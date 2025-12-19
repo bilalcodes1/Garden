@@ -7,75 +7,37 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /* تحسينات عامة وتنسيقات مخصصة */
         html { scroll-behavior: smooth; }
         .before-after-clip { transition: clip-path 0.3s ease; }
         
-        /* تصميم الدبوس الاحترافي (Perfect Pin) */
-        .map-wrapper { position: relative; width: 100%; height: 100%; }
-        
-        .custom-pin {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -100%);
-            z-index: 20;
-            pointer-events: none;
+        /* تحسينات المودال */
+        .modal-animate { animation: modalPop 0.3s ease-out forwards; }
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        .pin-shape {
-            width: 40px;
-            height: 40px;
-            border-radius: 50% 50% 50% 0;
-            background: #ef4444; /* لون أحمر */
-            position: relative;
-            transform: rotate(-45deg);
-            border: 3px solid white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-
-        .pin-shape::after {
-            content: "";
-            width: 14px;
-            height: 14px;
-            background: white;
-            position: absolute;
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        /* تأثير النبض أسفل الدبوس */
-        .pin-pulse {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 20px;
-            height: 20px;
-            background: rgba(239, 68, 68, 0.4);
-            border-radius: 50%;
-            z-index: 10;
-            animation: pulse-ring 1.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
-        }
-
-        @keyframes pulse-ring {
-            0% { transform: translate(-50%, -50%) scale(0.3); opacity: 1; }
-            80%, 100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
-        }
-
-        /* تخصيص شريط التمرير */
+        /* تنسيق شريط التمرير */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #16a34a; border-radius: 10px; }
-    </style>
+
+        /* الدبوس */
+        .custom-pin { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -100%); z-index: 20; pointer-events: none; }
+        .pin-shape { width: 40px; height: 40px; border-radius: 50% 50% 50% 0; background: #ef4444; position: relative; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .pin-shape::after { content: ""; width: 14px; height: 14px; background: white; position: absolute; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .pin-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; background: rgba(239, 68, 68, 0.4); border-radius: 50%; z-index: 10; animation: pulse-ring 1.5s infinite; }
+        @keyframes pulse-ring { 0% { transform: translate(-50%, -50%) scale(0.3); opacity: 1; } 80%, 100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; } }
+    
+        /* تفاصيل النبات: محاذاة ممتازة لكل المقاسات */
+        #modal-details { direction: rtl; }
+        </style>
 </head>
 <body onload="initApp();" class="bg-gray-50 text-gray-800">
 
-    <div id="app" class="min-h-screen flex flex-col">
+    <div id="app" class="min-h-screen flex flex-col relative">
         
-        <header class="bg-gradient-to-r from-green-600 to-green-700 text-white shadow-lg sticky top-0 z-50">
+        <header class="bg-gradient-to-r from-green-600 to-green-700 text-white shadow-lg sticky top-0 z-40">
             <div class="container mx-auto px-4 py-4">
                 <div class="flex items-center justify-center gap-4">
                     <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-md">
@@ -89,10 +51,9 @@
             </div>
         </header>
 
-        <nav class="bg-white shadow-md sticky top-20 z-40 overflow-x-auto">
+        <nav class="bg-white shadow-md sticky top-20 z-30 overflow-x-auto">
             <div class="container mx-auto px-4">
-                <div id="nav-tabs" class="flex justify-start md:justify-center gap-2 py-4 min-w-max">
-                    </div>
+                <div id="nav-tabs" class="flex justify-start md:justify-center gap-2 py-4 min-w-max"></div>
             </div>
         </nav>
 
@@ -100,7 +61,7 @@
             
             <div id="home" class="space-y-8 animate-fadeIn hidden">
                 <div class="relative rounded-2xl overflow-hidden shadow-2xl h-80 md:h-96">
-                    <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1400&h=600&fit=crop&q=80" class="w-full h-full object-cover" alt="الحديقة">
+                    <img src="https://i.imgur.com/WhGfU0i.jpg" class="w-full h-full object-cover" alt="الحديقة">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end">
                         <div class="p-8 w-full">
                             <h2 class="text-3xl md:text-5xl font-bold mb-2 text-white">مرحباً بكم في حديقتنا</h2>
@@ -108,21 +69,13 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="bg-white rounded-2xl p-6 shadow-xl">
                     <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center gap-3">
                         <i data-lucide="map" class="w-7 h-7"></i>موقع المشروع
                     </h3>
                     <div class="relative aspect-video w-full rounded-xl overflow-hidden border-2 border-gray-100">
-                        <iframe
-                            src="https://maps.google.com/maps?ll=33.40319202995753,43.25935297872681&z=19&t=k&output=embed"
-                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
-                        </iframe>
-                        
-                        <div class="custom-pin">
-                            <div class="pin-shape"></div>
-                            <div class="pin-pulse"></div>
-                        </div>
+                        <iframe src="https://maps.google.com/maps?ll=33.40319202995753,43.25935297872681&z=19&t=k&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        <div class="custom-pin"><div class="pin-shape"></div><div class="pin-pulse"></div></div>
                     </div>
                     <p class="text-center mt-4 text-gray-600 font-medium">📍 جامعة الأنبار - خلف كلية علوم الحاسوب</p>
                 </div>
@@ -133,26 +86,26 @@
                     <h2 class="text-3xl font-bold text-green-700 mb-6 flex items-center gap-3">
                         <i data-lucide="info" class="w-8 h-8"></i> عن المشروع
                     </h2>
-                    <p class="text-lg leading-relaxed text-gray-700">
-                        مبادرة طلابية تهدف لتحسين البيئة الجامعية، تحت إشراف قسم علوم الحاسوب. قمنا بتحويل المساحات الخالية إلى واحات خضراء تضم أنواعاً مختلفة من النباتات المحلية.
-                    </p>
+                    <p class="text-lg leading-relaxed text-gray-700">مبادرة طلابية تهدف لتحسين البيئة الجامعية، قمنا بزراعة عشرات الأنواع من النباتات المحلية والمستوردة لتلطيف الأجواء وخلق بيئة دراسية مريحة. يضم المشروع نخبة من نباتات النخيل، الأشجار، الزهور الموسمية، والمتسلقات.</p>
                 </div>
             </div>
 
             <div id="plants" class="space-y-6 hidden">
-                <h2 class="text-3xl font-bold text-green-700 flex items-center gap-3">
-                    <i data-lucide="sprout" class="w-8 h-8"></i> نباتاتنا
-                </h2>
-                <div id="plants-container" class="grid md:grid-cols-3 gap-6"></div>
+                <div class="flex justify-between items-end">
+                    <h2 class="text-3xl font-bold text-green-700 flex items-center gap-3">
+                        <i data-lucide="sprout" class="w-8 h-8"></i> نباتاتنا
+                    </h2>
+                </div>
+                <div id="plants-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
             </div>
 
             <div id="beforeafter" class="space-y-6 hidden">
                 <h2 class="text-3xl font-bold text-green-700">قبل وبعد المشروع</h2>
                 <div class="bg-white rounded-xl p-6 shadow-lg">
                     <div class="relative w-full h-80 md:h-96 overflow-hidden rounded-lg">
-                        <img src="https://images.unsplash.com/photo-1594735168218-2d4f7b23e8d8?w=1200" class="w-full h-full object-cover">
+                        <img src="https://i.imgur.com/NJrnSDc.jpg" class="w-full h-full object-cover">
                         <div id="after-image" class="absolute inset-0 before-after-clip" style="clip-path: inset(0 50% 0 0);">
-                            <img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1200" class="w-full h-full object-cover">
+                            <img src="https://i.imgur.com/28Ayv97.jpg" class="w-full h-full object-cover">
                         </div>
                         <div id="slider-handle" class="absolute top-0 bottom-0 w-1 bg-white shadow-lg" style="left: 50%;">
                             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-xl flex items-center justify-center border-2 border-green-600">
@@ -175,7 +128,53 @@
             <p class="font-bold">© 2025 حديقة النشاطات الطلابية</p>
             <p class="text-sm opacity-80 mt-1">تصميم وتطوير: بلال زامل أحمد</p>
         </footer>
-    </div>
+
+                <div id="plant-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-2 sm:p-4">
+            <div class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+
+            <div class="bg-white w-full max-w-5xl h-[95vh] sm:h-auto sm:max-h-[90vh] rounded-2xl shadow-2xl relative z-10 overflow-hidden flex flex-col modal-animate">
+                <button onclick="closeModal()" class="absolute top-3 left-3 z-20 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+
+                <!-- Body: صورة بالأعلى بالموبايل + تفاصيل تحتها / وعلى اليمين بالديسكتوب -->
+                <div class="flex flex-col md:flex-row w-full h-full">
+                    <!-- الصورة -->
+                    <div class="w-full md:w-1/2 bg-black/90 p-2 sm:p-3 shrink-0 h-[42vh] sm:h-[48vh] md:h-auto flex items-center justify-center">
+                        <img id="modal-img" src="" class="w-full h-full object-contain rounded-xl" alt="Plant Image">
+                    </div>
+
+                    <!-- المحتوى -->
+                    <div class="w-full md:w-1/2 p-4 sm:p-6 overflow-y-auto custom-scrollbar">
+                        <!-- العنوان -->
+                        <div class="mb-6">
+                            <span id="modal-category" class="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold inline-block"></span>
+                            <h2 id="modal-title" class="text-2xl sm:text-3xl font-bold text-green-900 mt-3"></h2>
+                            <p id="modal-scientific" class="text-green-700 italic font-serif mt-1"></p>
+                        </div>
+
+                        <!-- الوصف -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-green-800 mb-2 flex items-center gap-2">
+                                <i data-lucide="book-open" class="w-5 h-5"></i> الوصف
+                            </h3>
+                            <p id="modal-desc" class="text-gray-700 leading-relaxed"></p>
+                        </div>
+
+                        <!-- تفاصيل النبات -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-green-800 mb-3 flex items-center gap-2">
+                                <i data-lucide="list" class="w-5 h-5"></i> تفاصيل النبات
+                            </h3>
+                            <div id="modal-details" class="grid grid-cols-1 lg:grid-cols-2 gap-3"></div>
+                        </div>
+
+                        <!-- محتوى إضافي (يظهر لبعض النباتات فقط) -->
+                        <div id="modal-extra" class="mt-6 space-y-6"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <script>
         const sections = [
@@ -186,13 +185,91 @@
             { id: 'participants', name: 'المشاركون', icon: 'users' }
         ];
 
+        // --- قاعدة بيانات النباتات المبنية على تصنيف المستخدم ---
         const plantsData = [
-            { name: 'النخيل', desc: 'رمز الصمود العراقي.', img: 'https://images.unsplash.com/photo-1509567011011-23e9fa146ce2?w=600' },
-            { name: 'الورد الجوري', desc: 'جمال وعطر أخاذ.', img: 'https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?w=600' },
-            { name: 'الياسمين', desc: 'عطر يملأ المكان ليلاً.', img: 'https://images.unsplash.com/photo-1592729645009-b96d1e63d14b?w=600' }
+            // === أولاً: النخيل والأشجار ===
+            { cat: 'أشجار ونخيل', name: 'نخيل التمر', sci: 'Phoenix dactylifera', desc: 'هيكل الحديقة الأساسي.', full: 'النخلة سيدة الشجر، تتحمل أقصى الظروف وتعطي أطيب الثمر.', carb: 'تمتص كميات عالية من الكربون.', img: 'https://i.imgur.com/brpxFH5.jpg' },
+            { cat: 'أشجار ونخيل', name: 'نخيل واشنطونيا', sci: 'Washingtonia robusta', desc: 'نخيل زينة.', full: 'نخيل مروحي جميل وسريع النمو يزين الممرات.', carb: 'تنقية الغبار.', img: 'https://i.imgur.com/4MvUYsl.jpg' },
+            { cat: 'أشجار ونخيل', name: 'المستكة (الضرو)', sci: 'Pistacia lentiscus', desc: 'شجرة دائمة.', full: 'شجرة قوية لها رائحة عطرية مميزة وصمغ مفيد.', carb: 'مقاومة للجفاف.', img: 'https://i.imgur.com/BNMlEl1.jpg' },
+            { cat: 'أشجار ونخيل', name: 'المستكة', sci: 'Pistacia lentiscus', desc: 'جمال دائم الخضرة.', full: 'تستخدم لتزيين الحدائق وتوفير الظل.', carb: 'تنقية الهواء.', img: 'https://i.imgur.com/Q2cT0IY.jpg' },
+            { cat: 'أشجار ونخيل', name: 'المستكة والجوري', sci: 'Garden Mix', desc: 'تناغم نباتي.', full: 'تداخل جميل بين شجر المستكة وشجيرات الجوري.', carb: 'تنوع بيولوجي.', img: 'https://i.imgur.com/oy5uq7V.jpg' },
+            { cat: 'أشجار ونخيل', name: 'لجوستروم', sci: 'Ligustrum', desc: 'سياج نباتي.', full: 'شجيرة قوية تستخدم كأسيجة وتشكيلات قص.', carb: 'مصد للغبار.', img: 'https://i.imgur.com/3MGRkMz.jpg' },
+            { cat: 'أشجار ونخيل', name: 'يوكا', sci: 'Yucca aloifolia', desc: 'جمال صحراوي.', full: 'نبات قوي بأوراق سيفية الشكل.', carb: 'تحمل الحرارة العالية.', img: 'https://i.imgur.com/dIjQ5n6.jpg' },
+
+            // === ثانياً: الشجيرات المزهرة ===
+            { cat: 'شجيرات مزهرة', name: 'الجهنمية (وردي)', sci: 'Bougainvillea', desc: 'إزهار كثيف.', full: 'متسلقة قوية بألوان زاهية تتحمل الحرارة.', carb: 'توفير الظل.', img: 'https://i.imgur.com/lt6XYmg.jpg' },
+            { cat: 'شجيرات مزهرة', name: 'الجهنمية', sci: 'Bougainvillea', desc: 'ألوان صيفية.', full: 'تزهر بانتظام وتحتاج للتقليم.', carb: 'امتصاص الكربون.', img: 'https://i.imgur.com/httQ5OA.jpg' },
+            { cat: 'شجيرات مزهرة', name: 'الجهنمية (أصفر)', sci: 'Bougainvillea', desc: 'ألوان مشرقة.', full: 'صنف مميز بأزهار صفراء وبرتقالية.', carb: 'تحسين المنظر.', img: 'https://i.imgur.com/uxPbIbK.jpg' },
+            { cat: 'شجيرات مزهرة', name: 'الجهنمية (أحمر)', sci: 'Bougainvillea', desc: 'جمال صارخ.', full: 'تضيف لوناً قوياً للحديقة.', carb: 'عزل حراري.', img: 'https://i.imgur.com/rAsFA8S.jpg' },
+            { cat: 'شجيرات مزهرة', name: 'الجهنمية (برتقالي)', sci: 'Bougainvillea', desc: 'ألوان الغروب.', full: 'متسلقة قوية جداً.', carb: 'مأوى للطيور.', img: 'https://i.imgur.com/zmUglPI.jpg' },
+            { cat: 'شجيرات مزهرة', name: 'الجهنمية', sci: 'Bougainvillea', desc: 'كثافة خضرية.', full: 'تغطي المساحات وتزين الجدران.', carb: 'تنقية الهواء.', img: 'https://i.imgur.com/cKrp8AQ.jpg' },
+            { cat: 'شجيرات مزهرة', name: 'الجهنمية (نبيذي)', sci: 'Bougainvillea', desc: 'لون مميز.', full: 'لون نبيذي داكن جذاب.', carb: 'مقاومة للتلوث.', img: 'https://i.imgur.com/lXzl8F2.jpg' },
+            
+            { cat: 'شجيرات مزهرة', name: 'كاريسا', sci: 'Carissa macrocarpa', desc: 'ياسمين كاليفورنيا.', full: 'شجيرة بأوراق لامعة وزهور بيضاء عطرية.', carb: 'سياج مانع.', img: 'https://i.imgur.com/QXyukM3.jpg' },
+            { cat: 'شجيرات مزهرة', name: 'كاريسا', sci: 'Carissa macrocarpa', desc: 'أوراق كثيفة.', full: 'تتحمل القص والتشكيل.', carb: 'مصد للغبار.', img: 'https://i.imgur.com/VlT2CBo.jpg' },
+            { cat: 'شجيرات مزهرة', name: 'كاريسا', sci: 'Carissa macrocarpa', desc: 'جمال دائم.', full: 'ثمارها حمراء تشبه التوت.', carb: 'خضرة دائمة.', img: 'https://i.imgur.com/iydcWrO.jpg' },
+            { cat: 'شجيرات مزهرة', name: 'كاريسا', sci: 'Carissa macrocarpa', desc: 'أزهار نجمية.', full: 'تزهر معظم أوقات السنة.', carb: 'تحسين الهواء.', img: 'https://i.imgur.com/391hHCN.jpg' },
+            { cat: 'شجيرات مزهرة', name: 'كاريسا', sci: 'Carissa macrocarpa', desc: 'نمو قوي.', full: 'نبات قوي البنية.', carb: 'تثبيت التربة.', img: 'https://i.imgur.com/5rjWWBT.jpg' },
+            { cat: 'شجيرات مزهرة', name: 'كاريسا', sci: 'Carissa macrocarpa', desc: 'تنسيق حدائقي.', full: 'مثالية لتحديد الممرات.', carb: 'منظر جمالي.', img: 'https://i.imgur.com/qFfaEHC.jpg' },
+
+            { cat: 'شجيرات مزهرة', name: 'الورد الجوري', sci: 'Rosa damascena', desc: 'ملك الزهور.', full: 'رائحة عطرية وألوان خلابة.', carb: 'تهدئة الأعصاب.', img: 'https://i.imgur.com/iFQ6MkK.jpg' },
+            { cat: 'شجيرات مزهرة', name: 'الورد الجوري', sci: 'Rosa', desc: 'أوراق نضرة.', full: 'يتطلب عناية وري منتظم.', carb: 'تلطيف الجو.', img: 'https://i.imgur.com/kK8ElB7.jpg' },
+            { cat: 'شجيرات مزهرة', name: 'برعم جوري', sci: 'Rosa', desc: 'بداية الإزهار.', full: 'جمال البراعم قبل التفتح.', carb: 'دورة حياة.', img: 'https://i.imgur.com/FwXshk3.jpg' },
+
+            { cat: 'شجيرات مزهرة', name: 'مرجان (إيفوربيا)', sci: 'Euphorbia milii', desc: 'إكليل الشوك.', full: 'نبات عصاري مزهر يتحمل الجفاف.', carb: 'قليل الاستهلاك المائي.', img: 'https://i.imgur.com/q7LO3S7.jpg' },
+            { cat: 'شجيرات مزهرة', name: 'مرجان (أصفر)', sci: 'Euphorbia milii', desc: 'أزهار ناعمة.', full: 'تنوع لوني جميل.', carb: 'مقاوم للحرارة.', img: 'https://i.imgur.com/wprCl86.jpg' },
+            
+            { cat: 'شجيرات مزهرة', name: 'لانتانا (المينا)', sci: 'Lantana camara', desc: 'ألوان متعددة.', full: 'شجيرة قوية جداً تزهر بغزارة.', carb: 'جاذبة للفراشات.', img: 'https://i.imgur.com/WE8dvvV.jpg' },
+            { cat: 'شجيرات مزهرة', name: 'الختمة (هيبسكس)', sci: 'Hibiscus', desc: 'زهور بوقية.', full: 'شجيرة بزهور كبيرة وأوراق خضراء داكنة.', carb: 'امتصاص جيد.', img: 'https://i.imgur.com/dj0LTUG.jpg' },
+            { cat: 'شجيرات مزهرة', name: 'تيكوما', sci: 'Tecoma stans', desc: 'الأجراس الصفراء.', full: 'شجيرة سريعة النمو بزهور صفراء كثيفة.', carb: 'ظل وجمال.', img: 'https://i.imgur.com/G8dAkmP.jpg' },
+
+            // === ثالثاً: المتسلقات ===
+            { cat: 'متسلقات', name: 'الياسمين الأحمر', sci: 'Combretum indicum', desc: 'ياسمين هندي.', full: 'متسلقة عطرية تتدرج ألوانها من الأبيض للأحمر.', carb: 'تغطية الجدران.', img: 'https://i.imgur.com/4NMdp2w.jpg' },
+            { cat: 'متسلقات', name: 'ياسمين وعين البزون', sci: 'Garden Mix', desc: 'تداخل لوني.', full: 'اندماج المتسلقات مع الزهور الأرضية.', carb: 'كثافة خضرية.', img: 'https://i.imgur.com/4DXMZyx.jpg' },
+            { cat: 'متسلقات', name: 'بطاطا الزينة', sci: 'Ipomoea batatas', desc: 'أوراق ملونة.', full: 'نبات زاحف بأوراق ليمونية جميلة.', carb: 'تغطية التربة.', img: 'https://i.imgur.com/11uRFOE.jpg' },
+
+            // === رابعاً: الزهور الموسمية والعشبية ===
+            { cat: 'زهور موسمية', name: 'الجعفري (القطيفة)', sci: 'Tagetes', desc: 'ذهبي وأصفر.', full: 'نبات حولي مزهر طارد للديدان.', carb: 'ألوان موسمية.', img: 'https://i.imgur.com/WhGfU0i.jpg' },
+            { cat: 'زهور موسمية', name: 'الجعفري', sci: 'Tagetes', desc: 'كثافة زهرية.', full: 'يملأ الأحواض بالألوان.', carb: 'طارد للحشرات.', img: 'https://i.imgur.com/Udjojah.jpg' },
+            { cat: 'زهور موسمية', name: 'الجعفري', sci: 'Tagetes', desc: 'جمال التنسيق.', full: 'يستخدم لتحديد الأحواض.', carb: 'بيئة نظيفة.', img: 'https://i.imgur.com/UKp903R.jpg' },
+
+            { cat: 'زهور موسمية', name: 'الداوودي', sci: 'Chrysanthemum', desc: 'ملك الخريف.', full: 'أزهار مركبة بألوان متعددة.', carb: 'تنقية الجو.', img: 'https://i.imgur.com/NJrnSDc.jpg' },
+            { cat: 'زهور موسمية', name: 'الداوودي', sci: 'Chrysanthemum', desc: 'تنوع لوني.', full: 'يضفي بهجة للحديقة.', carb: 'رائحة عشبية.', img: 'https://i.imgur.com/9ubvgjC.jpg' },
+
+            { cat: 'زهور موسمية', name: 'دم العاشق', sci: 'Alternanthera', desc: 'أوراق حمراء.', full: 'نبات تحديد بألوان أوراق جذابة.', carb: 'تباين لوني.', img: 'https://i.imgur.com/M9dZyxB.jpg' },
+            { cat: 'زهور موسمية', name: 'دم العاشق', sci: 'Alternanthera', desc: 'غطاء نباتي.', full: 'يتحمل القص والتشكيل.', carb: 'حفظ الرطوبة.', img: 'https://i.imgur.com/i8UtYkb.jpg' },
+            { cat: 'زهور موسمية', name: 'دم العاشق', sci: 'Alternanthera', desc: 'لون نبيذي.', full: 'يضيف تبايناً مع الأخضر.', carb: 'جمال الأوراق.', img: 'https://i.imgur.com/nMWFSFY.jpg' },
+            { cat: 'زهور موسمية', name: 'دم العاشق', sci: 'Alternanthera', desc: 'مزيج لوني.', full: 'يتغير لونه حسب الإضاءة.', carb: 'تنوع.', img: 'https://i.imgur.com/EFv0iqN.jpg' },
+
+            { cat: 'زهور موسمية', name: 'سينراريا (دستس)', sci: 'Jacobaea maritima', desc: 'المغبرة.', full: 'أوراق فضية قطنية الملمس.', carb: 'عكس أشعة الشمس.', img: 'https://i.imgur.com/V9N4gCH.jpg' },
+            { cat: 'زهور موسمية', name: 'سينراريا', sci: 'Jacobaea maritima', desc: 'جمال فضي.', full: 'يبرز جمال الزهور الملونة بجانبه.', carb: 'تحمل الجفاف.', img: 'https://i.imgur.com/FCbLdP9.jpg' },
+
+            { cat: 'زهور موسمية', name: 'نازناز (ورد الصباح)', sci: 'Portulaca', desc: 'محبة للشمس.', full: 'زهور تتفتح مع الشمس وتغلق مساءً.', carb: 'تغطية التربة.', img: 'https://i.imgur.com/UpEM18S.jpg' },
+            { cat: 'زهور موسمية', name: 'القرنفل الصيني', sci: 'Dianthus', desc: 'أزهار رقيقة.', full: 'أزهار ذات حواف مشرشرة وألوان جميلة.', carb: 'رائحة خفيفة.', img: 'https://i.imgur.com/DvpTsu1.jpg' },
+
+            // === خامساً: العصاريات والنباتات الداخلية ===
+            { cat: 'عصاريات', name: 'الألوفيرا', sci: 'Aloe Vera', desc: 'طبيب العائلة.', full: 'نبات عصاري له فوائد طبية عديدة.', carb: 'يطلق الأكسجين ليلاً.', img: 'https://i.imgur.com/28Ayv97.jpg' },
+            { cat: 'عصاريات', name: 'الألوفيرا', sci: 'Aloe Vera', desc: 'تحمل العطش.', full: 'يخزن الماء في أوراقه.', carb: 'تنقية الهواء.', img: 'https://i.imgur.com/yHo8Ado.jpg' },
+            { cat: 'عصاريات', name: 'الألوفيرا', sci: 'Aloe Vera', desc: 'نمو جديد.', full: 'سهل الإكثار والعناية.', carb: 'صحي للبيئة.', img: 'https://i.imgur.com/08gDPBe.jpg' },
+            { cat: 'عصاريات', name: 'جلد النمر', sci: 'Sansevieria', desc: 'نبات الثعبان.', full: 'منقي هواء من الطراز الأول.', carb: 'يزيل السموم.', img: 'https://i.imgur.com/4v8rSBT.jpg' },
+            { cat: 'عصاريات', name: 'ديسكيديا', sci: 'Dischidia', desc: 'نبات معلق.', full: 'نبات زينة جميل للأصص المعلقة.', carb: 'منظر جمالي.', img: 'https://i.imgur.com/A2GeMTS.jpg' }
         ];
 
         const students = ['بلال زامل أحمد', 'أحمد محمد علي', 'فاطمة حسن', 'علي حسين', 'سارة محمود', 'زينب عادل'];
+
+        const defaultPlantDetails = [
+            { label: 'مدة الحياة', value: 'مُعمّر' },
+            { label: 'نوع النبات', value: 'شُجيرة' },
+            { label: 'موسم الإزهار', value: 'الربيع، الصيف، أوائل الخريف' },
+            { label: 'ارتفاع النبات', value: '91 سم إلى 2.5 م' },
+            { label: 'الانتشار (العرض)', value: '2.5 م' },
+            { label: 'لون الأوراق', value: 'أخضر' },
+            { label: 'حجم الزهرة', value: '2.5 سم' },
+            { label: 'لون الزهرة', value: 'أحمر' },
+            { label: 'نوع الأوراق', value: 'دائمة الخضرة' },
+            { label: 'درجة الحرارة المثالية', value: '5 – 35°م' }
+        ];
+
 
         function showSection(id) {
             document.querySelectorAll('main > div').forEach(div => div.classList.add('hidden'));
@@ -210,8 +287,85 @@
             document.getElementById('slider-handle').style.left = `${val}%`;
         }
 
+        function openModal(index) {
+            const plant = plantsData[index];
+
+            document.getElementById('modal-img').src = plant.img;
+            document.getElementById('modal-title').innerText = plant.name;
+            document.getElementById('modal-category').innerText = plant.cat; // إضافة التصنيف
+            document.getElementById('modal-scientific').innerText = plant.sci;
+            document.getElementById('modal-desc').innerText = plant.full;            // تفاصيل النبات (عربي) - نفس التفاصيل تُعرض لكل النباتات إلا إذا وفّرت تفاصيل خاصة داخل plant.details
+            const detailsContainer = document.getElementById('modal-details');
+            const details = plant.details || defaultPlantDetails;
+
+            if (detailsContainer) {
+                detailsContainer.innerHTML = details.map(d => `                    <div class="bg-white border border-green-200 rounded-xl p-3">
+                        <div class="flex flex-col gap-1">
+                            <span class="text-xs font-bold text-green-800 opacity-90" dir="auto">${d.label}</span>
+                            <span class="text-gray-800 font-semibold leading-snug break-words" dir="auto">${d.value}</span>
+                        </div>
+                    </div>`).join('');
+            }
+
+            // محتوى إضافي لبعض النباتات (مثل Bottlebrush)
+            const extraContainer = document.getElementById('modal-extra');
+            if (extraContainer) {
+                if (plant.page && plant.page.onThisPage && plant.page.sections) {
+                    const links = plant.page.onThisPage.map(item => `
+                        <a href="#${item.id}" class="px-3 py-1 rounded-full border border-green-200 bg-white hover:bg-green-50 text-sm font-bold text-green-800 transition">
+                            ${item.title}
+                        </a>
+                    `).join('');
+
+                    const sectionsHtml = plant.page.sections.map(sec => `
+                        <section id="${sec.id}" class="scroll-mt-24">
+                            <h3 class="text-xl font-extrabold text-green-900 mb-3 flex items-center gap-2">
+                                <i data-lucide="${sec.icon || 'sparkles'}" class="w-5 h-5"></i> ${sec.title}
+                            </h3>
+                            <div class="bg-white border border-green-200 rounded-2xl p-4 leading-relaxed text-gray-800">
+                                ${sec.html}
+                            </div>
+                        </section>
+                    `).join('');
+
+                    extraContainer.innerHTML = `
+                        <div class="bg-green-50 border border-green-200 rounded-2xl p-4">
+                            <h3 class="text-lg font-extrabold text-green-900 mb-3">في هذه الصفحة</h3>
+                            <div class="flex flex-wrap gap-2">
+                                ${links}
+                            </div>
+                        </div>
+                        ${sectionsHtml}
+                    `;
+
+                    // Smooth scroll داخل المودال
+                    extraContainer.querySelectorAll('a[href^="#"]').forEach(a => {
+                        a.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            const id = a.getAttribute('href').slice(1);
+                            const target = extraContainer.querySelector('#' + CSS.escape(id));
+                            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        });
+                    });
+
+                } else {
+                    extraContainer.innerHTML = '';
+                }
+            }
+
+            const modal = document.getElementById('plant-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            lucide.createIcons();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('plant-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
         function initApp() {
-            // توليد التبويبات
             const nav = document.getElementById('nav-tabs');
             nav.innerHTML = sections.map(s => `
                 <button data-id="${s.id}" onclick="showSection('${s.id}')" class="nav-button px-6 py-2 rounded-full flex items-center gap-2">
@@ -219,15 +373,26 @@
                 </button>
             `).join('');
 
-            // توليد النباتات
-            document.getElementById('plants-container').innerHTML = plantsData.map(p => `
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:scale-105 transition">
-                    <img src="${p.img}" class="w-full h-40 object-cover">
-                    <div class="p-4"><h4 class="font-bold text-green-700">${p.name}</h4><p class="text-sm text-gray-600">${p.desc}</p></div>
+            document.getElementById('plants-container').innerHTML = plantsData.map((p, index) => `
+                <div onclick="openModal(${index})" class="bg-white rounded-xl shadow-md overflow-hidden hover:scale-105 transition cursor-pointer group hover:shadow-2xl">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-2 right-2 z-10">
+                            <span class="bg-white/90 backdrop-blur-sm text-green-800 text-xs font-bold px-2 py-1 rounded-md shadow-sm border border-green-100">${p.cat}</span>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end justify-center pb-4">
+                            <span class="text-white font-bold text-sm bg-green-600/80 px-3 py-1 rounded-full backdrop-blur-sm">عرض التفاصيل</span>
+                        </div>
+                    </div>
+                    <div class="p-4 border-t border-gray-100">
+                        <h4 class="font-bold text-green-700 text-lg flex justify-between items-center">
+                            ${p.name}
+                        </h4>
+                        <p class="text-sm text-gray-600 mt-1 line-clamp-1">${p.desc}</p>
+                    </div>
                 </div>
             `).join('');
 
-            // توليد فريق العمل
             document.getElementById('students-container').innerHTML = students.map(s => `
                 <div class="bg-white p-4 rounded-lg shadow-sm border-r-4 border-green-500 font-medium">${s}</div>
             `).join('');
