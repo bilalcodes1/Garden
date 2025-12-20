@@ -50,6 +50,27 @@
         /* Shorts container: ثابت ومناسب للشاشات الكبيرة */
         .short-frame { aspect-ratio: 9 / 16; }
 
+    
+        /* Project Gallery */
+        .gallery-card{
+            border: 1px solid rgba(22,163,74,.18);
+            background: rgba(255,255,255,.85);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,.06);
+            transition: transform .15s ease, box-shadow .15s ease;
+        }
+        .gallery-card:hover{
+            transform: translateY(-2px);
+            box-shadow: 0 10px 26px rgba(0,0,0,.10);
+        }
+        .gallery-thumb{
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            display: block;
+        }
+
     </style>
 </head>
 <body onload="initApp();" class="bg-gray-50 text-gray-800">
@@ -80,7 +101,7 @@
             
             <div id="home" class="space-y-8 animate-fadeIn hidden">
                 <div class="relative rounded-2xl overflow-hidden shadow-2xl h-80 md:h-96">
-                    <img src="https://imgur.com/YIvddc1.jpg" class="w-full h-full object-cover" alt="الحديقة">
+                    <img src="https://i.imgur.com/WhGfU0i.jpg" class="w-full h-full object-cover" alt="الحديقة">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end">
                         <div class="p-8 w-full">
                             <h2 class="text-3xl md:text-5xl font-bold mb-2 text-white">مرحباً بكم في حديقتنا</h2>
@@ -136,72 +157,124 @@
                 <div id="plants-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
             </div>
 
-            <div id="beforeafter" class="space-y-6 hidden">
-                <h2 class="text-3xl font-bold text-green-700">قبل وبعد المشروع</h2>
-                <div class="bg-white rounded-xl p-6 shadow-lg">
-                    <div class="relative w-full h-80 md:h-96 overflow-hidden rounded-lg">
-                        <img src="https://i.imgur.com/NJrnSDc.jpg" class="w-full h-full object-cover">
-                        <div id="after-image" class="absolute inset-0 before-after-clip" style="clip-path: inset(0 50% 0 0);">
-                            <img src="https://i.imgur.com/28Ayv97.jpg" class="w-full h-full object-cover">
-                        </div>
-                        <div id="slider-handle" class="absolute top-0 bottom-0 w-1 bg-white shadow-lg" style="left: 50%;">
-                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-xl flex items-center justify-center border-2 border-green-600">
-                                <i data-lucide="chevrons-left-right" class="w-4 h-4 text-green-600"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="range" min="0" max="100" value="50" oninput="handleSliderChange(this.value)" class="w-full mt-6 accent-green-600">
-                </div>
-            </div>
-
-            
-            <!-- مراحل الاستعداد لتأهيل ميدان النشاطات الطلابية -->
-            <div id="stages" class="space-y-6 hidden">
+                        <div id="beforeafter" class="space-y-6 hidden">
                 <h2 class="text-3xl font-bold text-green-700 flex items-center gap-2">
-                    <i data-lucide="video" class="w-7 h-7"></i> مراحل الاستعداد لتأهيل ميدان النشاطات الطلابية
+                    <i data-lucide="scan" class="w-7 h-7"></i> قبل وبعد المشروع
                 </h2>
 
-                <!-- الفيديو -->
-                <div class="bg-white border border-green-200 rounded-2xl p-4 sm:p-6 shadow-sm">
-                    <h3 class="text-xl font-extrabold text-green-900 mb-4 flex items-center gap-2">
-                        <i data-lucide="film" class="w-6 h-6"></i> فيديو مراحل العمل
-                    </h3>
-
-                    <div class="relative overflow-hidden rounded-2xl border border-green-200 bg-black mx-auto w-full max-w-[260px] sm:max-w-[280px] md:max-w-[260px] lg:max-w-[240px] short-frame">
-                        <iframe class="absolute inset-0 w-full h-full"
-                                src="https://www.youtube-nocookie.com/embed/ITPQTXG-eSg?rel=0&playsinline=1"
-                                title="فيديو مراحل العمل"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                </div>
-
-                <!-- السلايد شو للصور -->
-                <div class="bg-white border border-green-200 rounded-2xl p-4 sm:p-6 shadow-sm">
-                    <h3 class="text-xl font-extrabold text-green-900 mb-4 flex items-center gap-2">
-                        <i data-lucide="images" class="w-6 h-6"></i> صور المراحل
-                    </h3>
-
-                    <div class="relative overflow-hidden rounded-2xl border border-green-200 bg-black/5">
-                        <img id="stages-slide" src="" alt="صور مراحل التأهيل" class="w-full h-[260px] sm:h-[360px] md:h-[420px] object-cover transition-opacity duration-500 opacity-0">
-                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                            <p id="stages-title" class="text-white font-extrabold text-lg sm:text-xl"></p>
-                            <p id="stages-desc" class="text-white/90 text-sm sm:text-base mt-1"></p>
+                <div class="grid gap-6">
+                    <!-- مقارنة 1 -->
+                    <div class="beforeafter-card bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-green-100">
+                        <div class="flex items-center justify-end flex-wrap gap-3 mb-4">
+                            <div class="flex items-center gap-2 text-xs font-bold">
+                                <span class="px-3 py-1 rounded-full bg-green-50 border border-green-200 text-green-800">قبل</span>
+                                <span class="px-3 py-1 rounded-full bg-white border border-green-200 text-green-800">بعد</span>
+                            </div>
                         </div>
 
-                        <button id="stages-prev" class="absolute top-1/2 -translate-y-1/2 left-3 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition">
-                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
-                        </button>
-                        <button id="stages-next" class="absolute top-1/2 -translate-y-1/2 right-3 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition">
-                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
-                        </button>
+                        <div class="relative w-full h-72 sm:h-80 md:h-96 overflow-hidden rounded-2xl border border-green-200">
+                            <img data-imgur-id="C5BcmcD" alt="قبل - 1" class="w-full h-full object-cover">
+                            <div class="after-image absolute inset-0" style="clip-path: inset(0 50% 0 0);">
+                                <img data-imgur-id="oe1xaMS" alt="بعد - 1" class="w-full h-full object-cover">
+                            </div>
+
+                            <div class="absolute top-3 right-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">قبل</div>
+                            <div class="absolute top-3 left-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">بعد</div>
+
+                            <div class="slider-handle absolute top-0 bottom-0 w-1 bg-white shadow-lg" style="left: 50%;">
+                                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
+                                    <i data-lucide="chevrons-left-right" class="w-4 h-4 text-green-600"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="range" min="0" max="100" value="50" oninput="handleSliderChange(this)"
+                               class="w-full mt-5 accent-green-600">
                     </div>
 
-                    <div id="stages-dots" class="flex flex-wrap gap-2 justify-center mt-4"></div>
+                    <!-- مقارنة 2 -->
+                    <div class="beforeafter-card bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-green-100">
+                        <div class="flex items-center justify-end flex-wrap gap-3 mb-4">
+                            <div class="flex items-center gap-2 text-xs font-bold">
+                                <span class="px-3 py-1 rounded-full bg-green-50 border border-green-200 text-green-800">قبل</span>
+                                <span class="px-3 py-1 rounded-full bg-white border border-green-200 text-green-800">بعد</span>
+                            </div>
+                        </div>
+
+                        <div class="relative w-full h-72 sm:h-80 md:h-96 overflow-hidden rounded-2xl border border-green-200">
+                            <img data-imgur-id="13NmB1S" alt="قبل - 2" class="w-full h-full object-cover">
+                            <div class="after-image absolute inset-0" style="clip-path: inset(0 50% 0 0);">
+                                <img data-imgur-id="8vzY6Z3" alt="بعد - 2" class="w-full h-full object-cover">
+                            </div>
+
+                            <div class="absolute top-3 right-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">قبل</div>
+                            <div class="absolute top-3 left-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">بعد</div>
+
+                            <div class="slider-handle absolute top-0 bottom-0 w-1 bg-white shadow-lg" style="left: 50%;">
+                                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
+                                    <i data-lucide="chevrons-left-right" class="w-4 h-4 text-green-600"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="range" min="0" max="100" value="50" oninput="handleSliderChange(this)"
+                               class="w-full mt-5 accent-green-600">
+                    </div>
                 </div>
             </div>
 
+<div id="stages" class="space-y-6 hidden">
+                <div class="flex items-center justify-between gap-3 flex-wrap">
+                    <h2 class="text-3xl font-bold text-green-700 flex items-center gap-2">
+                        <i data-lucide="images" class="w-7 h-7"></i> معرض صور المشروع
+                    </h2>
+                    <span class="text-sm text-gray-600 bg-white/70 border border-green-200 px-3 py-1 rounded-full">
+                        صور من تجهيز وتأهيل ميدان النشاطات الطلابية
+                    </span>
+                </div>
+
+                <div class="bg-white border border-green-200 rounded-2xl p-4 sm:p-6 shadow-sm">
+                    <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
+                        <h3 class="text-xl font-extrabold text-green-900 flex items-center gap-2">
+                            <i data-lucide="gallery-vertical-end" class="w-6 h-6"></i> صور العمل والإنجاز
+                        </h3>
+                        <div id="gallery-count" class="text-sm font-bold text-green-900 bg-green-50 border border-green-200 px-3 py-1 rounded-full"></div>
+                    </div>
+
+                    <!-- Grid -->
+                    <div id="project-gallery-grid"
+                         class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                    </div>
+                </div>
+
+                <!-- Lightbox -->
+                <div id="gallery-lightbox" class="fixed inset-0 z-[120] hidden items-center justify-center p-3 sm:p-6">
+                    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeGallery()"></div>
+
+                    <div class="relative z-10 w-full max-w-5xl">
+                        <button onclick="closeGallery()" class="absolute -top-2 -right-2 sm:top-0 sm:right-0 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition">
+                            <i data-lucide="x" class="w-6 h-6"></i>
+                        </button>
+
+                        <div class="bg-black/30 rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
+                            <div class="relative w-full flex items-center justify-center bg-black">
+                                <img id="gallery-full" src="" alt="صورة من المشروع" class="max-h-[78vh] w-auto object-contain">
+
+                                <button id="gallery-prev" onclick="prevGallery()" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition">
+                                    <i data-lucide="chevron-left" class="w-7 h-7"></i>
+                                </button>
+                                <button id="gallery-next" onclick="nextGallery()" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition">
+                                    <i data-lucide="chevron-right" class="w-7 h-7"></i>
+                                </button>
+
+                                <div id="gallery-counter"
+                                     class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/60 text-white text-sm font-bold px-3 py-1 rounded-full">
+                                </div>
+                            </div>
+                        </div>
+</div>
+                </div>
+            </div>
 
 <div id="participants" class="space-y-6 hidden">
                 <h2 class="text-3xl font-bold text-green-700">فريق العمل</h2>
@@ -320,7 +393,7 @@
             { cat: 'زهور موسمية', name: 'الجعفري', sci: 'Tagetes', desc: 'كثافة زهرية.', full: 'يملأ الأحواض بالألوان.', carb: 'طارد للحشرات.', img: 'https://i.imgur.com/Udjojah.jpg' },
             { cat: 'زهور موسمية', name: 'الجعفري', sci: 'Tagetes', desc: 'جمال التنسيق.', full: 'يستخدم لتحديد الأحواض.', carb: 'بيئة نظيفة.', img: 'https://i.imgur.com/UKp903R.jpg' },
 
-            { cat: 'زهور موسمية', name: 'الداوودي', sci: 'Chrysanthemum', desc: 'ملك الخريف.', full: 'أزهار مركبة بألوان متعددة.', carb: 'تنقية الجو.', img: 'https://i.imgur.com/NJrnSDc.jpg' },
+            { cat: 'زهور موسمية', name: 'الداوودي', sci: 'Chrysanthemum', desc: 'ملك الخريف.', full: 'أزهار مركبة بألوان متعددة.', carb: 'تنقية الجو.', img: 'https://i.imgur.com/aPbDpwu.jpg' },
             { cat: 'زهور موسمية', name: 'الداوودي', sci: 'Chrysanthemum', desc: 'تنوع لوني.', full: 'يضفي بهجة للحديقة.', carb: 'رائحة عشبية.', img: 'https://i.imgur.com/9ubvgjC.jpg' },
 
             { cat: 'زهور موسمية', name: 'دم العاشق', sci: 'Alternanthera', desc: 'أوراق حمراء.', full: 'نبات تحديد بألوان أوراق جذابة.', carb: 'تباين لوني.', img: 'https://i.imgur.com/M9dZyxB.jpg' },
@@ -335,7 +408,7 @@
             { cat: 'زهور موسمية', name: 'القرنفل الصيني', sci: 'Dianthus', desc: 'أزهار رقيقة.', full: 'أزهار ذات حواف مشرشرة وألوان جميلة.', carb: 'رائحة خفيفة.', img: 'https://i.imgur.com/DvpTsu1.jpg' },
 
             // === خامساً: العصاريات والنباتات الداخلية ===
-            { cat: 'عصاريات', name: 'الألوفيرا', sci: 'Aloe Vera', desc: 'طبيب العائلة.', full: 'نبات عصاري له فوائد طبية عديدة.', carb: 'يطلق الأكسجين ليلاً.', img: 'https://i.imgur.com/28Ayv97.jpg' },
+            { cat: 'عصاريات', name: 'الألوفيرا', sci: 'Aloe Vera', desc: 'طبيب العائلة.', full: 'نبات عصاري له فوائد طبية عديدة.', carb: 'يطلق الأكسجين ليلاً.', img: 'https://i.imgur.com/brpxFH5.jpg' },
             { cat: 'عصاريات', name: 'الألوفيرا', sci: 'Aloe Vera', desc: 'تحمل العطش.', full: 'يخزن الماء في أوراقه.', carb: 'تنقية الهواء.', img: 'https://i.imgur.com/yHo8Ado.jpg' },
             { cat: 'عصاريات', name: 'الألوفيرا', sci: 'Aloe Vera', desc: 'نمو جديد.', full: 'سهل الإكثار والعناية.', carb: 'صحي للبيئة.', img: 'https://i.imgur.com/08gDPBe.jpg' },
             { cat: 'عصاريات', name: 'جلد النمر', sci: 'Sansevieria', desc: 'نبات الثعبان.', full: 'منقي هواء من الطراز الأول.', carb: 'يزيل السموم.', img: 'https://i.imgur.com/4v8rSBT.jpg' },
@@ -458,9 +531,16 @@
             lucide.createIcons();
         }
 
-        function handleSliderChange(val) {
-            document.getElementById('after-image').style.clipPath = `inset(0 ${100 - val}% 0 0)`;
-            document.getElementById('slider-handle').style.left = `${val}%`;
+        function handleSliderChange(slider) {
+            const card = slider.closest('.beforeafter-card');
+            if (!card) return;
+
+            const val = Number(slider.value);
+            const after = card.querySelector('.after-image');
+            const handle = card.querySelector('.slider-handle');
+
+            if (after) after.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
+            if (handle) handle.style.left = `${val}%`;
         }
 
         function openModal(index) {
@@ -541,6 +621,108 @@
             modal.classList.remove('flex');
         }
 
+        // --- معرض صور المشروع (Imgur) ---
+        const projectGalleryIds = ['C5BcmcD', 'psuoF8V', '13NmB1S', 'KG9hVLd', 'goupDMm', 'EEMQKIT', '7phP4aa', 'F0d62Ve', 'k0S7dAU', 'aPbDpwu', 'ukztdXq', 'ULGk4X1', '0tr7fzg', 'K8qd0qB', 'KEa3SW4', '0lyKTNq', 'E8f8H7Q', 'jMQ2qvX', 'FiEpEHb', 'jU0UKsD', 'gssg8bC', 'mOTiwiF', 'g4Zs7eN', 'oe1xaMS', 'Et2OXdu', '8A27QrE', 'La2MYqr', 'd5N5Qkj', 'ji8Q0Hd', 'dCpUVCS', 'a26hDjB', 'Ef4x1Y9', 'T0mz4DO', '6G6tsaP', 'l6HVoZc', 'GP1Fxq5', '7kFZFuz', '6Nq60ni', '3X1wL8n', 'KxqfMz6', 'NV1KAo3', 'sAq8CUq', 'kuYwIGB', 'pN1zUBG', 'hLL8VUX', 'O4HlH2z', 'FYvyKDy', 'cT99hPo', 'IPFtJ60', 'wtybtaB', 'U91hPKl', 'Q1TmxRE', 'aHB0r9g', 'Fbkv7Co', '2afjBpE', '7qBKzs4', 'sUCM3R1', 'LB6KJo7', 'jIHSVlh', 'ICNM6wr', 'f4zaXCv', '4T2uRh2', 'FJPiG6B', 'uF4ap4m', 'RgJteLi'];
+
+        const IMGUR_EXTS = ['jpg','png','jpeg','webp'];
+
+        function imgurUrl(id, extIndex=0) {
+            const ext = IMGUR_EXTS[extIndex] || 'jpg';
+            return `https://i.imgur.com/${id}.${ext}`;
+        }
+
+        function setImgurWithFallback(imgEl, id) {
+            let extIndex = 0;
+            imgEl.onerror = () => {
+                extIndex++;
+                if (extIndex < IMGUR_EXTS.length) {
+                    imgEl.src = imgurUrl(id, extIndex);
+                }
+            };
+            imgEl.src = imgurUrl(id, 0);
+        }
+
+        let galleryIndex = 0;
+
+        function initProjectGallery() {
+            const grid = document.getElementById('project-gallery-grid');
+            const count = document.getElementById('gallery-count');
+            if (!grid) return;
+
+            grid.innerHTML = projectGalleryIds.map((id, idx) => `
+                <button class="gallery-card text-left" type="button" onclick="openGallery(${idx})">
+                    <img class="gallery-thumb" data-imgur-id="${id}" alt="صورة ${idx+1}" loading="lazy">
+                </button>
+            `).join('');
+
+            // Load thumbs with fallback
+            grid.querySelectorAll('img[data-imgur-id]').forEach(img => {
+                setImgurWithFallback(img, img.getAttribute('data-imgur-id'));
+            });
+
+            if (count) count.textContent = `عدد الصور: ${projectGalleryIds.length}`;
+
+            // Keyboard controls (only when lightbox open)
+            document.addEventListener('keydown', (e) => {
+                const lb = document.getElementById('gallery-lightbox');
+                if (!lb || lb.classList.contains('hidden')) return;
+
+                if (e.key === 'Escape') closeGallery();
+                if (e.key === 'ArrowLeft') prevGallery();
+                if (e.key === 'ArrowRight') nextGallery();
+            });
+        }
+
+        function openGallery(i) {
+            const lb = document.getElementById('gallery-lightbox');
+            const img = document.getElementById('gallery-full');
+            const counter = document.getElementById('gallery-counter');
+            if (!lb || !img) return;
+
+            galleryIndex = (i + projectGalleryIds.length) % projectGalleryIds.length;
+
+            lb.classList.remove('hidden');
+            lb.classList.add('flex');
+
+            setImgurWithFallback(img, projectGalleryIds[galleryIndex]);
+            if (counter) counter.textContent = `${galleryIndex + 1} / ${projectGalleryIds.length}`;
+
+            // refresh icons for buttons inside modal
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function closeGallery() {
+            const lb = document.getElementById('gallery-lightbox');
+            if (!lb) return;
+            lb.classList.add('hidden');
+            lb.classList.remove('flex');
+        }
+
+        function prevGallery() {
+            openGallery(galleryIndex - 1);
+        }
+
+        function nextGallery() {
+            openGallery(galleryIndex + 1);
+        }
+
+        function initBeforeAfterImages() {
+            const imgs = document.querySelectorAll('#beforeafter img[data-imgur-id]');
+            if (!imgs.length) return;
+            imgs.forEach(img => {
+                const id = img.getAttribute('data-imgur-id');
+                if (window.setImgurWithFallback) {
+                    setImgurWithFallback(img, id);
+                } else {
+                    img.src = `https://i.imgur.com/${id}.jpg`;
+                }
+            });
+        }
+
+
+
+
+
         function initApp() {
             const nav = document.getElementById('nav-tabs');
             nav.innerHTML = sections.map(s => `
@@ -574,6 +756,8 @@
             `).join('');
 
             initStagesSlideshow();
+            initProjectGallery();
+            initBeforeAfterImages();
             showSection('home');
         }
     </script>
