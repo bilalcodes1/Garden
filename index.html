@@ -6,13 +6,13 @@
     <title>حديقة النشاطات الطلابية - جامعة الأنبار</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
-
+        
         body { font-family: 'Tajawal', sans-serif; }
         html { scroll-behavior: smooth; }
-
+        .before-after-clip { transition: clip-path 0.3s ease; }
+        
         /* Animations */
         .modal-animate { animation: modalPop 0.3s ease-out forwards; }
         @keyframes modalPop {
@@ -54,524 +54,1026 @@
             object-fit: cover;
             transition: transform 0.5s ease;
         }
-        .gallery-card:hover .gallery-thumb { transform: scale(1.1); }
-
-        /* Custom Scroll inside modal */
-        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #16a34a; border-radius: 10px; }
-
-        /* Before/After - Drag on image */
-        .ba-stage { touch-action: none; cursor: ew-resize; user-select: none; }
-        .after-image { transition: clip-path 0.12s ease-out; }
-        .slider-handle { transition: left 0.12s ease-out; }
+        .gallery-card:hover .gallery-thumb {
+            transform: scale(1.1);
+        }
     </style>
 </head>
-
 <body onload="initApp();" class="bg-gray-50 text-gray-800">
 
-<div id="app" class="min-h-screen flex flex-col relative">
-
-    <div class="sticky top-0 z-50 w-full">
-        <header class="bg-gradient-to-r from-green-600 to-green-700 text-white shadow-lg relative z-20">
-            <div class="container mx-auto px-4 py-4">
-                <div class="flex items-center justify-center gap-4">
-                    <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-md shrink-0">
-                        <i data-lucide="leaf" class="text-green-600 w-8 h-8"></i>
-                    </div>
-                    <div class="text-center">
-                        <h1 class="text-xl md:text-2xl font-bold">حديقة النشاطات الطلابية</h1>
-                        <p class="text-green-100 text-sm">كلية علوم الحاسوب - جامعة الأنبار</p>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <nav class="bg-white shadow-md relative z-10 overflow-x-auto border-t border-green-600/20">
-            <div class="container mx-auto px-4">
-                <div id="nav-tabs" class="flex justify-start md:justify-center gap-2 py-3 min-w-max"></div>
-            </div>
-        </nav>
-    </div>
-
-    <main class="container mx-auto px-4 py-8 flex-grow">
-
-        <!-- HOME -->
-        <div id="home" class="space-y-8 hidden">
-            <div class="relative rounded-2xl overflow-hidden shadow-2xl h-80 md:h-96">
-                <img src="https://i.imgur.com/YIvddc1.jpg" class="w-full h-full object-cover" alt="الحديقة">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
-                    <div>
-                        <h2 class="text-3xl md:text-5xl font-bold text-white">واحة المعرفة الخضراء</h2>
-                        <p class="text-white/90 mt-2">نباتاتنا المختارة بعناية لتناسب بيئتنا الجامعية</p>
+    <div id="app" class="min-h-screen flex flex-col relative">
+        
+        <div class="sticky top-0 z-50 w-full">
+            
+            <header class="bg-gradient-to-r from-green-600 to-green-700 text-white shadow-lg relative z-20">
+                <div class="container mx-auto px-4 py-4">
+                    <div class="flex items-center justify-center gap-4">
+                        <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-md shrink-0">
+                            <i data-lucide="leaf" class="text-green-600 w-8 h-8"></i>
+                        </div>
+                        <div class="text-center">
+                            <h1 class="text-xl md:text-2xl font-bold">حديقة النشاطات الطلابية</h1>
+                            <p class="text-green-100 text-sm">كلية علوم الحاسوب - جامعة الأنبار</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="bg-white rounded-2xl p-6 shadow-xl border border-green-100 text-center">
-                <h3 class="text-2xl font-bold text-green-700 flex items-center justify-center gap-3 mb-6">
-                    <i data-lucide="video" class="w-7 h-7"></i> فيديو مراحل التأهيل
-                </h3>
-
-                <div class="relative overflow-hidden rounded-2xl border-4 border-green-50 bg-black mx-auto w-full max-w-[300px]" style="aspect-ratio: 9/16;">
-                    <iframe class="absolute inset-0 w-full h-full"
-                            src="https://www.youtube-nocookie.com/embed/ITPQTXG-eSg?rel=0&playsinline=1"
-                            title="فيديو مراحل التأهيل"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen>
-                    </iframe>
+            </header>
+    
+            <nav class="bg-white shadow-md relative z-10 overflow-x-auto border-t border-green-600/20">
+                <div class="container mx-auto px-4">
+                    <div id="nav-tabs" class="flex justify-start md:justify-center gap-2 py-3 min-w-max"></div>
                 </div>
-            </div>
-
-            <div class="bg-white rounded-2xl p-6 shadow-xl">
-                <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center gap-3">
-                    <i data-lucide="map" class="w-7 h-7"></i>موقع المشروع
-                </h3>
-                <div class="relative aspect-video w-full rounded-xl overflow-hidden border-2 border-gray-100">
-                    <iframe src="https://maps.google.com/maps?ll=33.40319202995753,43.25935297872681&z=19&t=k&output=embed"
-                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                    <div class="custom-pin"><div class="pin-shape"></div><div class="pin-pulse"></div></div>
-                </div>
-                <p class="text-center mt-4 text-gray-600 font-medium">📍 جامعة الأنبار - وسط كلية علوم الحاسوب</p>
-            </div>
+            </nav>
+            
         </div>
-
-        <!-- PLANTS -->
-        <div id="plants" class="space-y-6 hidden">
-            <div class="flex items-center gap-3">
-                <i data-lucide="sprout" class="text-green-600 w-8 h-8"></i>
-                <h2 class="text-3xl font-bold text-green-700">موسوعة النباتات</h2>
-            </div>
-            <div id="plants-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
-        </div>
-
-        <!-- BEFORE AFTER (FIXED / NO DUPLICATE IDS) -->
-        <div id="beforeafter" class="space-y-6 hidden">
-            <h2 class="text-3xl font-bold text-green-700 flex items-center gap-2">
-                <i data-lucide="scan" class="w-7 h-7"></i> قبل وبعد المشروع
-            </h2>
-
-            <div class="grid gap-6">
-
-                <!-- مقارنة 1 -->
-                <div class="beforeafter-card bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-green-100">
-                    <div class="flex items-center justify-end gap-2 mb-4 text-xs font-bold">
-                        <span class="px-3 py-1 rounded-full bg-green-50 border border-green-200 text-green-800">قبل</span>
-                        <span class="px-3 py-1 rounded-full bg-white border border-green-200 text-green-800">بعد</span>
-                    </div>
-
-                    <div class="ba-stage relative w-full h-72 sm:h-80 md:h-96 overflow-hidden rounded-2xl border border-green-200">
-                        <img src="https://i.imgur.com/NJrnSDc.jpg" class="w-full h-full object-cover" alt="قبل">
-
-                        <div class="after-image absolute inset-0" style="clip-path: inset(0 50% 0 0);">
-                            <img src="https://i.imgur.com/28Ayv97.jpg" class="w-full h-full object-cover" alt="بعد">
-                        </div>
-
-                        <div class="absolute top-3 right-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">قبل</div>
-                        <div class="absolute top-3 left-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">بعد</div>
-
-                        <div class="slider-handle absolute top-0 bottom-0 w-1 bg-white shadow-lg" style="left: 50%;">
-                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
-                                <i data-lucide="chevrons-left-right" class="w-4 h-4 text-green-600"></i>
-                            </div>
+        <main class="container mx-auto px-4 py-8 flex-grow">
+            <div id="home" class="space-y-8 hidden">
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl h-80 md:h-96">
+                    <img src="https://i.imgur.com/YIvddc1.jpg" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
+                        <div>
+                            <h2 class="text-3xl md:text-5xl font-bold text-white">واحة المعرفة الخضراء</h2>
+                            <p class="text-white/90 mt-2">نباتاتنا المختارة بعناية لتناسب بيئتنا الجامعية</p>
                         </div>
                     </div>
-
-                    <input type="range" min="0" max="100" value="50"
-                           oninput="handleSliderChange(this)"
-                           class="w-full mt-5 accent-green-600">
                 </div>
 
-                <!-- مقارنة 2 -->
-                <div class="beforeafter-card bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-green-100">
-                    <div class="flex items-center justify-end gap-2 mb-4 text-xs font-bold">
-                        <span class="px-3 py-1 rounded-full bg-green-50 border border-green-200 text-green-800">قبل</span>
-                        <span class="px-3 py-1 rounded-full bg-white border border-green-200 text-green-800">بعد</span>
+           <div class="bg-white rounded-2xl p-6 shadow-xl border border-green-100 text-center">
+                    <h3 class="text-2xl font-bold text-green-700 flex items-center justify-center gap-3 mb-6">
+                        <i data-lucide="video" class="w-7 h-7"></i> فيديو مراحل التأهيل
+                    </h3>
+                    
+                    <div class="relative overflow-hidden rounded-2xl border-4 border-green-50 bg-black mx-auto w-full max-w-[300px]" style="aspect-ratio: 9/16;">
+                        <iframe class="absolute inset-0 w-full h-full"
+                                src="https://www.youtube-nocookie.com/embed/ITPQTXG-eSg?rel=0&playsinline=1"
+                                title="فيديو مراحل التأهيل"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen>
+                        </iframe>
                     </div>
-
-                    <div class="ba-stage relative w-full h-72 sm:h-80 md:h-96 overflow-hidden rounded-2xl border border-green-200">
-                        <img src="https://i.imgur.com/13NmB1S.jpg" class="w-full h-full object-cover" alt="قبل">
-
-                        <div class="after-image absolute inset-0" style="clip-path: inset(0 50% 0 0);">
-                            <img src="https://i.imgur.com/8vzY6Z3.jpg" class="w-full h-full object-cover" alt="بعد">
-                        </div>
-
-                        <div class="absolute top-3 right-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">قبل</div>
-                        <div class="absolute top-3 left-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">بعد</div>
-
-                        <div class="slider-handle absolute top-0 bottom-0 w-1 bg-white shadow-lg" style="left: 50%;">
-                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
-                                <i data-lucide="chevrons-left-right" class="w-4 h-4 text-green-600"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <input type="range" min="0" max="100" value="50"
-                           oninput="handleSliderChange(this)"
-                           class="w-full mt-5 accent-green-600">
                 </div>
 
+                <div class="bg-white rounded-2xl p-6 shadow-xl">
+                    <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center gap-3">
+                        <i data-lucide="map" class="w-7 h-7"></i>موقع المشروع
+                    </h3>
+                    <div class="relative aspect-video w-full rounded-xl overflow-hidden border-2 border-gray-100">
+                        <iframe src="https://maps.google.com/maps?ll=33.40319202995753,43.25935297872681&z=19&t=k&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        <div class="custom-pin"><div class="pin-shape"></div><div class="pin-pulse"></div></div>
+                    </div>
+                    <p class="text-center mt-4 text-gray-600 font-medium">📍 جامعة الأنبار - وسط كلية علوم الحاسوب</p>
+                </div>
             </div>
-        </div>
 
-        <!-- GALLERY -->
-        <div id="stages" class="space-y-6 hidden">
-            <div class="flex items-center justify-between gap-3 flex-wrap">
+            <div id="plants" class="space-y-6 hidden">
+                <div class="flex items-center gap-3">
+                    <i data-lucide="sprout" class="text-green-600 w-8 h-8"></i>
+                    <h2 class="text-3xl font-bold text-green-700">موسوعة النباتات</h2>
+                </div>
+                <div id="plants-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            </div>
+
+            <div id="beforeafter" class="space-y-6 hidden">
                 <h2 class="text-3xl font-bold text-green-700 flex items-center gap-2">
-                    <i data-lucide="images" class="w-7 h-7"></i> معرض صور المشروع
+                    <i data-lucide="scan" class="w-7 h-7"></i> قبل وبعد المشروع
                 </h2>
-                <span id="gallery-count" class="text-sm font-bold text-green-900 bg-green-50 border border-green-200 px-3 py-1 rounded-full"></span>
+
+                <div class="grid gap-6">
+                    <div id="beforeafter" class="space-y-6 hidden">
+    <h2 class="text-3xl font-bold text-green-700 flex items-center gap-2">
+        <i data-lucide="scan" class="w-7 h-7"></i> قبل وبعد المشروع
+    </h2>
+
+    <div class="grid gap-6">
+
+        <!-- مقارنة 1 -->
+        <div class="beforeafter-card bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-green-100">
+
+            <!-- هيدر قبل / بعد -->
+            <div class="flex items-center justify-end gap-2 mb-4 text-xs font-bold">
+                <span class="px-3 py-1 rounded-full bg-green-50 border border-green-200 text-green-800">قبل</span>
+                <span class="px-3 py-1 rounded-full bg-white border border-green-200 text-green-800">بعد</span>
             </div>
 
-            <div class="bg-white border border-green-200 rounded-2xl p-4 sm:p-6 shadow-sm">
-                <div id="project-gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"></div>
-            </div>
+            <!-- الصور -->
+            <div class="relative w-full h-72 sm:h-80 md:h-96 overflow-hidden rounded-2xl border border-green-200">
+                <img src="https://i.imgur.com/NJrnSDc.jpg" class="w-full h-full object-cover" alt="قبل">
 
-            <div id="gallery-lightbox" class="fixed inset-0 z-[120] hidden items-center justify-center p-3 sm:p-6">
-                <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeGallery()"></div>
-
-                <div class="relative z-10 w-full max-w-5xl h-full flex items-center justify-center">
-                    <button onclick="closeGallery()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition z-20">
-                        <i data-lucide="x" class="w-8 h-8"></i>
-                    </button>
-
-                    <img id="gallery-full" src="" alt="صورة من المشروع" class="max-h-[85vh] max-w-full object-contain rounded-lg shadow-2xl">
-
-                    <button onclick="prevGallery()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition">
-                        <i data-lucide="chevron-left" class="w-8 h-8"></i>
-                    </button>
-                    <button onclick="nextGallery()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition">
-                        <i data-lucide="chevron-right" class="w-8 h-8"></i>
-                    </button>
-
-                    <div id="gallery-counter" class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/60 text-white text-sm font-bold px-4 py-2 rounded-full"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PARTICIPANTS -->
-        <div id="participants" class="space-y-6 hidden">
-            <h2 class="text-3xl font-bold text-green-700">فريق العمل</h2>
-            <div id="students-container" class="grid md:grid-cols-3 gap-4"></div>
-        </div>
-
-        <!-- ABOUT -->
-        <div id="about" class="space-y-6 hidden">
-            <h2 class="text-3xl font-bold text-green-700 flex items-center gap-2">
-                <i data-lucide="award" class="w-7 h-7"></i> عن المشروع
-            </h2>
-            <div class="bg-white rounded-2xl p-6 shadow border border-green-100 text-gray-700 leading-relaxed">
-                <p>
-                    هذا المشروع يهدف إلى تطوير بيئة جامعية خضراء داخل كلية علوم الحاسوب - جامعة الأنبار،
-                    من خلال زراعة نباتات مختارة بعناية، وتحسين المظهر العام، وتعزيز الوعي البيئي لدى الطلبة.
-                </p>
-            </div>
-        </div>
-
-    </main>
-
-    <footer class="bg-green-800 text-white py-8 text-center mt-auto">
-        <p class="font-bold">© 2025 حديقة النشاطات الطلابية</p>
-        <p class="text-sm opacity-80 mt-1">تصميم وتطوير: بلال زامل أحمد</p>
-    </footer>
-
-    <!-- PLANT MODAL -->
-    <div id="plant-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-2 sm:p-4">
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
-        <div class="bg-white w-full max-w-5xl h-[95vh] sm:h-auto sm:max-h-[90vh] rounded-2xl shadow-2xl relative z-10 overflow-hidden flex flex-col modal-animate">
-            <button onclick="closeModal()" class="absolute top-3 left-3 z-20 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
-
-            <div class="flex flex-col md:flex-row w-full h-full">
-                <div class="w-full md:w-1/2 bg-black/95 p-2 sm:p-3 shrink-0 h-[40vh] sm:h-[48vh] md:h-auto flex items-center justify-center relative">
-                    <img id="modal-img" src="" class="w-full h-full object-contain rounded-xl" alt="Plant Image">
+                <div class="after-image absolute inset-0" style="clip-path: inset(0 50% 0 0);">
+                    <img src="https://i.imgur.com/28Ayv97.jpg" class="w-full h-full object-cover" alt="بعد">
                 </div>
 
-                <div class="w-full md:w-1/2 p-5 sm:p-8 overflow-y-auto custom-scrollbar">
-                    <div class="mb-6 border-b border-gray-100 pb-4">
-                        <span id="modal-category" class="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold inline-block mb-2"></span>
-                        <h2 id="modal-title" class="text-3xl font-bold text-green-900"></h2>
-                        <p id="modal-scientific" class="text-green-700 italic font-serif text-sm mt-1"></p>
-                    </div>
+                <!-- لابل داخل الصورة -->
+                <div class="absolute top-3 right-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">
+                    قبل
+                </div>
+                <div class="absolute top-3 left-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">
+                    بعد
+                </div>
 
-                    <div id="modal-details-grid" class="grid grid-cols-2 gap-3 mb-6"></div>
-
-                    <div class="mb-6">
-                        <h3 class="text-sm font-bold text-gray-400 uppercase mb-2 flex items-center gap-2">
-                            الوصف العام
-                        </h3>
-                        <p id="modal-desc" class="text-gray-700 leading-relaxed text-sm"></p>
-                    </div>
-
-                    <div class="bg-green-50 p-4 rounded-xl border border-green-100">
-                        <h3 class="font-bold text-green-800 flex items-center gap-2 mb-1 text-sm">
-                            <i data-lucide="leaf" class="w-4 h-4"></i> الأثر البيئي
-                        </h3>
-                        <p id="modal-carbon" class="text-xs text-green-700"></p>
+                <!-- الخط -->
+                <div class="slider-handle absolute top-0 bottom-0 w-1 bg-white shadow-lg" style="left: 50%;">
+                    <div class="absolute top-1/2 left-1/2 
+                                -translate-x-1/2 -translate-y-1/2 
+                                w-10 h-10 bg-white rounded-full 
+                                flex items-center justify-center 
+                                border-2 border-green-600">
+                        <i data-lucide="chevrons-left-right" class="w-4 h-4 text-green-600"></i>
                     </div>
                 </div>
             </div>
+
+            <!-- السلايدر -->
+            <input type="range"
+                   min="0" max="100" value="50"
+                   oninput="handleSliderChange(this)"
+                   class="w-full mt-5 accent-green-600">
         </div>
+
+        <!-- مقارنة 2 (اختياري) -->
+        <div class="beforeafter-card bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-green-100">
+
+            <div class="flex items-center justify-end gap-2 mb-4 text-xs font-bold">
+                <span class="px-3 py-1 rounded-full bg-green-50 border border-green-200 text-green-800">قبل</span>
+                <span class="px-3 py-1 rounded-full bg-white border border-green-200 text-green-800">بعد</span>
+            </div>
+
+            <div class="relative w-full h-72 sm:h-80 md:h-96 overflow-hidden rounded-2xl border border-green-200">
+                <img src="https://i.imgur.com/13NmB1S.jpg" class="w-full h-full object-cover" alt="قبل">
+
+                <div class="after-image absolute inset-0" style="clip-path: inset(0 50% 0 0);">
+                    <img src="https://i.imgur.com/8vzY6Z3.jpg" class="w-full h-full object-cover" alt="بعد">
+                </div>
+
+                <div class="absolute top-3 right-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">قبل</div>
+                <div class="absolute top-3 left-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">بعد</div>
+
+                <div class="slider-handle absolute top-0 bottom-0 w-1 bg-white shadow-lg" style="left: 50%;">
+                    <div class="absolute top-1/2 left-1/2 
+                                -translate-x-1/2 -translate-y-1/2 
+                                w-10 h-10 bg-white rounded-full 
+                                flex items-center justify-center 
+                                border-2 border-green-600">
+                        <i data-lucide="chevrons-left-right" class="w-4 h-4 text-green-600"></i>
+                    </div>
+                </div>
+            </div>
+
+            <input type="range"
+                   min="0" max="100" value="50"
+                   oninput="handleSliderChange(this)"
+                   class="w-full mt-5 accent-green-600">
+        </div>
+
     </div>
-
 </div>
 
-<script>
-    const sections = [
-        { id: 'home', name: 'الرئيسية', icon: 'home' },
-        { id: 'plants', name: 'النباتات', icon: 'leaf' },
-        { id: 'beforeafter', name: 'قبل وبعد', icon: 'camera' },
-        { id: 'stages', name: 'معرض الصور', icon: 'images' },
-        { id: 'participants', name: 'المشاركون', icon: 'users' },
-        { id: 'about', name: 'عن المشروع', icon: 'award' }
-    ];
+            <div id="stages" class="space-y-6 hidden">
+                <div class="flex items-center justify-between gap-3 flex-wrap">
+                    <h2 class="text-3xl font-bold text-green-700 flex items-center gap-2">
+                        <i data-lucide="images" class="w-7 h-7"></i> معرض صور المشروع
+                    </h2>
+                    <span id="gallery-count" class="text-sm font-bold text-green-900 bg-green-50 border border-green-200 px-3 py-1 rounded-full"></span>
+                </div>
 
-    // --- plantsData (نفس بياناتك - مختصر هنا؟ لا، خليته كامل مثل ما أرسلته) ---
-    const plantsData = [
-        { 
-            cat: 'أشجار ونخيل', name: 'نخيل التمر', sci: 'Phoenix dactylifera',
-            desc: 'رمز الشموخ والعطاء، تتحمل أقسى الظروف.',
-            full: 'شجرة مباركة ذات قيمة اقتصادية وغذائية عالية، توفر ظلاً واسعاً وتتحمل الملوحة والجفاف والحرارة العالية.',
-            carb: 'تمتص النخلة الواحدة حوالي 200 كغم من CO2 سنوياً.',
-            img: 'https://i.imgur.com/brpxFH5.jpg',
-            details: [
-                { label: 'مدة الحياة', value: 'مُعمّر (تعيش لمئات السنين)' },
-                { label: 'نوع النبات', value: 'شجرة (نخيل)' },
-                { label: 'موسم الإزهار', value: 'الربيع' },
-                { label: 'ارتفاع النبات', value: '15 - 25 متر' },
-                { label: 'الانتشار', value: '6 - 10 متر' },
-                { label: 'لون الثمار', value: 'أصفر / أحمر / بني' },
-                { label: 'نوع الأوراق', value: 'سعف دائم الخضرة' },
-                { label: 'درجة الحرارة', value: '10 – 50°م' }
-            ]
-        },
-        { 
-            cat: 'أشجار ونخيل', name: 'نخيل واشنطونيا', sci: 'Washingtonia robusta',
-            desc: 'نخيل الزينة المروحي.',
-            full: 'نخيل سريع النمو جداً، يستخدم لتزيين الشوارع والمداخل، يتميز بجذع طويل وأوراق مروحية كبيرة.',
-            carb: 'فعالة جداً في تنقية هواء المدن من الغبار.',
-            img: 'https://i.imgur.com/4MvUYsl.jpg',
-            details: [
-                { label: 'مدة الحياة', value: 'مُعمّر' },
-                { label: 'نوع النبات', value: 'شجرة (نخيل)' },
-                { label: 'موسم الإزهار', value: 'الربيع الصيف' },
-                { label: 'ارتفاع النبات', value: '20 - 30 متر' },
-                { label: 'الانتشار', value: '3 - 5 متر' },
-                { label: 'شكل الأوراق', value: 'مروحي' },
-                { label: 'نوع الأوراق', value: 'دائمة الخضرة' },
-                { label: 'درجة الحرارة', value: '5 – 45°م' }
-            ]
-        },
-        // ✅ انت تقدر تترك بقية plantsData مثل ما عندك… (أنا كملت المنطق كله، وماكو شي يمنع)
-        // ملاحظة: إذا تريد ألصق كل plantsData العملاقة حرفياً هنا هم OK، بس رح يصير الرد أطول جداً.
-        // إذا تحب ألصقها كلها بدون حذف ولا سطر، گلي "ألصق plantsData كاملة" وأنا أعطيك نسخة حرفية.
-    ];
+                <div class="bg-white border border-green-200 rounded-2xl p-4 sm:p-6 shadow-sm">
+                    <div id="project-gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"></div>
+                </div>
 
-    // --- Gallery IDs ---
-    const projectGalleryIds = ['C5BcmcD','psuoF8V','13NmB1S','KG9hVLd','goupDMm','EEMQKIT','7phP4aa','F0d62Ve','k0S7dAU','aPbDpwu','ukztdXq','ULGk4X1','0tr7fzg','K8qd0qB','KEa3SW4','0lyKTNq','E8f8H7Q','jMQ2qvX','FiEpEHb','jU0UKsD','gssg8bC','mOTiwiF','g4Zs7eN','oe1xaMS','Et2OXdu','8A27QrE','La2MYqr','d5N5Qkj','ji8Q0Hd','dCpUVCS','a26hDjB','Ef4x1Y9','T0mz4DO','6G6tsaP','l6HVoZc','GP1Fxq5','7kFZFuz','6Nq60ni','3X1wL8n','KxqfMz6','NV1KAo3','sAq8CUq','kuYwIGB','pN1zUBG','hLL8VUX','O4HlH2z','FYvyKDy','cT99hPo','IPFtJ60','wtybtaB','U91hPKl','Q1TmxRE','aHB0r9g','Fbkv7Co','2afjBpE','7qBKzs4','sUCM3R1','LB6KJo7','jIHSVlh','ICNM6wr','f4zaXCv','4T2uRh2','FJPiG6B','uF4ap4m','RgJteLi'];
+                <div id="gallery-lightbox" class="fixed inset-0 z-[120] hidden items-center justify-center p-3 sm:p-6">
+                    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeGallery()"></div>
+                    <div class="relative z-10 w-full max-w-5xl h-full flex items-center justify-center">
+                        <button onclick="closeGallery()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition z-20">
+                            <i data-lucide="x" class="w-8 h-8"></i>
+                        </button>
+                        <img id="gallery-full" src="" alt="صورة من المشروع" class="max-h-[85vh] max-w-full object-contain rounded-lg shadow-2xl">
+                        
+                        <button onclick="prevGallery()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition">
+                            <i data-lucide="chevron-left" class="w-8 h-8"></i>
+                        </button>
+                        <button onclick="nextGallery()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition">
+                            <i data-lucide="chevron-right" class="w-8 h-8"></i>
+                        </button>
+                        
+                        <div id="gallery-counter" class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/60 text-white text-sm font-bold px-4 py-2 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
 
-    const students = ['بلال زامل أحمد', 'أحمد محمد علي', 'فاطمة حسن', 'علي حسين', 'سارة محمود', 'زينب عادل'];
+            <div id="participants" class="space-y-6 hidden">
+                <h2 class="text-3xl font-bold text-green-700">فريق العمل</h2>
+                <div id="students-container" class="grid md:grid-cols-3 gap-4"></div>
+            </div>
+            
+            <div id="about" class="hidden">...</div>
+        </main>
 
-    function showSection(id) {
-        document.querySelectorAll('main > div').forEach(div => div.classList.add('hidden'));
-        document.getElementById(id).classList.remove('hidden');
+        <footer class="bg-green-800 text-white py-8 text-center mt-auto">
+            <p class="font-bold">© 2025 حديقة النشاطات الطلابية</p>
+            <p class="text-sm opacity-80 mt-1">تصميم وتطوير: بلال زامل أحمد</p>
+        </footer>
 
-        document.querySelectorAll('.nav-button').forEach(btn => {
-            const isActive = btn.getAttribute('data-id') === id;
-            btn.className = `nav-button px-6 py-2 rounded-full transition flex items-center gap-2 font-bold whitespace-nowrap ${
-                isActive ? 'bg-green-600 text-white shadow-lg' : 'bg-gray-100 text-gray-600 hover:bg-green-100'
-            }`;
-        });
+        <div id="plant-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-2 sm:p-4">
+            <div class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+            <div class="bg-white w-full max-w-5xl h-[95vh] sm:h-auto sm:max-h-[90vh] rounded-2xl shadow-2xl relative z-10 overflow-hidden flex flex-col modal-animate">
+                <button onclick="closeModal()" class="absolute top-3 left-3 z-20 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
 
-        lucide.createIcons();
+                <div class="flex flex-col md:flex-row w-full h-full">
+                    <div class="w-full md:w-1/2 bg-black/95 p-2 sm:p-3 shrink-0 h-[40vh] sm:h-[48vh] md:h-auto flex items-center justify-center relative">
+                        <img id="modal-img" src="" class="w-full h-full object-contain rounded-xl" alt="Plant Image">
+                    </div>
 
-        // مهم: نربط السحب بعد ما ينفتح قسم beforeafter
-        if (id === 'beforeafter') bindBeforeAfterDrag();
-    }
+                    <div class="w-full md:w-1/2 p-5 sm:p-8 overflow-y-auto custom-scrollbar">
+                        <div class="mb-6 border-b border-gray-100 pb-4">
+                            <span id="modal-category" class="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold inline-block mb-2"></span>
+                            <h2 id="modal-title" class="text-3xl font-bold text-green-900"></h2>
+                            <p id="modal-scientific" class="text-green-700 italic font-serif text-sm mt-1"></p>
+                        </div>
 
-    function handleSliderChange(slider) {
-        const card = slider.closest('.beforeafter-card');
-        const val = Number(slider.value);
-        setBeforeAfter(card, val);
-    }
+                        <div id="modal-details-grid" class="grid grid-cols-2 gap-3 mb-6"></div>
 
-    function setBeforeAfter(card, val) {
-        const after = card.querySelector('.after-image');
-        const handle = card.querySelector('.slider-handle');
-        if (after) after.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
-        if (handle) handle.style.left = `${val}%`;
-        const range = card.querySelector('input[type="range"]');
-        if (range) range.value = val;
-    }
+                        <div class="mb-6">
+                            <h3 class="text-sm font-bold text-gray-400 uppercase mb-2 flex items-center gap-2">
+                                الوصف العام
+                            </h3>
+                            <p id="modal-desc" class="text-gray-700 leading-relaxed text-sm"></p>
+                        </div>
 
-    // ✅ السحب بالماوس/اللمس على الصورة نفسها
-    let beforeAfterBound = false;
-    function bindBeforeAfterDrag() {
-        if (beforeAfterBound) return; // حتى ما نكرر الربط كل مرة
-        beforeAfterBound = true;
+                        <div class="bg-green-50 p-4 rounded-xl border border-green-100">
+                            <h3 class="font-bold text-green-800 flex items-center gap-2 mb-1 text-sm">
+                                <i data-lucide="leaf" class="w-4 h-4"></i> الأثر البيئي
+                            </h3>
+                            <p id="modal-carbon" class="text-xs text-green-700"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        document.querySelectorAll('.beforeafter-card').forEach(card => {
-            const stage = card.querySelector('.ba-stage');
-            if (!stage) return;
+    <script>
+        const sections = [
+            { id: 'home', name: 'الرئيسية', icon: 'home' },
+            { id: 'plants', name: 'النباتات', icon: 'leaf' },
+            { id: 'beforeafter', name: 'قبل وبعد', icon: 'camera' },
+            { id: 'stages', name: 'معرض الصور', icon: 'images' }, // تم التحديث
+            { id: 'participants', name: 'المشاركون', icon: 'users' },
+            { id: 'about', name: 'عن المشروع', icon: 'award' }
+        ];
 
-            let dragging = false;
+        // --- قاعدة بيانات النباتات التفصيلية الكاملة ---
+       // --- قاعدة بيانات النباتات التفصيلية (بيانات علمية دقيقة) ---
+        const plantsData = [
+            // ==================== أولاً: النخيل والأشجار ====================
+            { 
+                cat: 'أشجار ونخيل', name: 'نخيل التمر', sci: 'Phoenix dactylifera', 
+                desc: 'رمز الشموخ والعطاء، تتحمل أقسى الظروف.', 
+                full: 'شجرة مباركة ذات قيمة اقتصادية وغذائية عالية، توفر ظلاً واسعاً وتتحمل الملوحة والجفاف والحرارة العالية.', 
+                carb: 'تمتص النخلة الواحدة حوالي 200 كغم من CO2 سنوياً.', 
+                img: 'https://i.imgur.com/brpxFH5.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر (تعيش لمئات السنين)' },
+                    { label: 'نوع النبات', value: 'شجرة (نخيل)' },
+                    { label: 'موسم الإزهار', value: 'الربيع' },
+                    { label: 'ارتفاع النبات', value: '15 - 25 متر' },
+                    { label: 'الانتشار', value: '6 - 10 متر' },
+                    { label: 'لون الثمار', value: 'أصفر / أحمر / بني' },
+                    { label: 'نوع الأوراق', value: 'سعف دائم الخضرة' },
+                    { label: 'درجة الحرارة', value: '10 – 50°م' }
+                ]
+            },
+            { 
+                cat: 'أشجار ونخيل', name: 'نخيل واشنطونيا', sci: 'Washingtonia robusta', 
+                desc: 'نخيل الزينة المروحي.', 
+                full: 'نخيل سريع النمو جداً، يستخدم لتزيين الشوارع والمداخل، يتميز بجذع طويل وأوراق مروحية كبيرة.', 
+                carb: 'فعالة جداً في تنقية هواء المدن من الغبار.', 
+                img: 'https://i.imgur.com/4MvUYsl.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجرة (نخيل)' },
+                    { label: 'موسم الإزهار', value: 'الربيع الصيف' },
+                    { label: 'ارتفاع النبات', value: '20 - 30 متر' },
+                    { label: 'الانتشار', value: '3 - 5 متر' },
+                    { label: 'شكل الأوراق', value: 'مروحي' },
+                    { label: 'نوع الأوراق', value: 'دائمة الخضرة' },
+                    { label: 'درجة الحرارة', value: '5 – 45°م' }
+                ]
+            },
+            { 
+                cat: 'أشجار ونخيل', name: 'شجرة المستكة (الضرو)', sci: 'Pistacia lentiscus', 
+                desc: 'شجرة قوية ذات رائحة عطرية.', 
+                full: 'شجيرة أو شجرة صغيرة دائمة الخضرة، تفرز صمغ المستكة العطري، وتتحمل الجفاف والتربة الفقيرة بامتياز.', 
+                carb: 'مقاومة للتصحر وتثبت التربة.', 
+                img: 'https://i.imgur.com/BNMlEl1.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجيرة كبيرة / شجرة' },
+                    { label: 'موسم الإزهار', value: 'الربيع (مارس - أبريل)' },
+                    { label: 'ارتفاع النبات', value: '2 - 5 متر' },
+                    { label: 'الانتشار', value: '2 - 4 متر' },
+                    { label: 'لون الزهرة', value: 'أحمر غامق (صغيرة)' },
+                    { label: 'نوع الأوراق', value: 'دائمة الخضرة' },
+                    { label: 'درجة الحرارة', value: '0 – 40°م' }
+                ]
+            },
+            { 
+                cat: 'أشجار ونخيل', name: 'المستكة (تشكيل)', sci: 'Pistacia lentiscus', 
+                desc: 'قابلة للقص والتشكيل.', 
+                full: 'تتميز بكثافة أوراقها مما يجعلها مثالية للقص الفني وتشكيل الأسيجة النباتية.', 
+                carb: 'توفر عزلاً صوتياً وبصرياً.', 
+                img: 'https://i.imgur.com/Q2cT0IY.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'سياج نباتي' },
+                    { label: 'الاستخدام', value: 'تزيين وتحديد' },
+                    { label: 'ارتفاع النبات', value: 'حسب القص (1 - 3 م)' },
+                    { label: 'لون الأوراق', value: 'أخضر داكن' },
+                    { label: 'نوع الأوراق', value: 'دائمة الخضرة' },
+                    { label: 'درجة الحرارة', value: '0 – 45°م' }
+                ]
+            },
+            { 
+                cat: 'أشجار ونخيل', name: 'حديقة المستكة والجوري', sci: 'Garden Landscape', 
+                desc: 'تنسيق حدائقي متكامل.', 
+                full: 'صورة تظهر التناغم بين أشجار المستكة الخلفية وشجيرات الورد الجوري الأمامية لخلق عمق بصري.', 
+                carb: 'نظام بيئي متكامل.', 
+                img: 'https://i.imgur.com/oy5uq7V.jpg',
+                details: [
+                    { label: 'التصميم', value: 'طبقات نباتية' },
+                    { label: 'المكونات', value: 'أشجار + شجيرات' },
+                    { label: 'الهدف', value: 'تغطية التربة وتوفير الظل' },
+                    { label: 'الصيانة', value: 'ري وتقليم دوري' }
+                ]
+            },
+            { 
+                cat: 'أشجار ونخيل', name: 'لجوستروم', sci: 'Ligustrum lucidum', 
+                desc: 'سياج دائم الخضرة.', 
+                full: 'نبات قوي جداً وسريع النمو، يستخدم بكثرة كأسيجة نباتية مصدة للرياح والغبار.', 
+                carb: 'منقي ممتاز للهواء من العوادم.', 
+                img: 'https://i.imgur.com/3MGRkMz.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجيرة / سياج' },
+                    { label: 'موسم الإزهار', value: 'الصيف' },
+                    { label: 'ارتفاع النبات', value: '2 - 4 متر' },
+                    { label: 'لون الزهرة', value: 'أبيض كريمي' },
+                    { label: 'نوع الأوراق', value: 'دائمة الخضرة' },
+                    { label: 'درجة الحرارة', value: '-5 – 40°م' }
+                ]
+            },
+            { 
+                cat: 'أشجار ونخيل', name: 'يوكا', sci: 'Yucca aloifolia', 
+                desc: 'الخنجر الإسباني.', 
+                full: 'نبات صحراوي قوي جداً بأوراق رمحية صلبة، يتحمل أقسى درجات الحرارة والعطش.', 
+                carb: 'يحتاج القليل جداً من الماء.', 
+                img: 'https://i.imgur.com/dIjQ5n6.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجيرة عصارية' },
+                    { label: 'موسم الإزهار', value: 'الربيع والصيف' },
+                    { label: 'ارتفاع النبات', value: '1 - 3 متر' },
+                    { label: 'لون الزهرة', value: 'أبيض (جرسية)' },
+                    { label: 'نوع الأوراق', value: 'دائمة (شائكة)' },
+                    { label: 'درجة الحرارة', value: 'يتحمل حتى 50°م' }
+                ]
+            },
 
-            const moveTo = (clientX) => {
-                const rect = stage.getBoundingClientRect();
-                const x = clientX - rect.left;
-                let p = (x / rect.width) * 100;
-                p = Math.max(0, Math.min(100, p));
-                setBeforeAfter(card, p);
-            };
+            // ==================== ثانياً: الشجيرات المزهرة ====================
+            { 
+                cat: 'شجيرات مزهرة', name: 'الجهنمية (وردي)', sci: 'Bougainvillea glabra', 
+                desc: 'ملكة الصيف.', 
+                full: 'متسلقة قوية تتحمل الحرارة العالية، تتميز بقناباتها الملونة التي تستمر لأشهر طويلة.', 
+                carb: 'توفر ظلاً كثيفاً يخفض الحرارة.', 
+                img: 'https://i.imgur.com/lt6XYmg.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'متسلق / شجيرة' },
+                    { label: 'موسم الإزهار', value: 'معظم السنة (خاصة الصيف)' },
+                    { label: 'ارتفاع النبات', value: '1 - 12 متر' },
+                    { label: 'لون الزهرة', value: 'وردي زاهي' },
+                    { label: 'نوع الأوراق', value: 'نصف متساقطة' },
+                    { label: 'درجة الحرارة', value: '10 – 45°م' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'الجهنمية (هجين)', sci: 'Bougainvillea spectabilis', 
+                desc: 'كثافة زهرية عالية.', 
+                full: 'تحتاج للشمس المباشرة لتزهر بكثافة، وتعتبر من أفضل النباتات لأجواء العراق.', 
+                carb: 'تمتص الغبار.', 
+                img: 'https://i.imgur.com/httQ5OA.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'متسلق' },
+                    { label: 'موسم الإزهار', value: 'الربيع والخريف' },
+                    { label: 'الانتشار', value: 'واسع جداً' },
+                    { label: 'لون الزهرة', value: 'متعدد' },
+                    { label: 'درجة الحرارة', value: '10 – 45°م' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'الجهنمية (أصفر)', sci: 'Bougainvillea "California Gold"', 
+                desc: 'الذهب الكاليفورني.', 
+                full: 'صنف مميز بلونه الأصفر الذهبي، يضفي إشراقة وحيوية على الحديقة.', 
+                carb: 'تنوع بصري.', 
+                img: 'https://i.imgur.com/uxPbIbK.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'متسلق' },
+                    { label: 'موسم الإزهار', value: 'الصيف' },
+                    { label: 'ارتفاع النبات', value: '2 - 5 متر' },
+                    { label: 'لون الزهرة', value: 'أصفر ذهبي' },
+                    { label: 'درجة الحرارة', value: '15 – 40°م' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'الجهنمية (أحمر)', sci: 'Bougainvillea "Barbara Karst"', 
+                desc: 'الأكثر حمرة.', 
+                full: 'من أشهر الأصناف وأكثرها تحملاً، أزهارها حمراء قانية تجذب الأنظار من بعيد.', 
+                carb: 'سياج حيوي.', 
+                img: 'https://i.imgur.com/rAsFA8S.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'متسلق' },
+                    { label: 'موسم الإزهار', value: 'طوال العام تقريباً' },
+                    { label: 'لون الزهرة', value: 'أحمر قرمزي' },
+                    { label: 'الاحتياج الشمسي', value: 'شمس مباشرة' },
+                    { label: 'درجة الحرارة', value: '5 – 45°م' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'الجهنمية (برتقالي)', sci: 'Bougainvillea "Orange King"', 
+                desc: 'لون الغروب.', 
+                full: 'لون برتقالي دافئ يتحول للوردي الباهت مع تقدم عمر الزهرة.', 
+                carb: 'جذب الملقحات.', 
+                img: 'https://i.imgur.com/zmUglPI.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'متسلق' },
+                    { label: 'لون الزهرة', value: 'برتقالي نحاسي' },
+                    { label: 'وقت الإزهار', value: 'الربيع والصيف' },
+                    { label: 'الري', value: 'معتدل إلى قليل' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'الجهنمية (تنسيق)', sci: 'Bougainvillea', 
+                desc: 'تغطية الجدران.', 
+                full: 'مثالية لتغطية الأسوار والجدران القبيحة وتحويلها للوحات فنية.', 
+                carb: 'عزل حراري للمباني.', 
+                img: 'https://i.imgur.com/cKrp8AQ.jpg',
+                details: [
+                    { label: 'الاستخدام', value: 'تغطية أسوار' },
+                    { label: 'النمو', value: 'سريع جداً' },
+                    { label: 'التقليم', value: 'ضروري للتحكم' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'الجهنمية (نبيذي)', sci: 'Bougainvillea "Royal Purple"', 
+                desc: 'الأرجواني الملكي.', 
+                full: 'لون أرجواني (نبيذي) عميق، يعطي فخامة للمكان ويتحمل الظروف القاسية.', 
+                carb: 'جمال دائم.', 
+                img: 'https://i.imgur.com/lXzl8F2.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'لون الزهرة', value: 'أرجواني غامق' },
+                    { label: 'وقت الإزهار', value: 'كثيف في الصيف' },
+                    { label: 'التحمل', value: 'عالي جداً' }
+                ]
+            },
+            
+            // --- كاريسا ---
+            { 
+                cat: 'شجيرات مزهرة', name: 'كاريسا', sci: 'Carissa macrocarpa', 
+                desc: 'ياسمين كاليفورنيا.', 
+                full: 'شجيرة كثيفة دائمة الخضرة، أوراقها لامعة سميكة، وأزهارها بيضاء تشبه الياسمين.', 
+                carb: 'سياج أمني (شائك).', 
+                img: 'https://i.imgur.com/QXyukM3.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجيرة' },
+                    { label: 'موسم الإزهار', value: 'الربيع والصيف' },
+                    { label: 'ارتفاع النبات', value: '0.5 - 2 متر' },
+                    { label: 'لون الزهرة', value: 'أبيض ناصع' },
+                    { label: 'لون الأوراق', value: 'أخضر غامق لامع' },
+                    { label: 'درجة الحرارة', value: '5 – 40°م' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'كاريسا (إثمار)', sci: 'Carissa macrocarpa', 
+                desc: 'ثمار صالحة للأكل.', 
+                full: 'تنتج ثماراً حمراء بيضاوية تسمى (النم-نم) غنية بفيتامين C.', 
+                carb: 'جذب الطيور.', 
+                img: 'https://i.imgur.com/iydcWrO.jpg',
+                details: [
+                    { label: 'الثمار', value: 'حمراء (صالحة للأكل)' },
+                    { label: 'الطعم', value: 'حامض حلو' },
+                    { label: 'وقت الإثمار', value: 'الخريف' }
+                ]
+            },
+            
+            // --- الورد الجوري ---
+            { 
+                cat: 'شجيرات مزهرة', name: 'الورد الجوري', sci: 'Rosa damascena', 
+                desc: 'الورد المحمدي.', 
+                full: 'ملك الزهور، يتميز برائحته العطرية الفواحة وألوانه الجذابة. يحتاج لعناية خاصة.', 
+                carb: 'يحسن الحالة المزاجية.', 
+                img: 'https://i.imgur.com/iFQ6MkK.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجيرة' },
+                    { label: 'موسم الإزهار', value: 'الربيع والخريف' },
+                    { label: 'ارتفاع النبات', value: '80 سم - 1.5 م' },
+                    { label: 'لون الزهرة', value: 'وردي / أحمر' },
+                    { label: 'الرائحة', value: 'عطرية قوية' },
+                    { label: 'درجة الحرارة', value: '10 – 35°م' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'أوراق الجوري', sci: 'Rosa', 
+                desc: 'نمو خضري صحي.', 
+                full: 'أوراق مركبة مسننة الحواف. صحة الأوراق دليل على صحة الجذور.', 
+                carb: 'امتصاص الكربون.', 
+                img: 'https://i.imgur.com/kK8ElB7.jpg',
+                details: [
+                    { label: 'نوع الأوراق', value: 'متساقطة شتاءً' },
+                    { label: 'اللون', value: 'أخضر داكن' },
+                    { label: 'الآفات', value: 'عرضة للمن والعناكب' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'برعم جوري', sci: 'Rosa', 
+                desc: 'وعد الجمال.', 
+                full: 'البراعم قبل التفتح تحمل وعوداً بألوان زاهية وعطور فواحة.', 
+                carb: 'جمال طبيعي.', 
+                img: 'https://i.imgur.com/FwXshk3.jpg',
+                details: [
+                    { label: 'المرحلة', value: 'ما قبل التفتح' },
+                    { label: 'اللون', value: 'أحمر قاني' },
+                    { label: 'الوقت للتفتح', value: '3 - 5 أيام' }
+                ]
+            },
 
-            stage.addEventListener('pointerdown', (e) => {
-                dragging = true;
-                stage.setPointerCapture(e.pointerId);
-                moveTo(e.clientX);
+            // --- مرجان / إيفوربيا ---
+            { 
+                cat: 'شجيرات مزهرة', name: 'مرجان (أحمر)', sci: 'Euphorbia milii', 
+                desc: 'إكليل الشوك.', 
+                full: 'نبات عصاري قوي جداً، ساقه مليئة بالأشواك، يزهر طوال العام تقريباً.', 
+                carb: 'يتحمل العطش الشديد.', 
+                img: 'https://i.imgur.com/q7LO3S7.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'عصاري شجيري' },
+                    { label: 'موسم الإزهار', value: 'طوال العام' },
+                    { label: 'ارتفاع النبات', value: '30 - 90 سم' },
+                    { label: 'لون الزهرة', value: 'أحمر' },
+                    { label: 'التحمل', value: 'جفاف وحرارة' },
+                    { label: 'درجة الحرارة', value: '10 – 40°م' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'مرجان (أصفر/أبيض)', sci: 'Euphorbia milii var.', 
+                desc: 'ألوان هادئة.', 
+                full: 'صنف ذو أزهار صفراء كريمية، يتميز بجماله ونعومته رغم أشواكه.', 
+                carb: 'تنوع في الحديقة.', 
+                img: 'https://i.imgur.com/wprCl86.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'لون الزهرة', value: 'أصفر كريمي' },
+                    { label: 'الاحتياج المائي', value: 'قليل جداً' }
+                ]
+            },
+            
+            // --- شجيرات أخرى ---
+            { 
+                cat: 'شجيرات مزهرة', name: 'لانتانا (المينا)', sci: 'Lantana camara', 
+                desc: 'كعكة الزهور.', 
+                full: 'شجيرة قوية تتحمل الحرارة، أزهارها تتغير ألوانها وتجذب الفراشات بشكل كبير.', 
+                carb: 'دعم التنوع البيولوجي.', 
+                img: 'https://i.imgur.com/WE8dvvV.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجيرة' },
+                    { label: 'موسم الإزهار', value: 'الربيع إلى الخريف' },
+                    { label: 'ارتفاع النبات', value: '1 - 2 متر' },
+                    { label: 'لون الزهرة', value: 'متعدد (أحمر/أصفر)' },
+                    { label: 'الرائحة', value: 'نفاذة' },
+                    { label: 'درجة الحرارة', value: '10 – 45°م' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'الختمة (هيبسكس)', sci: 'Hibiscus rosa-sinensis', 
+                desc: 'الورد الصيني.', 
+                full: 'شجيرة ذات أزهار بوقية كبيرة جداً وأوراق خضراء داكنة لامعة.', 
+                carb: 'تلطيف الجو.', 
+                img: 'https://i.imgur.com/dj0LTUG.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجيرة' },
+                    { label: 'موسم الإزهار', value: 'الصيف' },
+                    { label: 'حجم الزهرة', value: 'كبير (10-15 سم)' },
+                    { label: 'لون الزهرة', value: 'أحمر / وردي' },
+                    { label: 'درجة الحرارة', value: '15 – 35°م' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'تيكوما', sci: 'Tecoma stans', 
+                desc: 'الأجراس الصفراء.', 
+                full: 'شجيرة سريعة النمو تزهر بغزارة في الصيف والخريف، أزهارها صفراء بوقية الشكل.', 
+                carb: 'ظلال وجمال.', 
+                img: 'https://i.imgur.com/G8dAkmP.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجيرة كبيرة' },
+                    { label: 'موسم الإزهار', value: 'الصيف والخريف' },
+                    { label: 'ارتفاع النبات', value: '2 - 5 متر' },
+                    { label: 'لون الزهرة', value: 'أصفر زاهي' },
+                    { label: 'درجة الحرارة', value: '10 – 45°م' }
+                ]
+            },
+
+            // ==================== ثالثاً: المتسلقات ====================
+            { 
+                cat: 'متسلقات', name: 'الياسمين الأحمر', sci: 'Combretum indicum', 
+                desc: 'ياسمين هندي.', 
+                full: 'متسلقة عطرية رائعة، تتفتح أزهارها بيضاء ثم تتحول للوردي ثم الأحمر الغامق.', 
+                carb: 'تغطية نباتية ممتازة.', 
+                img: 'https://i.imgur.com/4NMdp2w.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'متسلق خشبي' },
+                    { label: 'موسم الإزهار', value: 'الصيف' },
+                    { label: 'الرائحة', value: 'عطرية فواحة' },
+                    { label: 'الارتفاع', value: 'يصل 8 أمتار' },
+                    { label: 'الألوان', value: 'أبيض > أحمر' },
+                    { label: 'درجة الحرارة', value: '15 – 40°م' }
+                ]
+            },
+            { 
+                cat: 'متسلقات', name: 'تداخل نباتي', sci: 'Combretum & Vinca', 
+                desc: 'ياسمين وعين البزون.', 
+                full: 'صورة تظهر التداخل الجميل بين متسلقة الياسمين الأحمر وزهور عين البزون الأرضية.', 
+                carb: 'استغلال المساحات.', 
+                img: 'https://i.imgur.com/4DXMZyx.jpg',
+                details: [
+                    { label: 'نوع التنسيق', value: 'رأسي وأفقي' },
+                    { label: 'النباتات', value: 'ياسمين + فينكا' },
+                    { label: 'الهدف', value: 'تغطية كاملة' }
+                ]
+            },
+            { 
+                cat: 'متسلقات', name: 'بطاطا الزينة', sci: 'Ipomoea batatas', 
+                desc: 'أوراق ليمونية.', 
+                full: 'نبات زاحف أو متسلق يزرع لجمال أوراقه ذات اللون الأخضر الليموني الفاقع.', 
+                carb: 'تغطية التربة بسرعة.', 
+                img: 'https://i.imgur.com/11uRFOE.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر (يعامل كحولي)' },
+                    { label: 'نوع النبات', value: 'زاحف / مداد' },
+                    { label: 'لون الأوراق', value: 'أخضر ليموني (Neon)' },
+                    { label: 'موسم النمو', value: 'الصيف' },
+                    { label: 'الانتشار', value: 'سريع جداً' },
+                    { label: 'درجة الحرارة', value: '15 – 40°م' }
+                ]
+            },
+
+            // ==================== رابعاً: الزهور الموسمية والعشبية ====================
+            { 
+                cat: 'زهور موسمية', name: 'الجعفري (القطيفة)', sci: 'Tagetes erecta', 
+                desc: 'الذهب الأفريقي.', 
+                full: 'نبات حولي صيفي وشتوي، أزهاره كروية كبيرة برتقالية وصفراء، طارد للنيماتودا والحشرات.', 
+                carb: 'بيئة صحية.', 
+                img: 'https://i.imgur.com/WhGfU0i.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'حولي' },
+                    { label: 'نوع النبات', value: 'عشبي مزهر' },
+                    { label: 'موسم الإزهار', value: 'الربيع والخريف' },
+                    { label: 'ارتفاع النبات', value: '30 - 60 سم' },
+                    { label: 'لون الزهرة', value: 'برتقالي / أصفر' },
+                    { label: 'الفائدة', value: 'طارد للحشرات' },
+                    { label: 'درجة الحرارة', value: '10 – 35°م' }
+                ]
+            },
+            { 
+                cat: 'زهور موسمية', name: 'حوض الجعفري', sci: 'Tagetes', 
+                desc: 'تنسيق كثيف.', 
+                full: 'زراعة الجعفري في مجموعات تعطي تأثيراً لونياً مبهراً وقوياً.', 
+                carb: 'ألوان موسمية.', 
+                img: 'https://i.imgur.com/Udjojah.jpg',
+                details: [
+                    { label: 'التنسيق', value: 'مجموعات (Massing)' },
+                    { label: 'الكثافة', value: 'عالية' },
+                    { label: 'الصيانة', value: 'إزالة الزهور الذابلة' }
+                ]
+            },
+            
+            // --- الداوودي ---
+            { 
+                cat: 'زهور موسمية', name: 'الداوودي (بنفسجي)', sci: 'Chrysanthemum morifolium', 
+                desc: 'زهرة الخريف.', 
+                full: 'تزهر بغزارة في الخريف والشتاء، وتتوفر بألوان وأشكال لا حصر لها.', 
+                carb: 'تنقية الهواء من البنزين.', 
+                img: 'https://i.imgur.com/NJrnSDc.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر (يتجدد)' },
+                    { label: 'نوع النبات', value: 'عشبي' },
+                    { label: 'موسم الإزهار', value: 'الخريف والشتاء' },
+                    { label: 'ارتفاع النبات', value: '30 - 80 سم' },
+                    { label: 'لون الزهرة', value: 'بنفسجي' },
+                    { label: 'درجة الحرارة', value: '5 – 25°م' }
+                ]
+            },
+            { 
+                cat: 'زهور موسمية', name: 'الداوودي (أصفر)', sci: 'Chrysanthemum', 
+                desc: 'شمس الشتاء.', 
+                full: 'لون أصفر مشرق يكسر كآبة الشتاء ويضيف بهجة للحديقة.', 
+                carb: 'رحيق للنحل.', 
+                img: 'https://i.imgur.com/9ubvgjC.jpg',
+                details: [
+                    { label: 'لون الزهرة', value: 'أصفر زاهي' },
+                    { label: 'الشكل', value: 'شعاعي' },
+                    { label: 'الرائحة', value: 'عشبية مميزة' }
+                ]
+            },
+
+            // --- دم العاشق ---
+            { 
+                cat: 'زهور موسمية', name: 'دم العاشق', sci: 'Alternanthera dentata', 
+                desc: 'أوراق ملونة.', 
+                full: 'نبات يزرع لجمال أوراقه الأرجوانية (النبيذية)، يستخدم بكثرة لتحديد الأحواض والرسم النباتي.', 
+                carb: 'تباين لوني.', 
+                img: 'https://i.imgur.com/M9dZyxB.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'غطاء تربة / تحديد' },
+                    { label: 'لون الأوراق', value: 'أرجواني / نبيذي' },
+                    { label: 'ارتفاع النبات', value: '20 - 50 سم' },
+                    { label: 'الإزهار', value: 'غير ملحوظ (أبيض صغير)' },
+                    { label: 'درجة الحرارة', value: '10 – 40°م' }
+                ]
+            },
+            { 
+                cat: 'زهور موسمية', name: 'دم العاشق (تحديد)', sci: 'Alternanthera', 
+                desc: 'سياج منخفض.', 
+                full: 'يتحمل القص والتشكيل بشكل ممتاز لعمل إطارات نباتية ملونة.', 
+                carb: 'تثبيت حواف التربة.', 
+                img: 'https://i.imgur.com/i8UtYkb.jpg',
+                details: [
+                    { label: 'الاستخدام', value: 'تحديد ممرات' },
+                    { label: 'الصيانة', value: 'قص دوري' },
+                    { label: 'الكثافة', value: 'عالية' }
+                ]
+            },
+            
+            // --- سينراريا / دستي ميلر ---
+            { 
+                cat: 'زهور موسمية', name: 'سينراريا (دستس)', sci: 'Jacobaea maritima', 
+                desc: 'المغبرة الفضية.', 
+                full: 'نبات مميز جداً بأوراقه الفضية المخملية الملمس، يكسر حدة اللون الأخضر في الحديقة.', 
+                carb: 'عكس أشعة الشمس.', 
+                img: 'https://i.imgur.com/V9N4gCH.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر (قصير العمر)' },
+                    { label: 'نوع النبات', value: 'عشبي' },
+                    { label: 'لون الأوراق', value: 'فضي / رمادي' },
+                    { label: 'الملمس', value: 'صوفي / مخملي' },
+                    { label: 'ارتفاع النبات', value: '20 - 40 سم' },
+                    { label: 'درجة الحرارة', value: '5 – 35°م' }
+                ]
+            },
+
+            // --- أخرى ---
+            { 
+                cat: 'زهور موسمية', name: 'نازناز (ورد الصباح)', sci: 'Portulaca grandiflora', 
+                desc: 'زهرة الشمس.', 
+                full: 'نبات زاحف عصاري، تتفتح أزهاره فقط عند سطوع الشمس وتغلق في الظل.', 
+                carb: 'مقاوم للجفاف.', 
+                img: 'https://i.imgur.com/UpEM18S.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'حولي / مُعمّر' },
+                    { label: 'نوع النبات', value: 'زاحف عصاري' },
+                    { label: 'موسم الإزهار', value: 'الصيف' },
+                    { label: 'لون الزهرة', value: 'متعدد (فوشي/أصفر)' },
+                    { label: 'الارتفاع', value: '10 - 15 سم' },
+                    { label: 'درجة الحرارة', value: '15 – 45°م' }
+                ]
+            },
+            { 
+                cat: 'زهور موسمية', name: 'القرنفل الصيني', sci: 'Dianthus chinensis', 
+                desc: 'أزهار مشرشرة.', 
+                full: 'أزهار جميلة ذات حواف مسننة، تتميز بألوان متداخلة (أبيض مع وردي/أحمر).', 
+                carb: 'زينة الأحواض.', 
+                img: 'https://i.imgur.com/DvpTsu1.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'حولي / ذو حولين' },
+                    { label: 'نوع النبات', value: 'عشبي' },
+                    { label: 'موسم الإزهار', value: 'الربيع' },
+                    { label: 'الارتفاع', value: '20 - 40 سم' },
+                    { label: 'لون الزهرة', value: 'أبيض ووردي' },
+                    { label: 'درجة الحرارة', value: '10 – 30°م' }
+                ]
+            },
+
+            // ==================== خامساً: العصاريات والنباتات الداخلية ====================
+            { 
+                cat: 'عصاريات', name: 'الألوفيرا', sci: 'Aloe Vera', 
+                desc: 'طبيب العائلة.', 
+                full: 'نبات عصاري مشهور بجلّه الشافي للحروق وترطيب البشرة، ومنقي قوي للهواء.', 
+                carb: 'يطلق الأكسجين ليلاً (CAM).', 
+                img: 'https://i.imgur.com/28Ayv97.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'عصاري' },
+                    { label: 'الاستخدام', value: 'طبي / تجميلي' },
+                    { label: 'ارتفاع النبات', value: '30 - 60 سم' },
+                    { label: 'لون الزهرة', value: 'أصفر / برتقالي (شمراخ)' },
+                    { label: 'الري', value: 'قليل جداً' },
+                    { label: 'درجة الحرارة', value: '10 – 40°م' }
+                ]
+            },
+            { 
+                cat: 'عصاريات', name: 'الألوفيرا (نمو)', sci: 'Aloe Vera', 
+                desc: 'خلفات جديدة.', 
+                full: 'تتكاثر الألوفيرا بسهولة عن طريق الخلفات الصغيرة التي تنمو بجوار الأم.', 
+                carb: 'استدامة.', 
+                img: 'https://i.imgur.com/08gDPBe.jpg',
+                details: [
+                    { label: 'التكاثر', value: 'بالخلفات' },
+                    { label: 'النمو', value: 'متوسط' },
+                    { label: 'التربة', value: 'رملية جيدة الصرف' }
+                ]
+            },
+            { 
+                cat: 'عصاريات', name: 'جلد النمر', sci: 'Sansevieria trifasciata', 
+                desc: 'نبات الثعبان.', 
+                full: 'من أكثر النباتات تحملاً للإهمال وقلة الضوء، وهو "مصنع أكسجين" ليلي مثالي لغرف النوم.', 
+                carb: 'يزيل الفورمالديهايد والبنزين.', 
+                img: 'https://i.imgur.com/4v8rSBT.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'عصاري داخلي/خارجي' },
+                    { label: 'ارتفاع النبات', value: '40 - 100 سم' },
+                    { label: 'شكل الأوراق', value: 'سيفية قائمة' },
+                    { label: 'الري', value: 'عند جفاف التربة تماماً' },
+                    { label: 'درجة الحرارة', value: '15 – 35°م' }
+                ]
+            },
+            { 
+                cat: 'عصاريات', name: 'ديسكيديا', sci: 'Dischidia', 
+                desc: 'نبات النمل.', 
+                full: 'نبات متدلي جميل أوراقه سميكة تشبه الأزرار، مناسب للسلال المعلقة.', 
+                carb: 'زينة داخلية.', 
+                img: 'https://i.imgur.com/A2GeMTS.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'متدلي (Epiphyte)' },
+                    { label: 'الضوء', value: 'غير مباشر ساطع' },
+                    { label: 'الري', value: 'رش رذاذ بانتظام' },
+                    { label: 'الاستخدام', value: 'سلال معلقة' }
+                ]
+            }
+        ];
+
+        // --- معرض صور المشروع ---
+        const projectGalleryIds = ['C5BcmcD', 'psuoF8V', '13NmB1S', 'KG9hVLd', 'goupDMm', 'EEMQKIT', '7phP4aa', 'F0d62Ve', 'k0S7dAU', 'aPbDpwu', 'ukztdXq', 'ULGk4X1', '0tr7fzg', 'K8qd0qB', 'KEa3SW4', '0lyKTNq', 'E8f8H7Q', 'jMQ2qvX', 'FiEpEHb', 'jU0UKsD', 'gssg8bC', 'mOTiwiF', 'g4Zs7eN', 'oe1xaMS', 'Et2OXdu', '8A27QrE', 'La2MYqr', 'd5N5Qkj', 'ji8Q0Hd', 'dCpUVCS', 'a26hDjB', 'Ef4x1Y9', 'T0mz4DO', '6G6tsaP', 'l6HVoZc', 'GP1Fxq5', '7kFZFuz', '6Nq60ni', '3X1wL8n', 'KxqfMz6', 'NV1KAo3', 'sAq8CUq', 'kuYwIGB', 'pN1zUBG', 'hLL8VUX', 'O4HlH2z', 'FYvyKDy', 'cT99hPo', 'IPFtJ60', 'wtybtaB', 'U91hPKl', 'Q1TmxRE', 'aHB0r9g', 'Fbkv7Co', '2afjBpE', '7qBKzs4', 'sUCM3R1', 'LB6KJo7', 'jIHSVlh', 'ICNM6wr', 'f4zaXCv', '4T2uRh2', 'FJPiG6B', 'uF4ap4m', 'RgJteLi'];
+
+        const students = ['بلال زامل أحمد', 'أحمد محمد علي', 'فاطمة حسن', 'علي حسين', 'سارة محمود', 'زينب عادل'];
+
+        // دوال مساعدة
+        function showSection(id) {
+            document.querySelectorAll('main > div').forEach(div => div.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-button').forEach(btn => {
+                const isActive = btn.getAttribute('data-id') === id;
+                btn.className = `nav-button px-6 py-2 rounded-full transition flex items-center gap-2 font-bold ${isActive ? 'bg-green-600 text-white shadow-lg' : 'bg-gray-100 text-gray-600 hover:bg-green-100'}`;
             });
+            lucide.createIcons();
+        }
 
-            stage.addEventListener('pointermove', (e) => {
-                if (!dragging) return;
-                moveTo(e.clientX);
-            });
+        function handleSliderChange(slider) {
+            const card = slider.closest('.beforeafter-card');
+            const val = slider.value;
+            const after = card.querySelector('.after-image');
+            const handle = card.querySelector('.slider-handle');
+            if (after) after.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
+            if (handle) handle.style.left = `${val}%`;
+        }
 
-            const stop = () => dragging = false;
-            stage.addEventListener('pointerup', stop);
-            stage.addEventListener('pointercancel', stop);
-            stage.addEventListener('pointerleave', () => { /* خليه لا ينقطع إلا pointerup */ });
-        });
-    }
+        function openModal(index) {
+            const plant = plantsData[index];
+            document.getElementById('modal-img').src = plant.img;
+            document.getElementById('modal-title').innerText = plant.name;
+            document.getElementById('modal-category').innerText = plant.cat;
+            document.getElementById('modal-scientific').innerText = plant.sci;
+            document.getElementById('modal-desc').innerText = plant.full;
+            document.getElementById('modal-carbon').innerText = plant.carb;
 
-    function openModal(index) {
-        const plant = plantsData[index];
-        document.getElementById('modal-img').src = plant.img;
-        document.getElementById('modal-title').innerText = plant.name;
-        document.getElementById('modal-category').innerText = plant.cat || '';
-        document.getElementById('modal-scientific').innerText = plant.sci || '';
-        document.getElementById('modal-desc').innerText = plant.full || plant.desc || '';
-        document.getElementById('modal-carbon').innerText = plant.carb || '';
+            // توليد شبكة التفاصيل
+            const detailsGrid = document.getElementById('modal-details-grid');
+            if (plant.details) {
+                detailsGrid.innerHTML = plant.details.map(d => `
+                    <div class="bg-gray-50 p-2 sm:p-3 rounded-lg border border-gray-100 hover:bg-green-50 transition">
+                        <span class="text-[10px] text-gray-500 block mb-1 font-bold">${d.label}</span>
+                        <span class="text-sm font-bold text-gray-800">${d.value}</span>
+                    </div>
+                `).join('');
+            } else {
+                detailsGrid.innerHTML = '';
+            }
+            
+            const modal = document.getElementById('plant-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            lucide.createIcons();
+        }
 
-        const detailsGrid = document.getElementById('modal-details-grid');
-        if (plant.details && plant.details.length) {
-            detailsGrid.innerHTML = plant.details.map(d => `
-                <div class="bg-gray-50 p-2 sm:p-3 rounded-lg border border-gray-100 hover:bg-green-50 transition">
-                    <span class="text-[10px] text-gray-500 block mb-1 font-bold">${d.label}</span>
-                    <span class="text-sm font-bold text-gray-800">${d.value}</span>
+        function closeModal() {
+            document.getElementById('plant-modal').classList.add('hidden');
+            document.getElementById('plant-modal').classList.remove('flex');
+        }
+
+        // --- Gallery Functions ---
+        let galleryIndex = 0;
+        function initProjectGallery() {
+            const grid = document.getElementById('project-gallery-grid');
+            const count = document.getElementById('gallery-count');
+            if (!grid) return;
+            
+            // Limit to first 24 images to avoid heavy loading, or use paging. 
+            // For now, loading all with lazy loading.
+            grid.innerHTML = projectGalleryIds.map((id, idx) => `
+                <div class="gallery-card cursor-pointer" onclick="openGallery(${idx})">
+                    <img class="gallery-thumb" src="https://i.imgur.com/${id}.jpg" loading="lazy" alt="Project image ${idx}">
                 </div>
             `).join('');
-        } else {
-            detailsGrid.innerHTML = '';
+            
+            if (count) count.textContent = `${projectGalleryIds.length} صورة`;
         }
 
-        const modal = document.getElementById('plant-modal');
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        lucide.createIcons();
-    }
-
-    function closeModal() {
-        const modal = document.getElementById('plant-modal');
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-    }
-
-    // --- Gallery ---
-    let galleryIndex = 0;
-
-    function initProjectGallery() {
-        const grid = document.getElementById('project-gallery-grid');
-        const count = document.getElementById('gallery-count');
-        if (!grid) return;
-
-        grid.innerHTML = projectGalleryIds.map((id, idx) => `
-            <div class="gallery-card cursor-pointer" onclick="openGallery(${idx})">
-                <img class="gallery-thumb" src="https://i.imgur.com/${id}.jpg" loading="lazy" alt="صورة ${idx + 1}">
-            </div>
-        `).join('');
-
-        if (count) count.textContent = `${projectGalleryIds.length} صورة`;
-    }
-
-    function openGallery(idx) {
-        galleryIndex = idx;
-        const lb = document.getElementById('gallery-lightbox');
-        const img = document.getElementById('gallery-full');
-        const counter = document.getElementById('gallery-counter');
-
-        lb.classList.remove('hidden');
-        lb.classList.add('flex');
-        img.src = `https://i.imgur.com/${projectGalleryIds[idx]}.jpg`;
-        counter.innerText = `${idx + 1} / ${projectGalleryIds.length}`;
-        lucide.createIcons();
-    }
-
-    function closeGallery() {
-        const lb = document.getElementById('gallery-lightbox');
-        lb.classList.add('hidden');
-        lb.classList.remove('flex');
-    }
-
-    function nextGallery() {
-        galleryIndex = (galleryIndex + 1) % projectGalleryIds.length;
-        openGallery(galleryIndex);
-    }
-
-    function prevGallery() {
-        galleryIndex = (galleryIndex - 1 + projectGalleryIds.length) % projectGalleryIds.length;
-        openGallery(galleryIndex);
-    }
-
-    // Escape key closes modal/gallery
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeModal();
-            closeGallery();
+        function openGallery(idx) {
+            galleryIndex = idx;
+            const lb = document.getElementById('gallery-lightbox');
+            const img = document.getElementById('gallery-full');
+            const counter = document.getElementById('gallery-counter');
+            
+            lb.classList.remove('hidden');
+            lb.classList.add('flex');
+            img.src = `https://i.imgur.com/${projectGalleryIds[idx]}.jpg`;
+            counter.innerText = `${idx + 1} / ${projectGalleryIds.length}`;
         }
-        if (e.key === 'ArrowRight') nextGallery();
-        if (e.key === 'ArrowLeft') prevGallery();
-    });
 
-    function initApp() {
-        const nav = document.getElementById('nav-tabs');
-        nav.innerHTML = sections.map(s => `
-            <button data-id="${s.id}" onclick="showSection('${s.id}')"
-                    class="nav-button px-6 py-2 rounded-full flex items-center gap-2 whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-green-100 font-bold transition">
-                <i data-lucide="${s.icon}" class="w-4 h-4"></i> ${s.name}
-            </button>
-        `).join('');
+        function closeGallery() {
+            document.getElementById('gallery-lightbox').classList.add('hidden');
+            document.getElementById('gallery-lightbox').classList.remove('flex');
+        }
 
-        const plantsContainer = document.getElementById('plants-container');
-        plantsContainer.innerHTML = plantsData.map((p, index) => `
-            <div onclick="openModal(${index})" class="bg-white rounded-xl shadow-md overflow-hidden hover:scale-[1.02] transition cursor-pointer group hover:shadow-2xl">
-                <div class="relative h-48 overflow-hidden">
-                    <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="${p.name}">
-                    <div class="absolute top-2 right-2 z-10">
-                        <span class="bg-white/90 backdrop-blur-sm text-green-800 text-xs font-bold px-2 py-1 rounded-md shadow-sm border border-green-100">${p.cat || ''}</span>
+        function nextGallery() {
+            galleryIndex = (galleryIndex + 1) % projectGalleryIds.length;
+            openGallery(galleryIndex);
+        }
+
+        function prevGallery() {
+            galleryIndex = (galleryIndex - 1 + projectGalleryIds.length) % projectGalleryIds.length;
+            openGallery(galleryIndex);
+        }
+
+        function initApp() {
+            const nav = document.getElementById('nav-tabs');
+            nav.innerHTML = sections.map(s => `
+                <button data-id="${s.id}" onclick="showSection('${s.id}')" class="nav-button px-6 py-2 rounded-full flex items-center gap-2 whitespace-nowrap">
+                    <i data-lucide="${s.icon}" class="w-4 h-4"></i> ${s.name}
+                </button>
+            `).join('');
+
+            document.getElementById('plants-container').innerHTML = plantsData.map((p, index) => `
+                <div onclick="openModal(${index})" class="bg-white rounded-xl shadow-md overflow-hidden hover:scale-105 transition cursor-pointer group hover:shadow-2xl">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-2 right-2 z-10">
+                            <span class="bg-white/90 backdrop-blur-sm text-green-800 text-xs font-bold px-2 py-1 rounded-md shadow-sm border border-green-100">${p.cat}</span>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end justify-center pb-4">
+                            <span class="text-white font-bold text-sm bg-green-600/80 px-3 py-1 rounded-full backdrop-blur-sm">عرض التفاصيل</span>
+                        </div>
                     </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end justify-center pb-4">
-                        <span class="text-white font-bold text-sm bg-green-600/80 px-3 py-1 rounded-full backdrop-blur-sm">عرض التفاصيل</span>
+                    <div class="p-4 border-t border-gray-100">
+                        <h4 class="font-bold text-green-700 text-lg flex justify-between items-center">
+                            ${p.name}
+                        </h4>
+                        <p class="text-sm text-gray-600 mt-1 line-clamp-1">${p.desc}</p>
                     </div>
                 </div>
-                <div class="p-4 border-t border-gray-100">
-                    <h4 class="font-bold text-green-700 text-lg">${p.name}</h4>
-                    <p class="text-sm text-gray-600 mt-1 truncate">${p.desc || ''}</p>
-                </div>
-            </div>
-        `).join('');
+            `).join('');
 
-        document.getElementById('students-container').innerHTML = students.map(s => `
-            <div class="bg-white p-4 rounded-lg shadow-sm border-r-4 border-green-500 font-medium">${s}</div>
-        `).join('');
+            document.getElementById('students-container').innerHTML = students.map(s => `
+                <div class="bg-white p-4 rounded-lg shadow-sm border-r-4 border-green-500 font-medium">${s}</div>
+            `).join('');
 
-        initProjectGallery();
-        showSection('home');
-        lucide.createIcons();
-
-        // اربط السحب مباشرة حتى لو فتحت قبل/بعد لاحقاً
-        bindBeforeAfterDrag();
-    }
-</script>
-
+            initProjectGallery();
+            showSection('home');
+        }
+    </script>
 </body>
 </html>
