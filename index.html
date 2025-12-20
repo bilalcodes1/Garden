@@ -140,94 +140,24 @@
                 </h2>
 
                 <div class="grid gap-6">
-                    <div id="beforeafter" class="space-y-6 hidden">
-    <h2 class="text-3xl font-bold text-green-700 flex items-center gap-2">
-        <i data-lucide="scan" class="w-7 h-7"></i> قبل وبعد المشروع
-    </h2>
-
-    <div class="grid gap-6">
-
-        <!-- مقارنة 1 -->
-        <div class="beforeafter-card bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-green-100">
-
-            <!-- هيدر قبل / بعد -->
-            <div class="flex items-center justify-end gap-2 mb-4 text-xs font-bold">
-                <span class="px-3 py-1 rounded-full bg-green-50 border border-green-200 text-green-800">قبل</span>
-                <span class="px-3 py-1 rounded-full bg-white border border-green-200 text-green-800">بعد</span>
-            </div>
-
-            <!-- الصور -->
-            <div class="relative w-full h-72 sm:h-80 md:h-96 overflow-hidden rounded-2xl border border-green-200">
-                <img src="https://i.imgur.com/NJrnSDc.jpg" class="w-full h-full object-cover" alt="قبل">
-
-                <div class="after-image absolute inset-0" style="clip-path: inset(0 50% 0 0);">
-                    <img src="https://i.imgur.com/28Ayv97.jpg" class="w-full h-full object-cover" alt="بعد">
-                </div>
-
-                <!-- لابل داخل الصورة -->
-                <div class="absolute top-3 right-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">
-                    قبل
-                </div>
-                <div class="absolute top-3 left-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">
-                    بعد
-                </div>
-
-                <!-- الخط -->
-                <div class="slider-handle absolute top-0 bottom-0 w-1 bg-white shadow-lg" style="left: 50%;">
-                    <div class="absolute top-1/2 left-1/2 
-                                -translate-x-1/2 -translate-y-1/2 
-                                w-10 h-10 bg-white rounded-full 
-                                flex items-center justify-center 
-                                border-2 border-green-600">
-                        <i data-lucide="chevrons-left-right" class="w-4 h-4 text-green-600"></i>
+                    <div class="beforeafter-card bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-green-100">
+                        <div class="relative w-full h-72 sm:h-80 md:h-96 overflow-hidden rounded-2xl border border-green-200">
+                            <img src="https://i.imgur.com/NJrnSDc.jpg" alt="قبل" class="w-full h-full object-cover">
+                            <div class="after-image absolute inset-0" style="clip-path: inset(0 50% 0 0);">
+                                <img src="https://i.imgur.com/28Ayv97.jpg" alt="بعد" class="w-full h-full object-cover">
+                            </div>
+                            <div class="absolute top-3 right-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">قبل</div>
+                            <div class="absolute top-3 left-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">بعد</div>
+                            <div class="slider-handle absolute top-0 bottom-0 w-1 bg-white shadow-lg" style="left: 50%;">
+                                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
+                                    <i data-lucide="chevrons-left-right" class="w-4 h-4 text-green-600"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="range" min="0" max="100" value="50" oninput="handleSliderChange(this)" class="w-full mt-5 accent-green-600">
                     </div>
                 </div>
             </div>
-
-            <!-- السلايدر -->
-            <input type="range"
-                   min="0" max="100" value="50"
-                   oninput="handleSliderChange(this)"
-                   class="w-full mt-5 accent-green-600">
-        </div>
-
-        <!-- مقارنة 2 (اختياري) -->
-        <div class="beforeafter-card bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-green-100">
-
-            <div class="flex items-center justify-end gap-2 mb-4 text-xs font-bold">
-                <span class="px-3 py-1 rounded-full bg-green-50 border border-green-200 text-green-800">قبل</span>
-                <span class="px-3 py-1 rounded-full bg-white border border-green-200 text-green-800">بعد</span>
-            </div>
-
-            <div class="relative w-full h-72 sm:h-80 md:h-96 overflow-hidden rounded-2xl border border-green-200">
-                <img src="https://i.imgur.com/13NmB1S.jpg" class="w-full h-full object-cover" alt="قبل">
-
-                <div class="after-image absolute inset-0" style="clip-path: inset(0 50% 0 0);">
-                    <img src="https://i.imgur.com/8vzY6Z3.jpg" class="w-full h-full object-cover" alt="بعد">
-                </div>
-
-                <div class="absolute top-3 right-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">قبل</div>
-                <div class="absolute top-3 left-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">بعد</div>
-
-                <div class="slider-handle absolute top-0 bottom-0 w-1 bg-white shadow-lg" style="left: 50%;">
-                    <div class="absolute top-1/2 left-1/2 
-                                -translate-x-1/2 -translate-y-1/2 
-                                w-10 h-10 bg-white rounded-full 
-                                flex items-center justify-center 
-                                border-2 border-green-600">
-                        <i data-lucide="chevrons-left-right" class="w-4 h-4 text-green-600"></i>
-                    </div>
-                </div>
-            </div>
-
-            <input type="range"
-                   min="0" max="100" value="50"
-                   oninput="handleSliderChange(this)"
-                   class="w-full mt-5 accent-green-600">
-        </div>
-
-    </div>
-</div>
 
             <div id="stages" class="space-y-6 hidden">
                 <div class="flex items-center justify-between gap-3 flex-wrap">
