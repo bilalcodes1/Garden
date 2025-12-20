@@ -31,7 +31,22 @@
     
         /* تفاصيل النبات: محاذاة ممتازة لكل المقاسات */
         #modal-details { direction: rtl; }
-        </style>
+        
+        /* سلايد شو المراحل */
+        .dot-btn{
+            width: 10px;
+            height: 10px;
+            border-radius: 9999px;
+            border: 1px solid rgba(22,163,74,.35);
+            background: rgba(34,197,94,.15);
+            transition: transform .15s ease, background .2s ease;
+        }
+        .dot-btn.active{
+            background: rgba(34,197,94,.9);
+            transform: scale(1.2);
+        }
+
+    </style>
 </head>
 <body onload="initApp();" class="bg-gray-50 text-gray-800">
 
@@ -67,6 +82,24 @@
                             <h2 class="text-3xl md:text-5xl font-bold mb-2 text-white">مرحباً بكم في حديقتنا</h2>
                             <p class="text-lg text-white/90">مشروع بيئي تعليمي بأيدي طلابنا</p>
                         </div>
+                    </div>
+                </div>
+
+                <!-- فيديو مراحل التأهيل -->
+                <div class="bg-white rounded-2xl p-6 shadow-xl border border-green-100">
+                    <h3 class="text-2xl font-bold text-green-700 flex items-center gap-3 mb-4">
+                        <i data-lucide="video" class="w-7 h-7"></i> فيديو مراحل تأهيل ميدان النشاطات الطلابية
+                    </h3>
+
+                    <div class="relative w-full overflow-hidden rounded-2xl border border-green-200 bg-black mx-auto max-w-sm sm:max-w-md" style="padding-top: 177.78%;">
+                        <iframe id="home-youtube"
+                                class="absolute inset-0 w-full h-full"
+                                src="https://www.youtube.com/embed/ITPQTXG-eSg?rel=0&modestbranding=1&playsinline=1"
+                                title="فيديو مراحل التأهيل"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen>
+                        </iframe>
                     </div>
                 </div>
                 <div class="bg-white rounded-2xl p-6 shadow-xl">
@@ -117,7 +150,56 @@
                 </div>
             </div>
 
-            <div id="participants" class="space-y-6 hidden">
+            
+            <!-- مراحل الاستعداد لتأهيل ميدان النشاطات الطلابية -->
+            <div id="stages" class="space-y-6 hidden">
+                <h2 class="text-3xl font-bold text-green-700 flex items-center gap-2">
+                    <i data-lucide="video" class="w-7 h-7"></i> مراحل الاستعداد لتأهيل ميدان النشاطات الطلابية
+                </h2>
+
+                <!-- الفيديو -->
+                <div class="bg-white border border-green-200 rounded-2xl p-4 sm:p-6 shadow-sm">
+                    <h3 class="text-xl font-extrabold text-green-900 mb-4 flex items-center gap-2">
+                        <i data-lucide="film" class="w-6 h-6"></i> فيديو مراحل العمل
+                    </h3>
+
+                    <div class="relative w-full overflow-hidden rounded-2xl border border-green-200 bg-black mx-auto max-w-sm sm:max-w-md" style="padding-top: 177.78%;">
+                        <iframe class="absolute inset-0 w-full h-full"
+                                src="https://www.youtube.com/embed/ITPQTXG-eSg?rel=0&modestbranding=1&playsinline=1"
+                                title="فيديو مراحل العمل"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <!-- السلايد شو للصور -->
+                <div class="bg-white border border-green-200 rounded-2xl p-4 sm:p-6 shadow-sm">
+                    <h3 class="text-xl font-extrabold text-green-900 mb-4 flex items-center gap-2">
+                        <i data-lucide="images" class="w-6 h-6"></i> صور المراحل
+                    </h3>
+
+                    <div class="relative overflow-hidden rounded-2xl border border-green-200 bg-black/5">
+                        <img id="stages-slide" src="" alt="صور مراحل التأهيل" class="w-full h-[260px] sm:h-[360px] md:h-[420px] object-cover transition-opacity duration-500 opacity-0">
+                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <p id="stages-title" class="text-white font-extrabold text-lg sm:text-xl"></p>
+                            <p id="stages-desc" class="text-white/90 text-sm sm:text-base mt-1"></p>
+                        </div>
+
+                        <button id="stages-prev" class="absolute top-1/2 -translate-y-1/2 left-3 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition">
+                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                        </button>
+                        <button id="stages-next" class="absolute top-1/2 -translate-y-1/2 right-3 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition">
+                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+
+                    <div id="stages-dots" class="flex flex-wrap gap-2 justify-center mt-4"></div>
+                </div>
+            </div>
+
+
+<div id="participants" class="space-y-6 hidden">
                 <h2 class="text-3xl font-bold text-green-700">فريق العمل</h2>
                 <div id="students-container" class="grid md:grid-cols-3 gap-4"></div>
             </div>
@@ -182,6 +264,7 @@
             { id: 'about', name: 'عن المشروع', icon: 'award' },
             { id: 'plants', name: 'النباتات', icon: 'leaf' },
             { id: 'beforeafter', name: 'قبل وبعد', icon: 'camera' },
+            { id: 'stages', name: 'مراحل التأهيل', icon: 'video' },
             { id: 'participants', name: 'المشاركون', icon: 'users' }
         ];
 
@@ -254,6 +337,95 @@
             { cat: 'عصاريات', name: 'جلد النمر', sci: 'Sansevieria', desc: 'نبات الثعبان.', full: 'منقي هواء من الطراز الأول.', carb: 'يزيل السموم.', img: 'https://i.imgur.com/4v8rSBT.jpg' },
             { cat: 'عصاريات', name: 'ديسكيديا', sci: 'Dischidia', desc: 'نبات معلق.', full: 'نبات زينة جميل للأصص المعلقة.', carb: 'منظر جمالي.', img: 'https://i.imgur.com/A2GeMTS.jpg' }
         ];
+
+        // --- سلايد شو مراحل التأهيل (عدّل الصور إلى صورك) ---
+        const stagesSlides = [
+            { src: 'assets/stage-01.jpg', title: 'مرحلة نقل وتجهيز السنادين', desc: 'نقل السنادين وتجهيزها وترتيبها داخل الميدان.' },
+            { src: 'assets/stage-02.jpg', title: 'مرحلة زراعة السنادين', desc: 'زراعة النباتات داخل السنادين وتثبيتها بشكل مرتب.' },
+            { src: 'assets/stage-03.jpg', title: 'مرحلة الرسم على الجدار', desc: 'رسم جمالي على الجدار لإضافة طابع مميز للمكان.' },
+            { src: 'assets/stage-04.jpg', title: 'مرحلة تغليف الجدار بالسياج الأخضر', desc: 'تغليف الجدار بسياج أخضر لإظهار شكل طبيعي أنيق.' },
+            { src: 'assets/stage-05.jpg', title: 'مرحلة تغليف مداخل الميدان', desc: 'تجهيز وتغليف المداخل لتكون منظمة ومرتبة.' },
+            { src: 'assets/stage-06.jpg', title: 'مرحلة تبنّي السنادين من قبل الطلاب', desc: 'كل طالب يتبنى سادن/نبات للاعتناء به ومتابعته.' },
+            { src: 'assets/stage-07.jpg', title: 'مرحلة إدارة التنمية والحفاظ على النباتات', desc: 'حماية النباتات من الطيور بوضع ستاند للحبوب والماء للطيور والعصافير.' },
+            { src: 'assets/stage-08.jpg', title: 'المرحلة الختامية لتجهيز الميدان الطلابي', desc: 'اللمسات الأخيرة وتجهيز المكان بشكل نهائي.' },
+        ];
+
+        let stagesIndex = 0;
+        let stagesTimer = null;
+
+        function renderStagesSlide(i) {
+            const img = document.getElementById('stages-slide');
+            const title = document.getElementById('stages-title');
+            const desc = document.getElementById('stages-desc');
+            const dots = document.getElementById('stages-dots');
+
+            if (!img || !title || !desc || !dots) return;
+
+            stagesIndex = (i + stagesSlides.length) % stagesSlides.length;
+
+            img.classList.add('opacity-0');
+            setTimeout(() => {
+                img.src = stagesSlides[stagesIndex].src;
+                title.textContent = stagesSlides[stagesIndex].title;
+                desc.textContent = stagesSlides[stagesIndex].desc;
+
+                dots.querySelectorAll('button').forEach((b, idx) => {
+                    b.classList.toggle('active', idx === stagesIndex);
+                });
+
+                img.classList.remove('opacity-0');
+            }, 180);
+        }
+
+        function initStagesSlideshow() {
+            const img = document.getElementById('stages-slide');
+            const dots = document.getElementById('stages-dots');
+            const prev = document.getElementById('stages-prev');
+            const next = document.getElementById('stages-next');
+
+            if (!img || !dots || !prev || !next) return;
+
+            // dots
+            dots.innerHTML = stagesSlides.map((_, idx) =>
+                `<button class="dot-btn ${idx === 0 ? 'active' : ''}" aria-label="slide ${idx+1}"></button>`
+            ).join('');
+
+            dots.querySelectorAll('button').forEach((btn, idx) => {
+                btn.addEventListener('click', () => {
+                    stopStagesAuto();
+                    renderStagesSlide(idx);
+                    startStagesAuto();
+                });
+            });
+
+            prev.addEventListener('click', () => {
+                stopStagesAuto();
+                renderStagesSlide(stagesIndex - 1);
+                startStagesAuto();
+            });
+
+            next.addEventListener('click', () => {
+                stopStagesAuto();
+                renderStagesSlide(stagesIndex + 1);
+                startStagesAuto();
+            });
+
+            renderStagesSlide(0);
+            startStagesAuto();
+        }
+
+        function startStagesAuto() {
+            if (stagesTimer) return;
+            stagesTimer = setInterval(() => renderStagesSlide(stagesIndex + 1), 3500);
+        }
+
+        function stopStagesAuto() {
+            if (stagesTimer) {
+                clearInterval(stagesTimer);
+                stagesTimer = null;
+            }
+        }
+
 
         const students = ['بلال زامل أحمد', 'أحمد محمد علي', 'فاطمة حسن', 'علي حسين', 'سارة محمود', 'زينب عادل'];
 
@@ -397,6 +569,7 @@
                 <div class="bg-white p-4 rounded-lg shadow-sm border-r-4 border-green-500 font-medium">${s}</div>
             `).join('');
 
+            initStagesSlideshow();
             showSection('home');
         }
     </script>
