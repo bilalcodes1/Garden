@@ -13,46 +13,49 @@
         html { scroll-behavior: smooth; }
         .before-after-clip { transition: clip-path 0.3s ease; }
         
+        /* Animations */
         .modal-animate { animation: modalPop 0.3s ease-out forwards; }
         @keyframes modalPop {
             from { opacity: 0; transform: scale(0.95) translateY(10px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
+        /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #16a34a; border-radius: 10px; }
 
+        /* Custom Map Pin */
         .custom-pin { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -100%); z-index: 20; pointer-events: none; }
         .pin-shape { width: 40px; height: 40px; border-radius: 50% 50% 50% 0; background: #ef4444; position: relative; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
         .pin-shape::after { content: ""; width: 14px; height: 14px; background: white; position: absolute; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); }
         .pin-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; background: rgba(239, 68, 68, 0.4); border-radius: 50%; z-index: 10; animation: pulse-ring 1.5s infinite; }
         @keyframes pulse-ring { 0% { transform: translate(-50%, -50%) scale(0.3); opacity: 1; } 80%, 100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; } }
 
-        /* تفاصيل النبات: محاذاة ممتازة لكل المقاسات */
-        #modal-details { direction: rtl; }
-        
-        /* Shorts container */
-        .short-frame { aspect-ratio: 9 / 16; }
-
-        /* Project Gallery */
-        .gallery-card{
+        /* Gallery Styles */
+        .gallery-card {
             border: 1px solid rgba(22,163,74,.18);
             background: rgba(255,255,255,.85);
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,.06);
-            transition: transform .15s ease, box-shadow .15s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,.05);
+            transition: transform .2s ease, box-shadow .2s ease;
+            aspect-ratio: 1/1;
+            position: relative;
         }
-        .gallery-card:hover{
-            transform: translateY(-2px);
-            box-shadow: 0 10px 26px rgba(0,0,0,.10);
+        .gallery-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,.1);
+            z-index: 10;
         }
-        .gallery-thumb{
+        .gallery-thumb {
             width: 100%;
-            aspect-ratio: 1 / 1;
+            height: 100%;
             object-fit: cover;
-            display: block;
+            transition: transform 0.5s ease;
+        }
+        .gallery-card:hover .gallery-thumb {
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -90,19 +93,17 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-2xl p-6 shadow-xl border border-green-100">
-                    <h3 class="text-2xl font-bold text-green-700 flex items-center gap-3 mb-4">
-                        <i data-lucide="video" class="w-7 h-7"></i> فيديو مراحل تأهيل ميدان النشاطات الطلابية
+                <div class="bg-white rounded-2xl p-6 shadow-xl border border-green-100 text-center">
+                    <h3 class="text-2xl font-bold text-green-700 flex items-center justify-center gap-3 mb-6">
+                        <i data-lucide="video" class="w-7 h-7"></i> فيديو مراحل التأهيل
                     </h3>
-
-                    <div class="relative overflow-hidden rounded-2xl border border-green-200 bg-black mx-auto w-full max-w-[260px] sm:max-w-[280px] md:max-w-[260px] lg:max-w-[240px] short-frame">
-                        <iframe id="home-youtube"
-                                class="absolute inset-0 w-full h-full"
+                    <div class="relative overflow-hidden rounded-2xl border border-green-200 bg-black mx-auto w-full max-w-md aspect-video">
+                        <iframe class="absolute inset-0 w-full h-full"
                                 src="https://www.youtube-nocookie.com/embed/ITPQTXG-eSg?rel=0&playsinline=1"
                                 title="فيديو مراحل التأهيل"
                                 frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                                allowfullscreen>
                         </iframe>
                     </div>
                 </div>
@@ -134,40 +135,10 @@
 
                 <div class="grid gap-6">
                     <div class="beforeafter-card bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-green-100">
-                        <div class="flex items-center justify-end flex-wrap gap-3 mb-4">
-                            <div class="flex items-center gap-2 text-xs font-bold">
-                                <span class="px-3 py-1 rounded-full bg-green-50 border border-green-200 text-green-800">قبل</span>
-                                <span class="px-3 py-1 rounded-full bg-white border border-green-200 text-green-800">بعد</span>
-                            </div>
-                        </div>
-
                         <div class="relative w-full h-72 sm:h-80 md:h-96 overflow-hidden rounded-2xl border border-green-200">
-                            <img data-imgur-id="C5BcmcD" alt="قبل - 1" class="w-full h-full object-cover">
+                            <img src="https://i.imgur.com/NJrnSDc.jpg" alt="قبل" class="w-full h-full object-cover">
                             <div class="after-image absolute inset-0" style="clip-path: inset(0 50% 0 0);">
-                                <img data-imgur-id="oe1xaMS" alt="بعد - 1" class="w-full h-full object-cover">
-                            </div>
-                            <div class="absolute top-3 right-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">قبل</div>
-                            <div class="absolute top-3 left-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">بعد</div>
-                            <div class="slider-handle absolute top-0 bottom-0 w-1 bg-white shadow-lg" style="left: 50%;">
-                                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 border-green-600">
-                                    <i data-lucide="chevrons-left-right" class="w-4 h-4 text-green-600"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <input type="range" min="0" max="100" value="50" oninput="handleSliderChange(this)" class="w-full mt-5 accent-green-600">
-                    </div>
-
-                    <div class="beforeafter-card bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-green-100">
-                        <div class="flex items-center justify-end flex-wrap gap-3 mb-4">
-                            <div class="flex items-center gap-2 text-xs font-bold">
-                                <span class="px-3 py-1 rounded-full bg-green-50 border border-green-200 text-green-800">قبل</span>
-                                <span class="px-3 py-1 rounded-full bg-white border border-green-200 text-green-800">بعد</span>
-                            </div>
-                        </div>
-                        <div class="relative w-full h-72 sm:h-80 md:h-96 overflow-hidden rounded-2xl border border-green-200">
-                            <img data-imgur-id="13NmB1S" alt="قبل - 2" class="w-full h-full object-cover">
-                            <div class="after-image absolute inset-0" style="clip-path: inset(0 50% 0 0);">
-                                <img data-imgur-id="8vzY6Z3" alt="بعد - 2" class="w-full h-full object-cover">
+                                <img src="https://i.imgur.com/28Ayv97.jpg" alt="بعد" class="w-full h-full object-cover">
                             </div>
                             <div class="absolute top-3 right-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">قبل</div>
                             <div class="absolute top-3 left-3 bg-black/55 text-white text-xs font-bold px-3 py-1 rounded-full">بعد</div>
@@ -187,40 +158,29 @@
                     <h2 class="text-3xl font-bold text-green-700 flex items-center gap-2">
                         <i data-lucide="images" class="w-7 h-7"></i> معرض صور المشروع
                     </h2>
-                    <span class="text-sm text-gray-600 bg-white/70 border border-green-200 px-3 py-1 rounded-full">
-                        صور من تجهيز وتأهيل ميدان النشاطات الطلابية
-                    </span>
+                    <span id="gallery-count" class="text-sm font-bold text-green-900 bg-green-50 border border-green-200 px-3 py-1 rounded-full"></span>
                 </div>
 
                 <div class="bg-white border border-green-200 rounded-2xl p-4 sm:p-6 shadow-sm">
-                    <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
-                        <h3 class="text-xl font-extrabold text-green-900 flex items-center gap-2">
-                            <i data-lucide="gallery-vertical-end" class="w-6 h-6"></i> صور العمل والإنجاز
-                        </h3>
-                        <div id="gallery-count" class="text-sm font-bold text-green-900 bg-green-50 border border-green-200 px-3 py-1 rounded-full"></div>
-                    </div>
-
-                    <div id="project-gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3"></div>
+                    <div id="project-gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"></div>
                 </div>
 
                 <div id="gallery-lightbox" class="fixed inset-0 z-[120] hidden items-center justify-center p-3 sm:p-6">
                     <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeGallery()"></div>
-                    <div class="relative z-10 w-full max-w-5xl">
-                        <button onclick="closeGallery()" class="absolute -top-2 -right-2 sm:top-0 sm:right-0 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition">
-                            <i data-lucide="x" class="w-6 h-6"></i>
+                    <div class="relative z-10 w-full max-w-5xl h-full flex items-center justify-center">
+                        <button onclick="closeGallery()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition z-20">
+                            <i data-lucide="x" class="w-8 h-8"></i>
                         </button>
-                        <div class="bg-black/30 rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
-                            <div class="relative w-full flex items-center justify-center bg-black">
-                                <img id="gallery-full" src="" alt="صورة من المشروع" class="max-h-[78vh] w-auto object-contain">
-                                <button id="gallery-prev" onclick="prevGallery()" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition">
-                                    <i data-lucide="chevron-left" class="w-7 h-7"></i>
-                                </button>
-                                <button id="gallery-next" onclick="nextGallery()" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition">
-                                    <i data-lucide="chevron-right" class="w-7 h-7"></i>
-                                </button>
-                                <div id="gallery-counter" class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/60 text-white text-sm font-bold px-3 py-1 rounded-full"></div>
-                            </div>
-                        </div>
+                        <img id="gallery-full" src="" alt="صورة من المشروع" class="max-h-[85vh] max-w-full object-contain rounded-lg shadow-2xl">
+                        
+                        <button onclick="prevGallery()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition">
+                            <i data-lucide="chevron-left" class="w-8 h-8"></i>
+                        </button>
+                        <button onclick="nextGallery()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition">
+                            <i data-lucide="chevron-right" class="w-8 h-8"></i>
+                        </button>
+                        
+                        <div id="gallery-counter" class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/60 text-white text-sm font-bold px-4 py-2 rounded-full"></div>
                     </div>
                 </div>
             </div>
@@ -246,31 +206,32 @@
                 </button>
 
                 <div class="flex flex-col md:flex-row w-full h-full">
-                    <div class="w-full md:w-1/2 bg-black/90 p-2 sm:p-3 shrink-0 h-[42vh] sm:h-[48vh] md:h-auto flex items-center justify-center">
+                    <div class="w-full md:w-1/2 bg-black/95 p-2 sm:p-3 shrink-0 h-[40vh] sm:h-[48vh] md:h-auto flex items-center justify-center relative">
                         <img id="modal-img" src="" class="w-full h-full object-contain rounded-xl" alt="Plant Image">
                     </div>
 
-                    <div class="w-full md:w-1/2 p-4 sm:p-6 overflow-y-auto custom-scrollbar">
-                        <div class="mb-6">
-                            <span id="modal-category" class="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold inline-block"></span>
-                            <h2 id="modal-title" class="text-2xl sm:text-3xl font-bold text-green-900 mt-3"></h2>
-                            <p id="modal-scientific" class="text-green-700 italic font-serif mt-1"></p>
+                    <div class="w-full md:w-1/2 p-5 sm:p-8 overflow-y-auto custom-scrollbar">
+                        <div class="mb-6 border-b border-gray-100 pb-4">
+                            <span id="modal-category" class="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold inline-block mb-2"></span>
+                            <h2 id="modal-title" class="text-3xl font-bold text-green-900"></h2>
+                            <p id="modal-scientific" class="text-green-700 italic font-serif text-sm mt-1"></p>
                         </div>
 
-                        <div class="mb-6">
-                            <h3 class="text-lg font-bold text-green-800 mb-2 flex items-center gap-2">
-                                <i data-lucide="book-open" class="w-5 h-5"></i> الوصف
-                            </h3>
-                            <p id="modal-desc" class="text-gray-700 leading-relaxed"></p>
-                        </div>
+                        <div id="modal-details-grid" class="grid grid-cols-2 gap-3 mb-6"></div>
 
                         <div class="mb-6">
-                            <h3 class="text-lg font-bold text-green-800 mb-3 flex items-center gap-2">
-                                <i data-lucide="list" class="w-5 h-5"></i> تفاصيل النبات
+                            <h3 class="text-sm font-bold text-gray-400 uppercase mb-2 flex items-center gap-2">
+                                الوصف العام
                             </h3>
-                            <div id="modal-details" class="grid grid-cols-1 lg:grid-cols-2 gap-3"></div>
+                            <p id="modal-desc" class="text-gray-700 leading-relaxed text-sm"></p>
                         </div>
-                        <div id="modal-extra" class="mt-6 space-y-6"></div>
+
+                        <div class="bg-green-50 p-4 rounded-xl border border-green-100">
+                            <h3 class="font-bold text-green-800 flex items-center gap-2 mb-1 text-sm">
+                                <i data-lucide="leaf" class="w-4 h-4"></i> الأثر البيئي
+                            </h3>
+                            <p id="modal-carbon" class="text-xs text-green-700"></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -282,96 +243,727 @@
             { id: 'home', name: 'الرئيسية', icon: 'home' },
             { id: 'plants', name: 'النباتات', icon: 'leaf' },
             { id: 'beforeafter', name: 'قبل وبعد', icon: 'camera' },
-            // تغيير اسم التبويب من "مراحل التأهيل" إلى "معرض الصور" وتغيير الأيقونة
-            { id: 'stages', name: 'معرض الصور', icon: 'images' },
+            { id: 'stages', name: 'معرض الصور', icon: 'images' }, // تم التحديث
             { id: 'participants', name: 'المشاركون', icon: 'users' },
             { id: 'about', name: 'عن المشروع', icon: 'award' }
         ];
 
-        // --- قاعدة بيانات النباتات ---
+        // --- قاعدة بيانات النباتات التفصيلية الكاملة ---
         const plantsData = [
-            // === أولاً: النخيل والأشجار ===
-            { cat: 'أشجار ونخيل', name: 'نخيل التمر', sci: 'Phoenix dactylifera', desc: 'هيكل الحديقة الأساسي.', full: 'النخلة سيدة الشجر، تتحمل أقصى الظروف وتعطي أطيب الثمر.', carb: 'تمتص كميات عالية من الكربون.', img: 'https://i.imgur.com/brpxFH5.jpg' },
-            { cat: 'أشجار ونخيل', name: 'نخيل واشنطونيا', sci: 'Washingtonia robusta', desc: 'نخيل زينة.', full: 'نخيل مروحي جميل وسريع النمو يزين الممرات.', carb: 'تنقية الغبار.', img: 'https://i.imgur.com/4MvUYsl.jpg' },
-            { cat: 'أشجار ونخيل', name: 'المستكة (الضرو)', sci: 'Pistacia lentiscus', desc: 'شجرة دائمة.', full: 'شجرة قوية لها رائحة عطرية مميزة وصمغ مفيد.', carb: 'مقاومة للجفاف.', img: 'https://i.imgur.com/BNMlEl1.jpg' },
-            { cat: 'أشجار ونخيل', name: 'المستكة', sci: 'Pistacia lentiscus', desc: 'جمال دائم الخضرة.', full: 'تستخدم لتزيين الحدائق وتوفير الظل.', carb: 'تنقية الهواء.', img: 'https://i.imgur.com/Q2cT0IY.jpg' },
-            { cat: 'أشجار ونخيل', name: 'المستكة والجوري', sci: 'Garden Mix', desc: 'تناغم نباتي.', full: 'تداخل جميل بين شجر المستكة وشجيرات الجوري.', carb: 'تنوع بيولوجي.', img: 'https://i.imgur.com/oy5uq7V.jpg' },
-            { cat: 'أشجار ونخيل', name: 'لجوستروم', sci: 'Ligustrum', desc: 'سياج نباتي.', full: 'شجيرة قوية تستخدم كأسيجة وتشكيلات قص.', carb: 'مصد للغبار.', img: 'https://i.imgur.com/3MGRkMz.jpg' },
-            { cat: 'أشجار ونخيل', name: 'يوكا', sci: 'Yucca aloifolia', desc: 'جمال صحراوي.', full: 'نبات قوي بأوراق سيفية الشكل.', carb: 'تحمل الحرارة العالية.', img: 'https://i.imgur.com/dIjQ5n6.jpg' },
+            // ==================== أولاً: النخيل والأشجار ====================
+            { 
+                cat: 'أشجار ونخيل', name: 'نخيل التمر', sci: 'Phoenix dactylifera', 
+                desc: 'رمز الشموخ والعطاء، تتحمل أقسى الظروف.', 
+                full: 'شجرة مباركة ذات قيمة اقتصادية وغذائية عالية، توفر ظلاً واسعاً وتتحمل الملوحة والجفاف والحرارة العالية.', 
+                carb: 'تمتص النخلة الواحدة حوالي 200 كغم من CO2 سنوياً.', 
+                img: 'https://i.imgur.com/brpxFH5.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجرة (نخيل)' },
+                    { label: 'موسم الإزهار', value: 'الربيع' },
+                    { label: 'ارتفاع النبات', value: '15 - 25 متر' },
+                    { label: 'الانتشار', value: '6 - 10 متر' },
+                    { label: 'نوع الأوراق', value: 'سعف دائم الخضرة' },
+                    { label: 'درجة الحرارة', value: '10 – 50°م' }
+                ]
+            },
+            { 
+                cat: 'أشجار ونخيل', name: 'نخيل واشنطونيا', sci: 'Washingtonia robusta', 
+                desc: 'نخيل الزينة المروحي.', 
+                full: 'نخيل سريع النمو جداً، يستخدم لتزيين الشوارع والمداخل، يتميز بجذع طويل وأوراق مروحية كبيرة.', 
+                carb: 'فعالة جداً في تنقية هواء المدن من الغبار.', 
+                img: 'https://i.imgur.com/4MvUYsl.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجرة (نخيل)' },
+                    { label: 'موسم الإزهار', value: 'الربيع الصيف' },
+                    { label: 'ارتفاع النبات', value: '20 - 30 متر' },
+                    { label: 'الانتشار', value: '3 - 5 متر' },
+                    { label: 'نوع الأوراق', value: 'دائمة الخضرة' },
+                    { label: 'درجة الحرارة', value: '5 – 45°م' }
+                ]
+            },
+            { 
+                cat: 'أشجار ونخيل', name: 'شجرة المستكة (الضرو)', sci: 'Pistacia lentiscus', 
+                desc: 'شجرة قوية ذات رائحة عطرية.', 
+                full: 'شجيرة أو شجرة صغيرة دائمة الخضرة، تفرز صمغ المستكة العطري، وتتحمل الجفاف والتربة الفقيرة بامتياز.', 
+                carb: 'مقاومة للتصحر وتثبت التربة.', 
+                img: 'https://i.imgur.com/BNMlEl1.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجيرة كبيرة / شجرة' },
+                    { label: 'موسم الإزهار', value: 'الربيع' },
+                    { label: 'ارتفاع النبات', value: '2 - 5 متر' },
+                    { label: 'الانتشار', value: '2 - 4 متر' },
+                    { label: 'نوع الأوراق', value: 'دائمة الخضرة' },
+                    { label: 'درجة الحرارة', value: '0 – 40°م' }
+                ]
+            },
+            { 
+                cat: 'أشجار ونخيل', name: 'المستكة (تشكيل)', sci: 'Pistacia lentiscus', 
+                desc: 'قابلة للقص والتشكيل.', 
+                full: 'تتميز بكثافة أوراقها مما يجعلها مثالية للقص الفني وتشكيل الأسيجة النباتية.', 
+                carb: 'توفر عزلاً صوتياً وبصرياً.', 
+                img: 'https://i.imgur.com/Q2cT0IY.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'سياج نباتي' },
+                    { label: 'الاستخدام', value: 'تزيين وتحديد' },
+                    { label: 'ارتفاع النبات', value: 'حسب القص (1 - 3 م)' },
+                    { label: 'لون الأوراق', value: 'أخضر داكن' },
+                    { label: 'درجة الحرارة', value: '0 – 45°م' }
+                ]
+            },
+            { 
+                cat: 'أشجار ونخيل', name: 'حديقة المستكة والجوري', sci: 'Garden Landscape', 
+                desc: 'تنسيق حدائقي متكامل.', 
+                full: 'صورة تظهر التناغم بين أشجار المستكة الخلفية وشجيرات الورد الجوري الأمامية لخلق عمق بصري.', 
+                carb: 'نظام بيئي متكامل.', 
+                img: 'https://i.imgur.com/oy5uq7V.jpg',
+                details: [
+                    { label: 'التصميم', value: 'طبقات نباتية' },
+                    { label: 'المكونات', value: 'أشجار + شجيرات' },
+                    { label: 'الهدف', value: 'تغطية التربة وتوفير الظل' },
+                    { label: 'الصيانة', value: 'ري وتقليم دوري' }
+                ]
+            },
+            { 
+                cat: 'أشجار ونخيل', name: 'لجوستروم', sci: 'Ligustrum lucidum', 
+                desc: 'سياج دائم الخضرة.', 
+                full: 'نبات قوي جداً وسريع النمو، يستخدم بكثرة كأسيجة نباتية مصدة للرياح والغبار.', 
+                carb: 'منقي ممتاز للهواء من العوادم.', 
+                img: 'https://i.imgur.com/3MGRkMz.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجيرة / سياج' },
+                    { label: 'موسم الإزهار', value: 'الصيف' },
+                    { label: 'ارتفاع النبات', value: '2 - 4 متر' },
+                    { label: 'نوع الأوراق', value: 'دائمة الخضرة' },
+                    { label: 'درجة الحرارة', value: '-5 – 40°م' }
+                ]
+            },
+            { 
+                cat: 'أشجار ونخيل', name: 'يوكا', sci: 'Yucca aloifolia', 
+                desc: 'الخنجر الإسباني.', 
+                full: 'نبات صحراوي قوي جداً بأوراق رمحية صلبة، يتحمل أقسى درجات الحرارة والعطش.', 
+                carb: 'يحتاج القليل جداً من الماء.', 
+                img: 'https://i.imgur.com/dIjQ5n6.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجيرة عصارية' },
+                    { label: 'موسم الإزهار', value: 'الربيع والصيف' },
+                    { label: 'ارتفاع النبات', value: '1 - 3 متر' },
+                    { label: 'نوع الأوراق', value: 'دائمة (شائكة)' },
+                    { label: 'درجة الحرارة', value: 'يتحمل حتى 50°م' }
+                ]
+            },
 
-            // === ثانياً: الشجيرات المزهرة ===
-            { cat: 'شجيرات مزهرة', name: 'الجهنمية (وردي)', sci: 'Bougainvillea', desc: 'إزهار كثيف.', full: 'متسلقة قوية بألوان زاهية تتحمل الحرارة.', carb: 'توفير الظل.', img: 'https://i.imgur.com/lt6XYmg.jpg' },
-            { cat: 'شجيرات مزهرة', name: 'الجهنمية', sci: 'Bougainvillea', desc: 'ألوان صيفية.', full: 'تزهر بانتظام وتحتاج للتقليم.', carb: 'امتصاص الكربون.', img: 'https://i.imgur.com/httQ5OA.jpg' },
-            { cat: 'شجيرات مزهرة', name: 'الجهنمية (أصفر)', sci: 'Bougainvillea', desc: 'ألوان مشرقة.', full: 'صنف مميز بأزهار صفراء وبرتقالية.', carb: 'تحسين المنظر.', img: 'https://i.imgur.com/uxPbIbK.jpg' },
-            { cat: 'شجيرات مزهرة', name: 'الجهنمية (أحمر)', sci: 'Bougainvillea', desc: 'جمال صارخ.', full: 'تضيف لوناً قوياً للحديقة.', carb: 'عزل حراري.', img: 'https://i.imgur.com/rAsFA8S.jpg' },
-            { cat: 'شجيرات مزهرة', name: 'الجهنمية (برتقالي)', sci: 'Bougainvillea', desc: 'ألوان الغروب.', full: 'متسلقة قوية جداً.', carb: 'مأوى للطيور.', img: 'https://i.imgur.com/zmUglPI.jpg' },
-            { cat: 'شجيرات مزهرة', name: 'الجهنمية', sci: 'Bougainvillea', desc: 'كثافة خضرية.', full: 'تغطي المساحات وتزين الجدران.', carb: 'تنقية الهواء.', img: 'https://i.imgur.com/cKrp8AQ.jpg' },
-            { cat: 'شجيرات مزهرة', name: 'الجهنمية (نبيذي)', sci: 'Bougainvillea', desc: 'لون مميز.', full: 'لون نبيذي داكن جذاب.', carb: 'مقاومة للتلوث.', img: 'https://i.imgur.com/lXzl8F2.jpg' },
+            // ==================== ثانياً: الشجيرات المزهرة ====================
+            { 
+                cat: 'شجيرات مزهرة', name: 'الجهنمية (وردي)', sci: 'Bougainvillea glabra', 
+                desc: 'ملكة الصيف.', 
+                full: 'متسلقة قوية تتحمل الحرارة العالية، تتميز بقناباتها الملونة التي تستمر لأشهر طويلة.', 
+                carb: 'توفر ظلاً كثيفاً يخفض الحرارة.', 
+                img: 'https://i.imgur.com/lt6XYmg.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'متسلق / شجيرة' },
+                    { label: 'موسم الإزهار', value: 'معظم السنة' },
+                    { label: 'ارتفاع النبات', value: '1 - 12 متر' },
+                    { label: 'لون الزهرة', value: 'وردي زاهي' },
+                    { label: 'نوع الأوراق', value: 'نصف متساقطة' },
+                    { label: 'درجة الحرارة', value: '10 – 45°م' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'الجهنمية (هجين)', sci: 'Bougainvillea spectabilis', 
+                desc: 'كثافة زهرية عالية.', 
+                full: 'تحتاج للشمس المباشرة لتزهر بكثافة، وتعتبر من أفضل النباتات لأجواء العراق.', 
+                carb: 'تمتص الغبار.', 
+                img: 'https://i.imgur.com/httQ5OA.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'متسلق' },
+                    { label: 'موسم الإزهار', value: 'الربيع والخريف' },
+                    { label: 'الانتشار', value: 'واسع جداً' },
+                    { label: 'لون الزهرة', value: 'متعدد' },
+                    { label: 'درجة الحرارة', value: '10 – 45°م' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'الجهنمية (أصفر)', sci: 'Bougainvillea "California Gold"', 
+                desc: 'الذهب الكاليفورني.', 
+                full: 'صنف مميز بلونه الأصفر الذهبي، يضفي إشراقة وحيوية على الحديقة.', 
+                carb: 'تنوع بصري.', 
+                img: 'https://i.imgur.com/uxPbIbK.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'متسلق' },
+                    { label: 'موسم الإزهار', value: 'الصيف' },
+                    { label: 'ارتفاع النبات', value: '2 - 5 متر' },
+                    { label: 'لون الزهرة', value: 'أصفر ذهبي' },
+                    { label: 'درجة الحرارة', value: '15 – 40°م' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'الجهنمية (أحمر)', sci: 'Bougainvillea "Barbara Karst"', 
+                desc: 'الأكثر حمرة.', 
+                full: 'من أشهر الأصناف وأكثرها تحملاً، أزهارها حمراء قانية تجذب الأنظار من بعيد.', 
+                carb: 'سياج حيوي.', 
+                img: 'https://i.imgur.com/rAsFA8S.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'متسلق' },
+                    { label: 'موسم الإزهار', value: 'طوال العام تقريباً' },
+                    { label: 'لون الزهرة', value: 'أحمر قرمزي' },
+                    { label: 'الاحتياج الشمسي', value: 'شمس مباشرة' },
+                    { label: 'درجة الحرارة', value: '5 – 45°م' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'الجهنمية (برتقالي)', sci: 'Bougainvillea "Orange King"', 
+                desc: 'لون الغروب.', 
+                full: 'لون برتقالي دافئ يتحول للوردي الباهت مع تقدم عمر الزهرة.', 
+                carb: 'جذب الملقحات.', 
+                img: 'https://i.imgur.com/zmUglPI.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'متسلق' },
+                    { label: 'لون الزهرة', value: 'برتقالي نحاسي' },
+                    { label: 'وقت الإزهار', value: 'الربيع والصيف' },
+                    { label: 'الري', value: 'معتدل إلى قليل' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'الجهنمية (تنسيق)', sci: 'Bougainvillea', 
+                desc: 'تغطية الجدران.', 
+                full: 'مثالية لتغطية الأسوار والجدران القبيحة وتحويلها للوحات فنية.', 
+                carb: 'عزل حراري للمباني.', 
+                img: 'https://i.imgur.com/cKrp8AQ.jpg',
+                details: [
+                    { label: 'الاستخدام', value: 'تغطية أسوار' },
+                    { label: 'النمو', value: 'سريع جداً' },
+                    { label: 'التقليم', value: 'ضروري للتحكم' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'الجهنمية (نبيذي)', sci: 'Bougainvillea "Royal Purple"', 
+                desc: 'الأرجواني الملكي.', 
+                full: 'لون أرجواني (نبيذي) عميق، يعطي فخامة للمكان ويتحمل الظروف القاسية.', 
+                carb: 'جمال دائم.', 
+                img: 'https://i.imgur.com/lXzl8F2.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'لون الزهرة', value: 'أرجواني غامق' },
+                    { label: 'وقت الإزهار', value: 'كثيف في الصيف' },
+                    { label: 'التحمل', value: 'عالي جداً' }
+                ]
+            },
             
-            { cat: 'شجيرات مزهرة', name: 'كاريسا', sci: 'Carissa macrocarpa', desc: 'ياسمين كاليفورنيا.', full: 'شجيرة بأوراق لامعة وزهور بيضاء عطرية.', carb: 'سياج مانع.', img: 'https://i.imgur.com/QXyukM3.jpg' },
-            { cat: 'شجيرات مزهرة', name: 'كاريسا', sci: 'Carissa macrocarpa', desc: 'أوراق كثيفة.', full: 'تتحمل القص والتشكيل.', carb: 'مصد للغبار.', img: 'https://i.imgur.com/VlT2CBo.jpg' },
-            { cat: 'شجيرات مزهرة', name: 'كاريسا', sci: 'Carissa macrocarpa', desc: 'جمال دائم.', full: 'ثمارها حمراء تشبه التوت.', carb: 'خضرة دائمة.', img: 'https://i.imgur.com/iydcWrO.jpg' },
-            { cat: 'شجيرات مزهرة', name: 'كاريسا', sci: 'Carissa macrocarpa', desc: 'أزهار نجمية.', full: 'تزهر معظم أوقات السنة.', carb: 'تحسين الهواء.', img: 'https://i.imgur.com/391hHCN.jpg' },
-            { cat: 'شجيرات مزهرة', name: 'كاريسا', sci: 'Carissa macrocarpa', desc: 'نمو قوي.', full: 'نبات قوي البنية.', carb: 'تثبيت التربة.', img: 'https://i.imgur.com/5rjWWBT.jpg' },
-            { cat: 'شجيرات مزهرة', name: 'كاريسا', sci: 'Carissa macrocarpa', desc: 'تنسيق حدائقي.', full: 'مثالية لتحديد الممرات.', carb: 'منظر جمالي.', img: 'https://i.imgur.com/qFfaEHC.jpg' },
-
-            { cat: 'شجيرات مزهرة', name: 'الورد الجوري', sci: 'Rosa damascena', desc: 'ملك الزهور.', full: 'رائحة عطرية وألوان خلابة.', carb: 'تهدئة الأعصاب.', img: 'https://i.imgur.com/iFQ6MkK.jpg' },
-            { cat: 'شجيرات مزهرة', name: 'الورد الجوري', sci: 'Rosa', desc: 'أوراق نضرة.', full: 'يتطلب عناية وري منتظم.', carb: 'تلطيف الجو.', img: 'https://i.imgur.com/kK8ElB7.jpg' },
-            { cat: 'شجيرات مزهرة', name: 'برعم جوري', sci: 'Rosa', desc: 'بداية الإزهار.', full: 'جمال البراعم قبل التفتح.', carb: 'دورة حياة.', img: 'https://i.imgur.com/FwXshk3.jpg' },
-
-            { cat: 'شجيرات مزهرة', name: 'مرجان (إيفوربيا)', sci: 'Euphorbia milii', desc: 'إكليل الشوك.', full: 'نبات عصاري مزهر يتحمل الجفاف.', carb: 'قليل الاستهلاك المائي.', img: 'https://i.imgur.com/q7LO3S7.jpg' },
-            { cat: 'شجيرات مزهرة', name: 'مرجان (أصفر)', sci: 'Euphorbia milii', desc: 'أزهار ناعمة.', full: 'تنوع لوني جميل.', carb: 'مقاوم للحرارة.', img: 'https://i.imgur.com/wprCl86.jpg' },
+            // --- كاريسا ---
+            { 
+                cat: 'شجيرات مزهرة', name: 'كاريسا', sci: 'Carissa macrocarpa', 
+                desc: 'ياسمين كاليفورنيا.', 
+                full: 'شجيرة كثيفة دائمة الخضرة، أوراقها لامعة سميكة، وأزهارها بيضاء تشبه الياسمين.', 
+                carb: 'سياج أمني (شائك).', 
+                img: 'https://i.imgur.com/QXyukM3.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجيرة' },
+                    { label: 'موسم الإزهار', value: 'الربيع والصيف' },
+                    { label: 'ارتفاع النبات', value: '0.5 - 2 متر' },
+                    { label: 'لون الزهرة', value: 'أبيض ناصع' },
+                    { label: 'درجة الحرارة', value: '5 – 40°م' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'كاريسا (إثمار)', sci: 'Carissa macrocarpa', 
+                desc: 'ثمار صالحة للأكل.', 
+                full: 'تنتج ثماراً حمراء بيضاوية تسمى (النم-نم) غنية بفيتامين C.', 
+                carb: 'جذب الطيور.', 
+                img: 'https://i.imgur.com/iydcWrO.jpg',
+                details: [
+                    { label: 'الثمار', value: 'حمراء (صالحة للأكل)' },
+                    { label: 'الطعم', value: 'حامض حلو' },
+                    { label: 'وقت الإثمار', value: 'الخريف' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'كاريسا (تنسيق)', sci: 'Carissa macrocarpa', 
+                desc: 'جمال دائم.', 
+                full: 'خضرة دائمة ولمعان في الأوراق يضفي رونقاً طوال العام.', 
+                carb: 'تحسين الهواء.', 
+                img: 'https://i.imgur.com/391hHCN.jpg',
+                details: [
+                    { label: 'نوع الأوراق', value: 'دائمة الخضرة' },
+                    { label: 'الاستخدام', value: 'تحديد أحواض' },
+                    { label: 'التحمل', value: 'حرارة وملوحة' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'كاريسا (أزهار)', sci: 'Carissa macrocarpa', 
+                desc: 'أزهار نجمية.', 
+                full: 'تزهر معظم أوقات السنة بأزهار بيضاء عطرية.', 
+                carb: 'رحيق للحشرات.', 
+                img: 'https://i.imgur.com/5rjWWBT.jpg',
+                details: [
+                    { label: 'شكل الزهرة', value: 'نجمية خماسية' },
+                    { label: 'الرائحة', value: 'خفيفة عطرية' },
+                    { label: 'اللون', value: 'أبيض' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'كاريسا (ممر)', sci: 'Carissa macrocarpa', 
+                desc: 'تنسيق حدائقي.', 
+                full: 'مثالية لتحديد الممرات ومداخل الحدائق.', 
+                carb: 'منظر جمالي.', 
+                img: 'https://i.imgur.com/qFfaEHC.jpg',
+                details: [
+                    { label: 'الاستخدام', value: 'تحديد ممرات' },
+                    { label: 'الكثافة', value: 'عالية' },
+                    { label: 'التقليم', value: 'سهل التشكيل' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'كاريسا (شجيرة)', sci: 'Carissa macrocarpa', 
+                desc: 'نمو قوي.', 
+                full: 'نبات قوي البنية يتحمل الظروف البيئية الصعبة.', 
+                carb: 'تثبيت التربة.', 
+                img: 'https://i.imgur.com/VlT2CBo.jpg',
+                details: [
+                    { label: 'النمو', value: 'كروي / مفترش' },
+                    { label: 'الري', value: 'معتدل' },
+                    { label: 'الشمس', value: 'كاملة / ظل جزئي' }
+                ]
+            },
             
-            { cat: 'شجيرات مزهرة', name: 'لانتانا (المينا)', sci: 'Lantana camara', desc: 'ألوان متعددة.', full: 'شجيرة قوية جداً تزهر بغزارة.', carb: 'جاذبة للفراشات.', img: 'https://i.imgur.com/WE8dvvV.jpg' },
-            { cat: 'شجيرات مزهرة', name: 'الختمة (هيبسكس)', sci: 'Hibiscus', desc: 'زهور بوقية.', full: 'شجيرة بزهور كبيرة وأوراق خضراء داكنة.', carb: 'امتصاص جيد.', img: 'https://i.imgur.com/dj0LTUG.jpg' },
-            { cat: 'شجيرات مزهرة', name: 'تيكوما', sci: 'Tecoma stans', desc: 'الأجراس الصفراء.', full: 'شجيرة سريعة النمو بزهور صفراء كثيفة.', carb: 'ظل وجمال.', img: 'https://i.imgur.com/G8dAkmP.jpg' },
+            // --- الورد الجوري ---
+            { 
+                cat: 'شجيرات مزهرة', name: 'الورد الجوري', sci: 'Rosa damascena', 
+                desc: 'ملك الزهور.', 
+                full: 'الورد المحمدي، يتميز برائحته العطرية الفواحة وألوانه الجذابة. يحتاج لعناية خاصة.', 
+                carb: 'يحسن الحالة المزاجية.', 
+                img: 'https://i.imgur.com/iFQ6MkK.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجيرة' },
+                    { label: 'موسم الإزهار', value: 'الربيع والخريف' },
+                    { label: 'ارتفاع النبات', value: '80 سم - 1.5 م' },
+                    { label: 'لون الزهرة', value: 'وردي / أحمر' },
+                    { label: 'الرائحة', value: 'عطرية قوية' },
+                    { label: 'درجة الحرارة', value: '10 – 35°م' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'أوراق الجوري', sci: 'Rosa', 
+                desc: 'نمو خضري صحي.', 
+                full: 'أوراق مركبة مسننة الحواف. صحة الأوراق دليل على صحة الجذور.', 
+                carb: 'امتصاص الكربون.', 
+                img: 'https://i.imgur.com/kK8ElB7.jpg',
+                details: [
+                    { label: 'نوع الأوراق', value: 'متساقطة شتاءً' },
+                    { label: 'اللون', value: 'أخضر داكن' },
+                    { label: 'الآفات', value: 'عرضة للمن والعناكب' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'برعم جوري', sci: 'Rosa', 
+                desc: 'وعد الجمال.', 
+                full: 'البراعم قبل التفتح تحمل وعوداً بألوان زاهية وعطور فواحة.', 
+                carb: 'جمال طبيعي.', 
+                img: 'https://i.imgur.com/FwXshk3.jpg',
+                details: [
+                    { label: 'المرحلة', value: 'ما قبل التفتح' },
+                    { label: 'اللون', value: 'أحمر قاني' },
+                    { label: 'الوقت للتفتح', value: '3 - 5 أيام' }
+                ]
+            },
 
-            // === ثالثاً: المتسلقات ===
-            { cat: 'متسلقات', name: 'الياسمين الأحمر', sci: 'Combretum indicum', desc: 'ياسمين هندي.', full: 'متسلقة عطرية تتدرج ألوانها من الأبيض للأحمر.', carb: 'تغطية الجدران.', img: 'https://i.imgur.com/4NMdp2w.jpg' },
-            { cat: 'متسلقات', name: 'ياسمين وعين البزون', sci: 'Garden Mix', desc: 'تداخل لوني.', full: 'اندماج المتسلقات مع الزهور الأرضية.', carb: 'كثافة خضرية.', img: 'https://i.imgur.com/4DXMZyx.jpg' },
-            { cat: 'متسلقات', name: 'بطاطا الزينة', sci: 'Ipomoea batatas', desc: 'أوراق ملونة.', full: 'نبات زاحف بأوراق ليمونية جميلة.', carb: 'تغطية التربة.', img: 'https://i.imgur.com/11uRFOE.jpg' },
+            // --- مرجان / إيفوربيا ---
+            { 
+                cat: 'شجيرات مزهرة', name: 'مرجان (أحمر)', sci: 'Euphorbia milii', 
+                desc: 'إكليل الشوك.', 
+                full: 'نبات عصاري قوي جداً، ساقه مليئة بالأشواك، يزهر طوال العام تقريباً.', 
+                carb: 'يتحمل العطش الشديد.', 
+                img: 'https://i.imgur.com/q7LO3S7.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'عصاري شجيري' },
+                    { label: 'موسم الإزهار', value: 'طوال العام' },
+                    { label: 'ارتفاع النبات', value: '30 - 90 سم' },
+                    { label: 'لون الزهرة', value: 'أحمر' },
+                    { label: 'التحمل', value: 'جفاف وحرارة' },
+                    { label: 'درجة الحرارة', value: '10 – 40°م' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'مرجان (أصفر/أبيض)', sci: 'Euphorbia milii var.', 
+                desc: 'ألوان هادئة.', 
+                full: 'صنف ذو أزهار صفراء كريمية، يتميز بجماله ونعومته رغم أشواكه.', 
+                carb: 'تنوع في الحديقة.', 
+                img: 'https://i.imgur.com/wprCl86.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'لون الزهرة', value: 'أصفر كريمي' },
+                    { label: 'الاحتياج المائي', value: 'قليل جداً' }
+                ]
+            },
+            
+            // --- شجيرات أخرى ---
+            { 
+                cat: 'شجيرات مزهرة', name: 'لانتانا (المينا)', sci: 'Lantana camara', 
+                desc: 'كعكة الزهور.', 
+                full: 'شجيرة قوية تتحمل الحرارة، أزهارها تتغير ألوانها وتجذب الفراشات بشكل كبير.', 
+                carb: 'دعم التنوع البيولوجي.', 
+                img: 'https://i.imgur.com/WE8dvvV.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجيرة' },
+                    { label: 'موسم الإزهار', value: 'الربيع إلى الخريف' },
+                    { label: 'ارتفاع النبات', value: '1 - 2 متر' },
+                    { label: 'لون الزهرة', value: 'متعدد (أحمر/أصفر)' },
+                    { label: 'الرائحة', value: 'نفاذة' },
+                    { label: 'درجة الحرارة', value: '10 – 45°م' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'الختمة (هيبسكس)', sci: 'Hibiscus rosa-sinensis', 
+                desc: 'الورد الصيني.', 
+                full: 'شجيرة ذات أزهار بوقية كبيرة جداً وأوراق خضراء داكنة لامعة.', 
+                carb: 'تلطيف الجو.', 
+                img: 'https://i.imgur.com/dj0LTUG.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجيرة' },
+                    { label: 'موسم الإزهار', value: 'الصيف' },
+                    { label: 'حجم الزهرة', value: 'كبير (10-15 سم)' },
+                    { label: 'لون الزهرة', value: 'أحمر / وردي' },
+                    { label: 'درجة الحرارة', value: '15 – 35°م' }
+                ]
+            },
+            { 
+                cat: 'شجيرات مزهرة', name: 'تيكوما', sci: 'Tecoma stans', 
+                desc: 'الأجراس الصفراء.', 
+                full: 'شجيرة سريعة النمو تزهر بغزارة في الصيف والخريف، أزهارها صفراء بوقية الشكل.', 
+                carb: 'ظلال وجمال.', 
+                img: 'https://i.imgur.com/G8dAkmP.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'شجيرة كبيرة' },
+                    { label: 'موسم الإزهار', value: 'الصيف والخريف' },
+                    { label: 'ارتفاع النبات', value: '2 - 5 متر' },
+                    { label: 'لون الزهرة', value: 'أصفر زاهي' },
+                    { label: 'درجة الحرارة', value: '10 – 45°م' }
+                ]
+            },
 
-            // === رابعاً: الزهور الموسمية والعشبية ===
-            { cat: 'زهور موسمية', name: 'الجعفري (القطيفة)', sci: 'Tagetes', desc: 'ذهبي وأصفر.', full: 'نبات حولي مزهر طارد للديدان.', carb: 'ألوان موسمية.', img: 'https://i.imgur.com/WhGfU0i.jpg' },
-            { cat: 'زهور موسمية', name: 'الجعفري', sci: 'Tagetes', desc: 'كثافة زهرية.', full: 'يملأ الأحواض بالألوان.', carb: 'طارد للحشرات.', img: 'https://i.imgur.com/Udjojah.jpg' },
-            { cat: 'زهور موسمية', name: 'الجعفري', sci: 'Tagetes', desc: 'جمال التنسيق.', full: 'يستخدم لتحديد الأحواض.', carb: 'بيئة نظيفة.', img: 'https://i.imgur.com/UKp903R.jpg' },
+            // ==================== ثالثاً: المتسلقات ====================
+            { 
+                cat: 'متسلقات', name: 'الياسمين الأحمر', sci: 'Combretum indicum', 
+                desc: 'ياسمين هندي.', 
+                full: 'متسلقة عطرية رائعة، تتفتح أزهارها بيضاء ثم تتحول للوردي ثم الأحمر الغامق.', 
+                carb: 'تغطية نباتية ممتازة.', 
+                img: 'https://i.imgur.com/4NMdp2w.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'متسلق خشبي' },
+                    { label: 'موسم الإزهار', value: 'الصيف' },
+                    { label: 'الرائحة', value: 'عطرية فواحة' },
+                    { label: 'الارتفاع', value: 'يصل 8 أمتار' },
+                    { label: 'الألوان', value: 'أبيض > أحمر' },
+                    { label: 'درجة الحرارة', value: '15 – 40°م' }
+                ]
+            },
+            { 
+                cat: 'متسلقات', name: 'تداخل نباتي', sci: 'Combretum & Vinca', 
+                desc: 'ياسمين وعين البزون.', 
+                full: 'صورة تظهر التداخل الجميل بين متسلقة الياسمين الأحمر وزهور عين البزون الأرضية.', 
+                carb: 'استغلال المساحات.', 
+                img: 'https://i.imgur.com/4DXMZyx.jpg',
+                details: [
+                    { label: 'نوع التنسيق', value: 'رأسي وأفقي' },
+                    { label: 'النباتات', value: 'ياسمين + فينكا' },
+                    { label: 'الهدف', value: 'تغطية كاملة' }
+                ]
+            },
+            { 
+                cat: 'متسلقات', name: 'بطاطا الزينة', sci: 'Ipomoea batatas', 
+                desc: 'أوراق ليمونية.', 
+                full: 'نبات زاحف أو متسلق يزرع لجمال أوراقه ذات اللون الأخضر الليموني الفاقع.', 
+                carb: 'تغطية التربة بسرعة.', 
+                img: 'https://i.imgur.com/11uRFOE.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر (يعامل كحولي)' },
+                    { label: 'نوع النبات', value: 'زاحف / مداد' },
+                    { label: 'لون الأوراق', value: 'أخضر ليموني' },
+                    { label: 'موسم النمو', value: 'الصيف' },
+                    { label: 'الانتشار', value: 'سريع جداً' },
+                    { label: 'درجة الحرارة', value: '15 – 40°م' }
+                ]
+            },
 
-            { cat: 'زهور موسمية', name: 'الداوودي', sci: 'Chrysanthemum', desc: 'ملك الخريف.', full: 'أزهار مركبة بألوان متعددة.', carb: 'تنقية الجو.', img: 'https://i.imgur.com/aPbDpwu.jpg' },
-            { cat: 'زهور موسمية', name: 'الداوودي', sci: 'Chrysanthemum', desc: 'تنوع لوني.', full: 'يضفي بهجة للحديقة.', carb: 'رائحة عشبية.', img: 'https://i.imgur.com/9ubvgjC.jpg' },
+            // ==================== رابعاً: الزهور الموسمية والعشبية ====================
+            { 
+                cat: 'زهور موسمية', name: 'الجعفري (القطيفة)', sci: 'Tagetes erecta', 
+                desc: 'الذهب الأفريقي.', 
+                full: 'نبات حولي صيفي وشتوي، أزهاره كروية كبيرة برتقالية وصفراء، طارد للنيماتودا والحشرات.', 
+                carb: 'بيئة صحية.', 
+                img: 'https://i.imgur.com/WhGfU0i.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'حولي' },
+                    { label: 'نوع النبات', value: 'عشبي مزهر' },
+                    { label: 'موسم الإزهار', value: 'الربيع والخريف' },
+                    { label: 'ارتفاع النبات', value: '30 - 60 سم' },
+                    { label: 'لون الزهرة', value: 'برتقالي / أصفر' },
+                    { label: 'الفائدة', value: 'طارد للحشرات' },
+                    { label: 'درجة الحرارة', value: '10 – 35°م' }
+                ]
+            },
+            { 
+                cat: 'زهور موسمية', name: 'حوض الجعفري', sci: 'Tagetes', 
+                desc: 'تنسيق كثيف.', 
+                full: 'زراعة الجعفري في مجموعات تعطي تأثيراً لونياً مبهراً وقوياً.', 
+                carb: 'ألوان موسمية.', 
+                img: 'https://i.imgur.com/Udjojah.jpg',
+                details: [
+                    { label: 'التنسيق', value: 'مجموعات (Massing)' },
+                    { label: 'الكثافة', value: 'عالية' },
+                    { label: 'الصيانة', value: 'إزالة الزهور الذابلة' }
+                ]
+            },
+            { 
+                cat: 'زهور موسمية', name: 'الجعفري (تحديد)', sci: 'Tagetes', 
+                desc: 'إطار ذهبي.', 
+                full: 'استخدامه لتحديد أحواض الأشجار الكبيرة يضفي جمالاً ويحمي الجذور.', 
+                carb: 'حماية بيولوجية.', 
+                img: 'https://i.imgur.com/UKp903R.jpg',
+                details: [
+                    { label: 'الاستخدام', value: 'تحديد أحواض' },
+                    { label: 'اللون', value: 'برتقالي متوهج' },
+                    { label: 'الري', value: 'منتظم' }
+                ]
+            },
+            
+            // --- الداوودي ---
+            { 
+                cat: 'زهور موسمية', name: 'الداوودي (بنفسجي)', sci: 'Chrysanthemum morifolium', 
+                desc: 'زهرة الخريف.', 
+                full: 'تزهر بغزارة في الخريف والشتاء، وتتوفر بألوان وأشكال لا حصر لها.', 
+                carb: 'تنقية الهواء من البنزين.', 
+                img: 'https://i.imgur.com/NJrnSDc.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر (يتجدد)' },
+                    { label: 'نوع النبات', value: 'عشبي' },
+                    { label: 'موسم الإزهار', value: 'الخريف والشتاء' },
+                    { label: 'ارتفاع النبات', value: '30 - 80 سم' },
+                    { label: 'لون الزهرة', value: 'بنفسجي' },
+                    { label: 'درجة الحرارة', value: '5 – 25°م' }
+                ]
+            },
+            { 
+                cat: 'زهور موسمية', name: 'الداوودي (أصفر)', sci: 'Chrysanthemum', 
+                desc: 'شمس الشتاء.', 
+                full: 'لون أصفر مشرق يكسر كآبة الشتاء ويضيف بهجة للحديقة.', 
+                carb: 'رحيق للنحل.', 
+                img: 'https://i.imgur.com/9ubvgjC.jpg',
+                details: [
+                    { label: 'لون الزهرة', value: 'أصفر زاهي' },
+                    { label: 'الشكل', value: 'شعاعي' },
+                    { label: 'الرائحة', value: 'عشبية مميزة' }
+                ]
+            },
 
-            { cat: 'زهور موسمية', name: 'دم العاشق', sci: 'Alternanthera', desc: 'أوراق حمراء.', full: 'نبات تحديد بألوان أوراق جذابة.', carb: 'تباين لوني.', img: 'https://i.imgur.com/M9dZyxB.jpg' },
-            { cat: 'زهور موسمية', name: 'دم العاشق', sci: 'Alternanthera', desc: 'غطاء نباتي.', full: 'يتحمل القص والتشكيل.', carb: 'حفظ الرطوبة.', img: 'https://i.imgur.com/i8UtYkb.jpg' },
-            { cat: 'زهور موسمية', name: 'دم العاشق', sci: 'Alternanthera', desc: 'لون نبيذي.', full: 'يضيف تبايناً مع الأخضر.', carb: 'جمال الأوراق.', img: 'https://i.imgur.com/nMWFSFY.jpg' },
-            { cat: 'زهور موسمية', name: 'دم العاشق', sci: 'Alternanthera', desc: 'مزيج لوني.', full: 'يتغير لونه حسب الإضاءة.', carb: 'تنوع.', img: 'https://i.imgur.com/EFv0iqN.jpg' },
+            // --- دم العاشق ---
+            { 
+                cat: 'زهور موسمية', name: 'دم العاشق', sci: 'Alternanthera dentata', 
+                desc: 'أوراق ملونة.', 
+                full: 'نبات يزرع لجمال أوراقه الأرجوانية (النبيذية)، يستخدم بكثرة لتحديد الأحواض والرسم النباتي.', 
+                carb: 'تباين لوني.', 
+                img: 'https://i.imgur.com/M9dZyxB.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'غطاء تربة / تحديد' },
+                    { label: 'لون الأوراق', value: 'أرجواني / نبيذي' },
+                    { label: 'ارتفاع النبات', value: '20 - 50 سم' },
+                    { label: 'الإزهار', value: 'غير ملحوظ' },
+                    { label: 'درجة الحرارة', value: '10 – 40°م' }
+                ]
+            },
+            { 
+                cat: 'زهور موسمية', name: 'دم العاشق (تحديد)', sci: 'Alternanthera', 
+                desc: 'سياج منخفض.', 
+                full: 'يتحمل القص والتشكيل بشكل ممتاز لعمل إطارات نباتية ملونة.', 
+                carb: 'تثبيت حواف التربة.', 
+                img: 'https://i.imgur.com/i8UtYkb.jpg',
+                details: [
+                    { label: 'الاستخدام', value: 'تحديد ممرات' },
+                    { label: 'الصيانة', value: 'قص دوري' },
+                    { label: 'الكثافة', value: 'عالية' }
+                ]
+            },
+            { 
+                cat: 'زهور موسمية', name: 'دم العاشق (كثافة)', sci: 'Alternanthera', 
+                desc: 'غطاء كامل.', 
+                full: 'زراعة كثيفة تغطي التربة بالكامل وتمنع نمو الأعشاب الضارة.', 
+                carb: 'حفظ رطوبة التربة.', 
+                img: 'https://i.imgur.com/nMWFSFY.jpg',
+                details: [
+                    { label: 'الهدف', value: 'تغطية أرضية' },
+                    { label: 'اللون', value: 'أحمر داكن' },
+                    { label: 'الشمس', value: 'كاملة لتعزيز اللون' }
+                ]
+            },
+            { 
+                cat: 'زهور موسمية', name: 'دم العاشق (تباين)', sci: 'Alternanthera', 
+                desc: 'لعب بالألوان.', 
+                full: 'التنوع في درجات لون الأوراق حسب التعرض للشمس.', 
+                carb: 'جمال بصري.', 
+                img: 'https://i.imgur.com/EFv0iqN.jpg',
+                details: [
+                    { label: 'التأثير', value: 'تدرج لوني' },
+                    { label: 'الموسم', value: 'طوال العام (بإستثناء الصقيع)' }
+                ]
+            },
+            
+            // --- سينراريا / دستي ميلر ---
+            { 
+                cat: 'زهور موسمية', name: 'سينراريا (دستس)', sci: 'Jacobaea maritima', 
+                desc: 'المغبرة الفضية.', 
+                full: 'نبات مميز جداً بأوراقه الفضية المخملية الملمس، يكسر حدة اللون الأخضر في الحديقة.', 
+                carb: 'عكس أشعة الشمس.', 
+                img: 'https://i.imgur.com/V9N4gCH.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر (قصير العمر)' },
+                    { label: 'نوع النبات', value: 'عشبي' },
+                    { label: 'لون الأوراق', value: 'فضي / رمادي' },
+                    { label: 'الملمس', value: 'صوفي / مخملي' },
+                    { label: 'ارتفاع النبات', value: '20 - 40 سم' },
+                    { label: 'درجة الحرارة', value: '5 – 35°م' }
+                ]
+            },
+            { 
+                cat: 'زهور موسمية', name: 'سينراريا (أزهار)', sci: 'Jacobaea maritima', 
+                desc: 'تباين فضي.', 
+                full: 'جمال الأوراق الفضية يبرز عند زراعتها بجانب نباتات خضراء داكنة.', 
+                carb: 'تحمل الجفاف.', 
+                img: 'https://i.imgur.com/FCbLdP9.jpg',
+                details: [
+                    { label: 'الزهرة', value: 'صفراء صغيرة' },
+                    { label: 'الأهمية', value: 'جمال الأوراق أهم' },
+                    { label: 'الري', value: 'قليل' }
+                ]
+            },
 
-            { cat: 'زهور موسمية', name: 'سينراريا (دستس)', sci: 'Jacobaea maritima', desc: 'المغبرة.', full: 'أوراق فضية قطنية الملمس.', carb: 'عكس أشعة الشمس.', img: 'https://i.imgur.com/V9N4gCH.jpg' },
-            { cat: 'زهور موسمية', name: 'سينراريا', sci: 'Jacobaea maritima', desc: 'جمال فضي.', full: 'يبرز جمال الزهور الملونة بجانبه.', carb: 'تحمل الجفاف.', img: 'https://i.imgur.com/FCbLdP9.jpg' },
+            // --- أخرى ---
+            { 
+                cat: 'زهور موسمية', name: 'نازناز (ورد الصباح)', sci: 'Portulaca grandiflora', 
+                desc: 'زهرة الشمس.', 
+                full: 'نبات زاحف عصاري، تتفتح أزهاره فقط عند سطوع الشمس وتغلق في الظل.', 
+                carb: 'مقاوم للجفاف.', 
+                img: 'https://i.imgur.com/UpEM18S.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'حولي / مُعمّر' },
+                    { label: 'نوع النبات', value: 'زاحف عصاري' },
+                    { label: 'موسم الإزهار', value: 'الصيف' },
+                    { label: 'لون الزهرة', value: 'متعدد (فوشي/أصفر)' },
+                    { label: 'الارتفاع', value: '10 - 15 سم' },
+                    { label: 'درجة الحرارة', value: '15 – 45°م' }
+                ]
+            },
+            { 
+                cat: 'زهور موسمية', name: 'القرنفل الصيني', sci: 'Dianthus chinensis', 
+                desc: 'أزهار مشرشرة.', 
+                full: 'أزهار جميلة ذات حواف مسننة، تتميز بألوان متداخلة (أبيض مع وردي/أحمر).', 
+                carb: 'زينة الأحواض.', 
+                img: 'https://i.imgur.com/DvpTsu1.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'حولي / ذو حولين' },
+                    { label: 'نوع النبات', value: 'عشبي' },
+                    { label: 'موسم الإزهار', value: 'الربيع' },
+                    { label: 'الارتفاع', value: '20 - 40 سم' },
+                    { label: 'لون الزهرة', value: 'أبيض ووردي' },
+                    { label: 'درجة الحرارة', value: '10 – 30°م' }
+                ]
+            },
 
-            { cat: 'زهور موسمية', name: 'نازناز (ورد الصباح)', sci: 'Portulaca', desc: 'محبة للشمس.', full: 'زهور تتفتح مع الشمس وتغلق مساءً.', carb: 'تغطية التربة.', img: 'https://i.imgur.com/UpEM18S.jpg' },
-            { cat: 'زهور موسمية', name: 'القرنفل الصيني', sci: 'Dianthus', desc: 'أزهار رقيقة.', full: 'أزهار ذات حواف مشرشرة وألوان جميلة.', carb: 'رائحة خفيفة.', img: 'https://i.imgur.com/DvpTsu1.jpg' },
-
-            // === خامساً: العصاريات والنباتات الداخلية ===
-            { cat: 'عصاريات', name: 'الألوفيرا', sci: 'Aloe Vera', desc: 'طبيب العائلة.', full: 'نبات عصاري له فوائد طبية عديدة.', carb: 'يطلق الأكسجين ليلاً.', img: 'https://i.imgur.com/brpxFH5.jpg' },
-            { cat: 'عصاريات', name: 'الألوفيرا', sci: 'Aloe Vera', desc: 'تحمل العطش.', full: 'يخزن الماء في أوراقه.', carb: 'تنقية الهواء.', img: 'https://i.imgur.com/yHo8Ado.jpg' },
-            { cat: 'عصاريات', name: 'الألوفيرا', sci: 'Aloe Vera', desc: 'نمو جديد.', full: 'سهل الإكثار والعناية.', carb: 'صحي للبيئة.', img: 'https://i.imgur.com/08gDPBe.jpg' },
-            { cat: 'عصاريات', name: 'جلد النمر', sci: 'Sansevieria', desc: 'نبات الثعبان.', full: 'منقي هواء من الطراز الأول.', carb: 'يزيل السموم.', img: 'https://i.imgur.com/4v8rSBT.jpg' },
-            { cat: 'عصاريات', name: 'ديسكيديا', sci: 'Dischidia', desc: 'نبات معلق.', full: 'نبات زينة جميل للأصص المعلقة.', carb: 'منظر جمالي.', img: 'https://i.imgur.com/A2GeMTS.jpg' }
+            // ==================== خامساً: العصاريات والنباتات الداخلية ====================
+            { 
+                cat: 'عصاريات', name: 'الألوفيرا', sci: 'Aloe Vera', 
+                desc: 'طبيب العائلة.', 
+                full: 'نبات عصاري مشهور بجلّه الشافي للحروق وترطيب البشرة، ومنقي قوي للهواء.', 
+                carb: 'يطلق الأكسجين ليلاً (CAM).', 
+                img: 'https://i.imgur.com/28Ayv97.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'عصاري' },
+                    { label: 'الاستخدام', value: 'طبي / تجميلي' },
+                    { label: 'ارتفاع النبات', value: '30 - 60 سم' },
+                    { label: 'لون الزهرة', value: 'أصفر (شمراخ)' },
+                    { label: 'الري', value: 'قليل جداً' },
+                    { label: 'درجة الحرارة', value: '10 – 40°م' }
+                ]
+            },
+            { 
+                cat: 'عصاريات', name: 'الألوفيرا (إجهاد)', sci: 'Aloe Vera', 
+                desc: 'تغير اللون.', 
+                full: 'تميل الأوراق للون البني المحمر عند التعرض للشمس المباشرة القوية أو العطش.', 
+                carb: 'مؤشر حيوي.', 
+                img: 'https://i.imgur.com/yHo8Ado.jpg',
+                details: [
+                    { label: 'الملاحظة', value: 'لون بني/برتقالي' },
+                    { label: 'السبب', value: 'شمس قوية / جفاف' },
+                    { label: 'الحل', value: 'ظل جزئي / ري' }
+                ]
+            },
+            { 
+                cat: 'عصاريات', name: 'الألوفيرا (نمو)', sci: 'Aloe Vera', 
+                desc: 'خلفات جديدة.', 
+                full: 'تتكاثر الألوفيرا بسهولة عن طريق الخلفات الصغيرة التي تنمو بجوار الأم.', 
+                carb: 'استدامة.', 
+                img: 'https://i.imgur.com/08gDPBe.jpg',
+                details: [
+                    { label: 'التكاثر', value: 'بالخلفات' },
+                    { label: 'النمو', value: 'متوسط' },
+                    { label: 'التربة', value: 'رملية جيدة الصرف' }
+                ]
+            },
+            { 
+                cat: 'عصاريات', name: 'جلد النمر', sci: 'Sansevieria trifasciata', 
+                desc: 'نبات الثعبان.', 
+                full: 'من أكثر النباتات تحملاً للإهمال وقلة الضوء، وهو "مصنع أكسجين" ليلي مثالي لغرف النوم.', 
+                carb: 'يزيل الفورمالديهايد والبنزين.', 
+                img: 'https://i.imgur.com/4v8rSBT.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'عصاري داخلي/خارجي' },
+                    { label: 'ارتفاع النبات', value: '40 - 100 سم' },
+                    { label: 'شكل الأوراق', value: 'سيفية قائمة' },
+                    { label: 'الري', value: 'عند جفاف التربة تماماً' },
+                    { label: 'درجة الحرارة', value: '15 – 35°م' }
+                ]
+            },
+            { 
+                cat: 'عصاريات', name: 'ديسكيديا', sci: 'Dischidia', 
+                desc: 'نبات النمل.', 
+                full: 'نبات متدلي جميل أوراقه سميكة تشبه الأزرار، مناسب للسلال المعلقة.', 
+                carb: 'زينة داخلية.', 
+                img: 'https://i.imgur.com/A2GeMTS.jpg',
+                details: [
+                    { label: 'مدة الحياة', value: 'مُعمّر' },
+                    { label: 'نوع النبات', value: 'متدلي (Epiphyte)' },
+                    { label: 'الضوء', value: 'غير مباشر ساطع' },
+                    { label: 'الري', value: 'رش رذاذ بانتظام' },
+                    { label: 'الاستخدام', value: 'سلال معلقة' }
+                ]
+            }
         ];
+
+        // --- معرض صور المشروع ---
+        const projectGalleryIds = ['C5BcmcD', 'psuoF8V', '13NmB1S', 'KG9hVLd', 'goupDMm', 'EEMQKIT', '7phP4aa', 'F0d62Ve', 'k0S7dAU', 'aPbDpwu', 'ukztdXq', 'ULGk4X1', '0tr7fzg', 'K8qd0qB', 'KEa3SW4', '0lyKTNq', 'E8f8H7Q', 'jMQ2qvX', 'FiEpEHb', 'jU0UKsD', 'gssg8bC', 'mOTiwiF', 'g4Zs7eN', 'oe1xaMS', 'Et2OXdu', '8A27QrE', 'La2MYqr', 'd5N5Qkj', 'ji8Q0Hd', 'dCpUVCS', 'a26hDjB', 'Ef4x1Y9', 'T0mz4DO', '6G6tsaP', 'l6HVoZc', 'GP1Fxq5', '7kFZFuz', '6Nq60ni', '3X1wL8n', 'KxqfMz6', 'NV1KAo3', 'sAq8CUq', 'kuYwIGB', 'pN1zUBG', 'hLL8VUX', 'O4HlH2z', 'FYvyKDy', 'cT99hPo', 'IPFtJ60', 'wtybtaB', 'U91hPKl', 'Q1TmxRE', 'aHB0r9g', 'Fbkv7Co', '2afjBpE', '7qBKzs4', 'sUCM3R1', 'LB6KJo7', 'jIHSVlh', 'ICNM6wr', 'f4zaXCv', '4T2uRh2', 'FJPiG6B', 'uF4ap4m', 'RgJteLi'];
 
         const students = ['بلال زامل أحمد', 'أحمد محمد علي', 'فاطمة حسن', 'علي حسين', 'سارة محمود', 'زينب عادل'];
-        const defaultPlantDetails = [
-            { label: 'مدة الحياة', value: 'مُعمّر' },
-            { label: 'نوع النبات', value: 'شُجيرة' },
-            { label: 'موسم الإزهار', value: 'الربيع، الصيف، أوائل الخريف' },
-            { label: 'ارتفاع النبات', value: '91 سم إلى 2.5 م' },
-            { label: 'الانتشار (العرض)', value: '2.5 م' },
-            { label: 'لون الأوراق', value: 'أخضر' },
-            { label: 'حجم الزهرة', value: '2.5 سم' },
-            { label: 'لون الزهرة', value: 'أحمر' },
-            { label: 'نوع الأوراق', value: 'دائمة الخضرة' },
-            { label: 'درجة الحرارة المثالية', value: '5 – 35°م' }
-        ];
 
+        // دوال مساعدة
         function showSection(id) {
             document.querySelectorAll('main > div').forEach(div => div.classList.add('hidden'));
             document.getElementById(id).classList.remove('hidden');
@@ -385,8 +977,7 @@
 
         function handleSliderChange(slider) {
             const card = slider.closest('.beforeafter-card');
-            if (!card) return;
-            const val = Number(slider.value);
+            const val = slider.value;
             const after = card.querySelector('.after-image');
             const handle = card.querySelector('.slider-handle');
             if (after) after.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
@@ -400,17 +991,21 @@
             document.getElementById('modal-category').innerText = plant.cat;
             document.getElementById('modal-scientific').innerText = plant.sci;
             document.getElementById('modal-desc').innerText = plant.full;
-            const detailsContainer = document.getElementById('modal-details');
-            const details = plant.details || defaultPlantDetails;
-            if (detailsContainer) {
-                detailsContainer.innerHTML = details.map(d => `
-                    <div class="bg-white border border-green-200 rounded-xl p-3">
-                        <div class="flex flex-col gap-1">
-                            <span class="text-xs font-bold text-green-800 opacity-90" dir="auto">${d.label}</span>
-                            <span class="text-gray-800 font-semibold leading-snug break-words" dir="auto">${d.value}</span>
-                        </div>
-                    </div>`).join('');
+            document.getElementById('modal-carbon').innerText = plant.carb;
+
+            // توليد شبكة التفاصيل
+            const detailsGrid = document.getElementById('modal-details-grid');
+            if (plant.details) {
+                detailsGrid.innerHTML = plant.details.map(d => `
+                    <div class="bg-gray-50 p-2 sm:p-3 rounded-lg border border-gray-100 hover:bg-green-50 transition">
+                        <span class="text-[10px] text-gray-500 block mb-1 font-bold">${d.label}</span>
+                        <span class="text-sm font-bold text-gray-800">${d.value}</span>
+                    </div>
+                `).join('');
+            } else {
+                detailsGrid.innerHTML = '';
             }
+            
             const modal = document.getElementById('plant-modal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
@@ -418,113 +1013,59 @@
         }
 
         function closeModal() {
-            const modal = document.getElementById('plant-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
+            document.getElementById('plant-modal').classList.add('hidden');
+            document.getElementById('plant-modal').classList.remove('flex');
         }
 
-        // --- معرض صور المشروع (Imgur) ---
-        const projectGalleryIds = ['C5BcmcD', 'psuoF8V', '13NmB1S', 'KG9hVLd', 'goupDMm', 'EEMQKIT', '7phP4aa', 'F0d62Ve', 'k0S7dAU', 'aPbDpwu', 'ukztdXq', 'ULGk4X1', '0tr7fzg', 'K8qd0qB', 'KEa3SW4', '0lyKTNq', 'E8f8H7Q', 'jMQ2qvX', 'FiEpEHb', 'jU0UKsD', 'gssg8bC', 'mOTiwiF', 'g4Zs7eN', 'oe1xaMS', 'Et2OXdu', '8A27QrE', 'La2MYqr', 'd5N5Qkj', 'ji8Q0Hd', 'dCpUVCS', 'a26hDjB', 'Ef4x1Y9', 'T0mz4DO', '6G6tsaP', 'l6HVoZc', 'GP1Fxq5', '7kFZFuz', '6Nq60ni', '3X1wL8n', 'KxqfMz6', 'NV1KAo3', 'sAq8CUq', 'kuYwIGB', 'pN1zUBG', 'hLL8VUX', 'O4HlH2z', 'FYvyKDy', 'cT99hPo', 'IPFtJ60', 'wtybtaB', 'U91hPKl', 'Q1TmxRE', 'aHB0r9g', 'Fbkv7Co', '2afjBpE', '7qBKzs4', 'sUCM3R1', 'LB6KJo7', 'jIHSVlh', 'ICNM6wr', 'f4zaXCv', '4T2uRh2', 'FJPiG6B', 'uF4ap4m', 'RgJteLi'];
-
-        const IMGUR_EXTS = ['jpg','png','jpeg','webp'];
-
-        function imgurUrl(id, extIndex=0) {
-            const ext = IMGUR_EXTS[extIndex] || 'jpg';
-            return `https://i.imgur.com/${id}.${ext}`;
-        }
-
-        function setImgurWithFallback(imgEl, id) {
-            let extIndex = 0;
-            imgEl.onerror = () => {
-                extIndex++;
-                if (extIndex < IMGUR_EXTS.length) {
-                    imgEl.src = imgurUrl(id, extIndex);
-                }
-            };
-            imgEl.src = imgurUrl(id, 0);
-        }
-
+        // --- Gallery Functions ---
         let galleryIndex = 0;
-
         function initProjectGallery() {
             const grid = document.getElementById('project-gallery-grid');
             const count = document.getElementById('gallery-count');
             if (!grid) return;
-
+            
+            // Limit to first 24 images to avoid heavy loading, or use paging. 
+            // For now, loading all with lazy loading.
             grid.innerHTML = projectGalleryIds.map((id, idx) => `
-                <button class="gallery-card text-left" type="button" onclick="openGallery(${idx})">
-                    <img class="gallery-thumb" data-imgur-id="${id}" alt="صورة ${idx+1}" loading="lazy">
-                </button>
+                <div class="gallery-card cursor-pointer" onclick="openGallery(${idx})">
+                    <img class="gallery-thumb" src="https://i.imgur.com/${id}.jpg" loading="lazy" alt="Project image ${idx}">
+                </div>
             `).join('');
-
-            // Load thumbs with fallback
-            grid.querySelectorAll('img[data-imgur-id]').forEach(img => {
-                setImgurWithFallback(img, img.getAttribute('data-imgur-id'));
-            });
-
-            if (count) count.textContent = `عدد الصور: ${projectGalleryIds.length}`;
-
-            // Keyboard controls (only when lightbox open)
-            document.addEventListener('keydown', (e) => {
-                const lb = document.getElementById('gallery-lightbox');
-                if (!lb || lb.classList.contains('hidden')) return;
-
-                if (e.key === 'Escape') closeGallery();
-                if (e.key === 'ArrowLeft') prevGallery();
-                if (e.key === 'ArrowRight') nextGallery();
-            });
+            
+            if (count) count.textContent = `${projectGalleryIds.length} صورة`;
         }
 
-        function openGallery(i) {
+        function openGallery(idx) {
+            galleryIndex = idx;
             const lb = document.getElementById('gallery-lightbox');
             const img = document.getElementById('gallery-full');
             const counter = document.getElementById('gallery-counter');
-            if (!lb || !img) return;
-
-            galleryIndex = (i + projectGalleryIds.length) % projectGalleryIds.length;
-
+            
             lb.classList.remove('hidden');
             lb.classList.add('flex');
-
-            setImgurWithFallback(img, projectGalleryIds[galleryIndex]);
-            if (counter) counter.textContent = `${galleryIndex + 1} / ${projectGalleryIds.length}`;
-
-            // refresh icons for buttons inside modal
-            if (window.lucide) lucide.createIcons();
+            img.src = `https://i.imgur.com/${projectGalleryIds[idx]}.jpg`;
+            counter.innerText = `${idx + 1} / ${projectGalleryIds.length}`;
         }
 
         function closeGallery() {
-            const lb = document.getElementById('gallery-lightbox');
-            if (!lb) return;
-            lb.classList.add('hidden');
-            lb.classList.remove('flex');
-        }
-
-        function prevGallery() {
-            openGallery(galleryIndex - 1);
+            document.getElementById('gallery-lightbox').classList.add('hidden');
+            document.getElementById('gallery-lightbox').classList.remove('flex');
         }
 
         function nextGallery() {
-            openGallery(galleryIndex + 1);
+            galleryIndex = (galleryIndex + 1) % projectGalleryIds.length;
+            openGallery(galleryIndex);
         }
 
-        function initBeforeAfterImages() {
-            const imgs = document.querySelectorAll('#beforeafter img[data-imgur-id]');
-            if (!imgs.length) return;
-            imgs.forEach(img => {
-                const id = img.getAttribute('data-imgur-id');
-                if (window.setImgurWithFallback) {
-                    setImgurWithFallback(img, id);
-                } else {
-                    img.src = `https://i.imgur.com/${id}.jpg`;
-                }
-            });
+        function prevGallery() {
+            galleryIndex = (galleryIndex - 1 + projectGalleryIds.length) % projectGalleryIds.length;
+            openGallery(galleryIndex);
         }
 
         function initApp() {
             const nav = document.getElementById('nav-tabs');
             nav.innerHTML = sections.map(s => `
-                <button data-id="${s.id}" onclick="showSection('${s.id}')" class="nav-button px-6 py-2 rounded-full flex items-center gap-2">
+                <button data-id="${s.id}" onclick="showSection('${s.id}')" class="nav-button px-6 py-2 rounded-full flex items-center gap-2 whitespace-nowrap">
                     <i data-lucide="${s.icon}" class="w-4 h-4"></i> ${s.name}
                 </button>
             `).join('');
@@ -553,9 +1094,7 @@
                 <div class="bg-white p-4 rounded-lg shadow-sm border-r-4 border-green-500 font-medium">${s}</div>
             `).join('');
 
-            // تم حذف استدعاء initStagesSlideshow() لأنه تم استبدال القسم بمعرض الصور
             initProjectGallery();
-            initBeforeAfterImages();
             showSection('home');
         }
     </script>
