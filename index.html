@@ -166,12 +166,71 @@
                 </div>
             </div>
 
-            <div id="participants" class="space-y-6 hidden">
-                <h2 class="text-3xl font-bold text-green-700">فريق العمل</h2>
-                <div id="students-container" class="grid md:grid-cols-3 gap-4"></div>
+           <div id="participants" class="space-y-10 hidden animate-fadeIn">
+                
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-green-800 inline-flex items-center gap-3">
+                        <i data-lucide="users" class="w-8 h-8"></i> فريق العمل والمشرفون
+                    </h2>
+                    <div class="h-1 w-24 bg-gradient-to-r from-green-400 to-green-600 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-green-100 relative overflow-hidden group hover:shadow-2xl transition-all duration-300">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-green-50 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110"></div>
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center gap-2">
+                            <i data-lucide="target" class="w-6 h-6"></i> رؤية وإنجاز
+                        </h3>
+                        <p class="text-gray-700 leading-relaxed text-lg">
+                            انطلقت هذه المبادرة بهدف <span class="font-bold text-green-800">إحياء الأرض وتجميل البيئة الجامعية</span>، حيث تكاتفت السواعد الطلابية لتحويل المساحات الفارغة إلى رئة خضراء. 
+                            <br>
+                            وبفضل الله، <span class="font-bold text-green-800">أثمر هذا الجهد عن حديقة نموذجية</span> تضم أكثر من 50 صنفاً نباتياً، لتصبح متنفساً طبيعيًا يدمج بين راحة الطالب وجمال الطبيعة، مؤكدين أن الإرادة والتعاون يصنعان الفارق.
+                        </p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2 border-r-4 border-green-500 pr-3">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i> الإشراف الأكاديمي والمتابعة
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-gradient-to-br from-white to-green-50 rounded-2xl p-6 shadow-md border border-green-100 flex items-center gap-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group cursor-default">
+                            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm border-2 border-green-200 group-hover:border-green-500 transition-colors">
+                                <i data-lucide="graduation-cap" class="w-8 h-8 text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 group-hover:text-green-700 transition-colors">الدكتورة رقية إياد</h4>
+                                <p class="text-sm text-green-600 font-medium">إشراف وتوجيه</p>
+                            </div>
+                            <div class="mr-auto opacity-0 group-hover:opacity-100 transition-opacity">
+                                <i data-lucide="quote" class="w-8 h-8 text-green-200 fill-green-100"></i>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-white to-green-50 rounded-2xl p-6 shadow-md border border-green-100 flex items-center gap-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group cursor-default">
+                            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm border-2 border-green-200 group-hover:border-green-500 transition-colors">
+                                <i data-lucide="graduation-cap" class="w-8 h-8 text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 group-hover:text-green-700 transition-colors">الدكتورة مكارم عبدالواحد</h4>
+                                <p class="text-sm text-green-600 font-medium">إشراف وتوجيه</p>
+                            </div>
+                            <div class="mr-auto opacity-0 group-hover:opacity-100 transition-opacity">
+                                <i data-lucide="quote" class="w-8 h-8 text-green-200 fill-green-100"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2 border-r-4 border-blue-500 pr-3">
+                        <i data-lucide="hammer" class="w-5 h-5 text-blue-500"></i> التنفيذ والعمل الميداني
+                    </h3>
+                    <div id="students-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+                </div>
+
             </div>
-            
-            <div id="about" class="hidden">...</div>
         </main>
 
         <footer class="bg-green-800 text-white py-8 text-center mt-auto">
@@ -842,8 +901,7 @@
         // --- معرض صور المشروع ---
         const projectGalleryIds = ['C5BcmcD', 'psuoF8V', '13NmB1S', 'KG9hVLd', 'goupDMm', 'EEMQKIT', '7phP4aa', 'F0d62Ve', 'k0S7dAU', 'aPbDpwu', 'ukztdXq', 'ULGk4X1', '0tr7fzg', 'K8qd0qB', 'KEa3SW4', '0lyKTNq', 'E8f8H7Q', 'jMQ2qvX', 'FiEpEHb', 'jU0UKsD', 'gssg8bC', 'mOTiwiF', 'g4Zs7eN', 'oe1xaMS', 'Et2OXdu', '8A27QrE', 'La2MYqr', 'd5N5Qkj', 'ji8Q0Hd', 'dCpUVCS', 'a26hDjB', 'Ef4x1Y9', 'T0mz4DO', '6G6tsaP', 'l6HVoZc', 'GP1Fxq5', '7kFZFuz', '6Nq60ni', '3X1wL8n', 'KxqfMz6', 'NV1KAo3', 'sAq8CUq', 'kuYwIGB', 'pN1zUBG', 'hLL8VUX', 'O4HlH2z', 'FYvyKDy', 'cT99hPo', 'IPFtJ60', 'wtybtaB', 'U91hPKl', 'Q1TmxRE', 'aHB0r9g', 'Fbkv7Co', '2afjBpE', '7qBKzs4', 'sUCM3R1', 'LB6KJo7', 'jIHSVlh', 'ICNM6wr', 'f4zaXCv', '4T2uRh2', 'FJPiG6B', 'uF4ap4m', 'RgJteLi'];
 
-        const students = ['بلال زامل أحمد', 'أحمد محمد علي', 'فاطمة حسن', 'علي حسين', 'سارة محمود', 'زينب عادل'];
-
+        const students = ['بلال زامل أحمد', 'عبيده خالد', 'ملاك مازن يوسف','رهام محمود','هيا هيثم', 'رحيق', 'عمر عبد الجبار
         // دوال مساعدة
         function showSection(id) {
             document.querySelectorAll('main > div').forEach(div => div.classList.add('hidden'));
@@ -962,10 +1020,15 @@
                 </div>
             `).join('');
 
+            // هذا الجزء يوضع داخل دالة initApp() مكان الكود القديم الخاص بالطلاب
             document.getElementById('students-container').innerHTML = students.map(s => `
-                <div class="bg-white p-4 rounded-lg shadow-sm border-r-4 border-green-500 font-medium">${s}</div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-green-300 hover:shadow-md hover:scale-[1.02] transition-all duration-300 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-700 shrink-0">
+                        <i data-lucide="user" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-gray-700">${s}</span>
+                </div>
             `).join('');
-
             initProjectGallery();
             showSection('home');
         }
