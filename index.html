@@ -972,11 +972,10 @@ const students = [
             const count = document.getElementById('gallery-count');
             if (!grid) return;
             
-            // Limit to first 24 images to avoid heavy loading, or use paging. 
-            // For now, loading all with lazy loading.
+            // Load the complete gallery in the original order.
             grid.innerHTML = projectGalleryIds.map((id, idx) => `
                 <div class="gallery-card cursor-pointer" onclick="openGallery(${idx})">
-                    <img class="gallery-thumb" src="${id}" loading="lazy" alt="Project image ${idx}">
+                    <img class="gallery-thumb" src="${id}" alt="Project image ${idx}">
                 </div>
             `).join('');
             
