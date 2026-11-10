@@ -11,6 +11,8 @@
         
         body { font-family: 'Tajawal', sans-serif; }
         html { scroll-behavior: smooth; }
+        html.modal-open, body.modal-open { overscroll-behavior: none; }
+        body.modal-open { overflow: hidden; }
         .before-after-clip { transition: clip-path 0.3s ease; }
         
         /* Animations */
@@ -150,7 +152,7 @@
                 <div id="gallery-lightbox" class="fixed inset-0 z-[120] hidden items-center justify-center p-3 sm:p-6">
                     <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeGallery()"></div>
                     <div class="relative z-10 w-full max-w-5xl h-full flex items-center justify-center">
-                        <button onclick="closeGallery()" class="absolute top-4 right-4 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition z-20">
+                            <button onclick="closeGallery()" aria-label="إغلاق الصورة" class="gallery-close fixed top-3 right-3 sm:top-4 sm:right-4 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition z-20">
                             <i data-lucide="x" class="w-8 h-8"></i>
                         </button>
                         <img id="gallery-full" src="" alt="صورة من المشروع" class="max-h-[85vh] max-w-full object-contain rounded-lg shadow-2xl">
@@ -225,7 +227,7 @@
         <div id="plant-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-2 sm:p-4">
             <div class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
             <div class="bg-white w-full max-w-5xl h-[95vh] sm:h-auto sm:max-h-[90vh] rounded-2xl shadow-2xl relative z-10 overflow-hidden flex flex-col modal-animate">
-                <button onclick="closeModal()" class="absolute top-3 left-3 z-20 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition">
+                <button onclick="closeModal()" aria-label="إغلاق التفاصيل" class="modal-close fixed top-3 left-3 z-20 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition">
                     <i data-lucide="x" class="w-6 h-6"></i>
                 </button>
 
@@ -936,6 +938,28 @@ const students = [
             lucide.createIcons();
         }
 
+        let lockedScrollY = 0;
+
+        function lockPageScroll() {
+            lockedScrollY = window.scrollY;
+            document.documentElement.classList.add('modal-open');
+            document.body.classList.add('modal-open');
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${lockedScrollY}px`;
+            document.body.style.left = '0';
+            document.body.style.right = '0';
+        }
+
+        function unlockPageScroll() {
+            document.documentElement.classList.remove('modal-open');
+            document.body.classList.remove('modal-open');
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.left = '';
+            document.body.style.right = '';
+            window.scrollTo(0, lockedScrollY);
+        }
+
         function openModal(index) {
             const plant = plantsData[index];
             document.getElementById('modal-img').src = plant.img;
@@ -961,12 +985,14 @@ const students = [
             const modal = document.getElementById('plant-modal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
+            lockPageScroll();
             lucide.createIcons();
         }
 
         function closeModal() {
             document.getElementById('plant-modal').classList.add('hidden');
             document.getElementById('plant-modal').classList.remove('flex');
+            unlockPageScroll();
         }
 
         // --- Gallery Functions ---
@@ -994,6 +1020,7 @@ const students = [
             
             lb.classList.remove('hidden');
             lb.classList.add('flex');
+            lockPageScroll();
             img.src = projectGalleryIds[idx];
             counter.innerText = `${idx + 1} / ${projectGalleryIds.length}`;
         }
@@ -1001,6 +1028,7 @@ const students = [
         function closeGallery() {
             document.getElementById('gallery-lightbox').classList.add('hidden');
             document.getElementById('gallery-lightbox').classList.remove('flex');
+            unlockPageScroll();
         }
 
         function nextGallery() {
@@ -1024,7 +1052,7 @@ const students = [
             document.getElementById('plants-container').innerHTML = plantsData.map((p, index) => `
                 <div onclick="openModal(${index})" class="bg-white rounded-xl shadow-md overflow-hidden hover:scale-105 transition cursor-pointer group hover:shadow-2xl">
                     <div class="relative h-48 overflow-hidden">
-                        <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <img src="${p.img}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="${p.name}">
                         <div class="absolute top-2 right-2 z-10">
                             <span class="bg-white/90 backdrop-blur-sm text-green-800 text-xs font-bold px-2 py-1 rounded-md shadow-sm border border-green-100">${p.cat}</span>
                         </div>
