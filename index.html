@@ -13,6 +13,16 @@
         html { scroll-behavior: smooth; }
         html.modal-open, body.modal-open { overscroll-behavior: none; }
         body.modal-open { overflow: hidden; }
+        .modal-close,
+        .gallery-close {
+            top: max(1rem, env(safe-area-inset-top));
+        }
+        @media (max-width: 640px) {
+            .modal-close,
+            .gallery-close {
+                top: 4.5rem;
+            }
+        }
         .before-after-clip { transition: clip-path 0.3s ease; }
         
         /* Animations */
@@ -152,7 +162,7 @@
                 <div id="gallery-lightbox" class="fixed inset-0 z-[120] hidden items-center justify-center p-3 sm:p-6">
                     <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeGallery()"></div>
                     <div class="relative z-10 w-full max-w-5xl h-full flex items-center justify-center">
-                            <button onclick="closeGallery()" aria-label="إغلاق الصورة" class="gallery-close fixed top-3 right-3 sm:top-4 sm:right-4 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition z-20">
+                            <button onclick="closeGallery()" aria-label="إغلاق الصورة" class="gallery-close fixed right-3 sm:right-4 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition z-20">
                             <i data-lucide="x" class="w-8 h-8"></i>
                         </button>
                         <img id="gallery-full" src="" alt="صورة من المشروع" class="max-h-[85vh] max-w-full object-contain rounded-lg shadow-2xl">
@@ -227,7 +237,7 @@
         <div id="plant-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-2 sm:p-4">
             <div class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
             <div class="bg-white w-full max-w-5xl h-[95vh] sm:h-auto sm:max-h-[90vh] rounded-2xl shadow-2xl relative z-10 overflow-hidden flex flex-col modal-animate">
-                <button onclick="closeModal()" aria-label="إغلاق التفاصيل" class="modal-close fixed top-3 left-3 z-20 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition">
+                <button onclick="closeModal()" aria-label="إغلاق التفاصيل" class="modal-close fixed left-3 z-20 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition">
                     <i data-lucide="x" class="w-6 h-6"></i>
                 </button>
 
