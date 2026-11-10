@@ -153,11 +153,12 @@ Garden/
 │   └── images/
 │       ├── hero.jpg
 │       ├── plants/
-│       └── gallery/
+│       ├── gallery/
+│       └── webp/
 └── README.md
 ```
 
-The project is a single-page static website. Image assets are stored locally in the repository to keep the visual order and quality consistent while reducing dependence on external image hosting.
+The project is a single-page static website. Original JPG assets are kept locally for full-size viewing, while optimized WebP variants in `assets/images/webp/` are used for page cards and thumbnails to reduce mobile loading time.
 
 ---
 
