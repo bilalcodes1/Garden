@@ -149,10 +149,15 @@ The about section explains the idea of the project, its environmental value, and
 ```txt
 Garden/
 ├── index.html
+├── assets/
+│   └── images/
+│       ├── hero.jpg
+│       ├── plants/
+│       └── gallery/
 └── README.md
 ```
 
-The project is currently built as a single-page static website using one main HTML file.
+The project is a single-page static website. Image assets are stored locally in the repository to keep the visual order and quality consistent while reducing dependence on external image hosting.
 
 ---
 
